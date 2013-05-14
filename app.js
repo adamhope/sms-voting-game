@@ -1,7 +1,9 @@
 var express = require('express'),
   routes = require('./routes'),
   participants = require('./routes/participants'),
-  http = require('http'), 
+  http = require('http'),
+  force_directed = require('./routes/force_directed'),
+  http = require('http'),
   path = require('path'),
   mongoose = require('mongoose');
 
@@ -25,7 +27,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
+
 app.get('/participants', participants.list);
+app.get('/force_directed', force_directed.force_directed);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

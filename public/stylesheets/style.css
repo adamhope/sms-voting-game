@@ -1,3 +1,5 @@
+/* Generic */
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -5,4 +7,16 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+/* Force Directed */
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
 }
