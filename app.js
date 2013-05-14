@@ -1,13 +1,10 @@
-
-/**
- * Module dependencies.
- */
-
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path');
+var express = require('express'),
+  routes = require('./routes'),
+  user = require('./routes/user'), 
+  votes = require('./routes/votes'),
+  http = require('http'), 
+  path = require('path'),
+  mongoose = require('mongoose');
 
 var app = express();
 
@@ -25,10 +22,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+  mongoose.connect('mongodb://localhost/sms-voting-game-development');
 }
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/votes', votes.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
