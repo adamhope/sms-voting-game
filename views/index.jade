@@ -5,3 +5,23 @@ block content
   p Welcome to #{title}
 
 
+  form
+    fieldset
+      legend Register
+      label
+        | New Phone Number
+        input(name='phone-number', id='phone-number')
+      input(type="submit", value="register")
+
+
+  form
+    fieldset
+      legend Vote
+      label
+        | From Phone Number
+        input(name='phone-number', id='phone-number')
+      input(type="submit", value="register")
+      label
+        | For Pin Number
+        input(name='pin-number', id='pin-number')
+      input(type="submit", value="register")
