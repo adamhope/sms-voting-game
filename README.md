@@ -13,3 +13,4 @@
 - Pin numbers vs. names
     - pins are harder to guess, you have to talk to someone to vote for them / have them vote for you
     - names might be easier and lesse clunky
+- graph network relationships instead of number of votes per participant
