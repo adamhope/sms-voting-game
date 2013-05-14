@@ -43,15 +43,17 @@ Participant.find(function(err, participants) {
     new Participant({
       pin: "0000",
       phoneNumber: "0414213852",
-      votes: {
-        phoneNumber: "0404882585"
+      votedForBy: {
+        '0404882585': null,
+        '0404882583': null
       }
     }).save();
     new Participant({
       pin: "0001",
       phoneNumber: "0414213333",
-      votes: {
-        phoneNumber: "0404882585"
+      votedForBy: {
+        '0404882585': null,
+        '0404882583': null
       }
     }).save();
   }

@@ -5,9 +5,7 @@ var mongoose = require('mongoose'),
 var participantSchema = mongoose.Schema({
   pin: String,
   phoneNumber: String,
-  votes: {
-    phoneNumber: String
-  }
+  votedForBy: { }
 });
 
 var Participant = mongoose.model('Participant', participantSchema); 
