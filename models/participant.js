@@ -8,4 +8,5 @@ var participantSchema = mongoose.Schema({
   votes: Number
 });
 
-exports.Participant = mongoose.model('Participant', participantSchema);
+var Participant = mongoose.model('Participant', participantSchema); 
+module.exports = Participant;
