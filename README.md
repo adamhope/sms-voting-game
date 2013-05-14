@@ -14,3 +14,7 @@
     - pins are harder to guess, you have to talk to someone to vote for them / have them vote for you
     - names might be easier and lesse clunky
 - graph network relationships instead of number of votes per participant
+
+- Analytics:
+  - Top participant (person who's given most votes)
+  - Top recipient (person who's receive the most votes)

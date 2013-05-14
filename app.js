@@ -1,7 +1,7 @@
 var express = require('express'),
   routes = require('./routes'),
   user = require('./routes/user'), 
-  votes = require('./routes/votes'),
+  participants = require('./routes/participants'),
   http = require('http'), 
   path = require('path'),
   mongoose = require('mongoose');
@@ -27,7 +27,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.get('/votes', votes.list);
+app.get('/participants', participants.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
