@@ -4,8 +4,18 @@ var mongoose = require('mongoose'),
 
 var participantSchema = mongoose.Schema({
   pin: String,
-  phonenumber: String,
-  votes: Number
+  phoneNumber: String,
+  votes: {
+    phoneNumber: String
+  }
+});
+
+var p = new Participant({
+  pin: "1234",
+  phoneNumber: "0414213852",
+  votes: {
+    phoneNumber: "0404882585"
+  }
 });
 
 var Participant = mongoose.model('Participant', participantSchema); 
