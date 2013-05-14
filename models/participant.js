@@ -10,13 +10,5 @@ var participantSchema = mongoose.Schema({
   }
 });
 
-var p = new Participant({
-  pin: "1234",
-  phoneNumber: "0414213852",
-  votes: {
-    phoneNumber: "0404882585"
-  }
-});
-
 var Participant = mongoose.model('Participant', participantSchema); 
 module.exports = Participant;

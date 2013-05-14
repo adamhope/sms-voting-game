@@ -5,6 +5,7 @@ var express = require('express'),
   force_directed = require('./routes/force_directed'),
   http = require('http'),
   path = require('path'),
+  Participant = require('./models/participant'),
   mongoose = require('mongoose');
 
 var app = express();
@@ -33,4 +34,25 @@ app.get('/force_directed', force_directed.force_directed);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+// Participant seeding
+
+Participant.find(function(err, participants) {
+  if (participants.length === 0) {
+    new Participant({
+      pin: "0000",
+      phoneNumber: "0414213852",
+      votes: {
+        phoneNumber: "0404882585"
+      }
+    }).save();
+    new Participant({
+      pin: "0001",
+      phoneNumber: "0414213333",
+      votes: {
+        phoneNumber: "0404882585"
+      }
+    }).save();
+  }
 });
