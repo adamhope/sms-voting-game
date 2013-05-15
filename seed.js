@@ -7,14 +7,14 @@ var seed = function() {
         pin: "00000",
         phoneNumber: "0414213852",
         votedForBy: {
-          '0414213852': null,
+          '0414213852': null
         }
       }).save();
       new Participant({
         pin: "00001",
         phoneNumber: "0414213333",
         votedForBy: {
-          '0041421333': null,
+          '0041421333': null
         }
       }).save();
     }
