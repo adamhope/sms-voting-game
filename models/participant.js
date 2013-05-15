@@ -18,4 +18,5 @@ participantSchema.path('phoneNumber').set(function (v) {
 });
 
 var Participant = mongoose.model('Participant', participantSchema); 
+
 module.exports = Participant;

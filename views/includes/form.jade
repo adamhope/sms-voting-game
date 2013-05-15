@@ -6,15 +6,13 @@ form(action='/participants/create', method='post')
       input(name='phoneNumber', id='phoneNumber')
     input(type="submit", value="register")
 
-
-form
+form(action='/participants/connect', method='post')
   fieldset
     legend Vote
     label
       | From Phone Number
-      input(name='phoneNumber', id='phoneNumber')
-    input(type="submit", value="register")
+      input(name='phoneNumberFrom', id='phoneNumberFrom')
     label
       | For Pin Number
-      input(name='pin-number', id='pin-number')
-    input(type="submit", value="register")
+      input(name='pinNumberTo', id='pinNumberTo')
+    input(type="submit", value="Connect")

@@ -8,6 +8,7 @@ var express        = require('express'),
   Participant      = require('./models/participant'),
   scoreboard       = require('./routes/scoreboard')
   seed = require('./seed');
+
 var app = express();
 
 // all environments
@@ -35,6 +36,7 @@ if (app.get('env') == 'development') {
 app.get('/', routes.index);
 app.get('/participants', participants.list);
 app.post('/participants/create', participants.create);
+app.post('/participants/connect', participants.connect);
 
 app.get('/scoreboard/1', scoreboard.highcharts);
 app.get('/scoreboard/2', scoreboard.sigma);
