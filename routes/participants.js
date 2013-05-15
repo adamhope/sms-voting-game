@@ -22,6 +22,7 @@ exports.create = function(req, res) {
   res.redirect('participants');
 };
 
+// TODO gerate pin randomly
 function generatePin() {
   return 1234;
 }

@@ -3,7 +3,9 @@ var mongoose = require('mongoose'),
   ObjectId = Schema.ObjectId;
 
 var participantSchema = mongoose.Schema({
-  pin:         { type: String, unique: true },
+  // TODO Enable unique for pin after generating it propertly
+  // pin:         { type: String, unique: true },
+  pin:         { type: String },
   phoneNumber: { type: String, unique: true },
   votedForBy:  { }
 });

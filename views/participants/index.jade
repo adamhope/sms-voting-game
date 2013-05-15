@@ -6,9 +6,8 @@ block content
   p Welcome to #{title}
 
   include ../includes/form
-
-  - var items = ["one", "two", "three"]
+  br
   ul
-  each item in participants
-    li= item
+  each participant in participants
+    li= participant
 
