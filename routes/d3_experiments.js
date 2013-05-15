@@ -4,5 +4,5 @@
  */
 
 exports.force_directed = function(req, res){
-  res.render('force_directed', {title: "force directed"});
+  res.render('d3_experiments', {title: 'D3 Experiments'});
 };

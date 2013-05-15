@@ -6,7 +6,7 @@ var express      = require('express'),
   routes         = require('./routes'),
   participants   = require('./routes/participants'),
   Participant    = require('./models/participant'),
-  force_directed = require('./routes/force_directed');
+  force_directed = require('./routes/d3_experiments');
 
 var app = express();
 
@@ -35,7 +35,7 @@ if (app.get('env') == 'development') {
 app.get('/', routes.index);
 app.get('/participants', participants.list);
 app.post('/participants/create', participants.create);
-app.get('/force_directed', force_directed.force_directed);
+app.get('/d3', force_directed.force_directed);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
