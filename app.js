@@ -35,8 +35,10 @@ if (app.get('env') == 'development') {
 app.get('/', routes.index);
 app.get('/participants', participants.list);
 app.post('/participants/create', participants.create);
-app.get('/scoreboard/d3', scoreboard.d3);
-app.get('/scoreboard/simple', scoreboard.simple);
+
+app.get('/scoreboard/1', scoreboard.highcharts);
+app.get('/scoreboard/2', scoreboard.sigma);
+app.get('/scoreboard/3', scoreboard.d3);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

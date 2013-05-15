@@ -3,16 +3,3 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
-
-  h2 Sample Graph
-
-
-      .actions
-          button(class="switcher", id="column") Column
-          button(class="switcher", id="area") Area
-          button(class="switcher", id="line") Line
-          button(class="switcher", id="spline") Spline
-          button(class="switcher", id="areaspline") Area Spline
-
-      #chart_1.chart
-      #chart_2.chart
