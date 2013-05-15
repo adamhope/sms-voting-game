@@ -4,29 +4,6 @@ block content
   h1= title
   p Welcome to #{title}
 
-
-  form(action='/participants/create', method='post')
-    fieldset
-      legend Register
-      label
-        | New Phone Number
-        input(name='phoneNumber', id='phoneNumber')
-      input(type="submit", value="register")
-
-
-  form
-    fieldset
-      legend Vote
-      label
-        | From Phone Number
-        input(name='phoneNumber', id='phoneNumber')
-      input(type="submit", value="register")
-      label
-        | For Pin Number
-        input(name='pin-number', id='pin-number')
-      input(type="submit", value="register")
-
-
   h2 Sample Graph
 
 

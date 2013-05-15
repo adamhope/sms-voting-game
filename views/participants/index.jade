@@ -2,7 +2,11 @@ extends ../layout
 
 block content
   h1= title
+
   p Welcome to #{title}
+
+  include ../includes/form
+
   - var items = ["one", "two", "three"]
   ul
   each item in participants
