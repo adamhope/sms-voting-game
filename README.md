@@ -1,4 +1,4 @@
-# sms-voting-game
+#The SMS Voting-Game
 
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
@@ -8,13 +8,18 @@
 - You can't vote for anyone more than once
 
 ## Ideas
-- exponential voting
-- display amount to be donated to charity on the scoreboard
+- Exponential point scoring
+- Display amount to be donated to charity on the scoreboard
 - Pin numbers vs. names
     - pins are harder to guess, you have to talk to someone to vote for them / have them vote for you
     - names might be easier and lesse clunky
-- graph network relationships instead of number of votes per participant
+- Graph network relationships instead of number of votes per participant
 
 - Analytics:
   - Top participant (person who's given most votes)
   - Top recipient (person who's receive the most votes)
+
+#TODOs
+
+- Deployment to... somewhere, nodejitsu?
+- SMS'ing via http://burstsms.com.au
