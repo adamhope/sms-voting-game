@@ -4,13 +4,13 @@
  */
 
 exports.highcharts = function(req, res){
-  res.render('scoreboard_highcharts', {title: 'Simple Scoreboard'});
+  res.render('scoreboard_highcharts', {title: 'Highcharts'});
 };
 
 exports.sigma = function(req, res){
-  res.render('scoreboard_sigma', {title: 'D3 Experiments'});
+  res.render('scoreboard_sigma', {title: 'Sigma'});
 };
 
 exports.d3 = function(req, res){
-  res.render('scoreboard_d3', {title: 'D3 Experiments'});
+  res.render('scoreboard_d3', {title: 'D3'});
 };

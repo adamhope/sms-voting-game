@@ -1,6 +1,8 @@
 extends layout
 
 block content
-    script(src="http://d3js.org/d3.v3.min.js")
-    //- script(src="/js/d3/force_directed.js")
-    script(src="/js/d3/heirarchial_edge_bundling.js")
+    #sig(style="height:200px;width:600px;")
+
+block scripts
+    script(src="/js/libs/sigma.min.js")
+    script(src="/js/sigma_test.js")
