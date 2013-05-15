@@ -3,9 +3,9 @@ var mongoose = require('mongoose'),
   ObjectId = Schema.ObjectId;
 
 var participantSchema = mongoose.Schema({
-  pin: String,
-  phoneNumber: { type : String, unique : true }  ,
-  votedForBy: { }
+  pin:         { type: String, unique: true },
+  phoneNumber: { type: String, unique: true },
+  votedForBy:  { }
 });
 
 var Participant = mongoose.model('Participant', participantSchema); 
