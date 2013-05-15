@@ -5,12 +5,12 @@ block content
   p Welcome to #{title}
 
 
-  form
+  form(action='/participants/create', method='post')
     fieldset
       legend Register
       label
         | New Phone Number
-        input(name='phone-number', id='phone-number')
+        input(name='phoneNumber', id='phoneNumber')
       input(type="submit", value="register")
 
 
@@ -19,7 +19,7 @@ block content
       legend Vote
       label
         | From Phone Number
-        input(name='phone-number', id='phone-number')
+        input(name='phoneNumber', id='phoneNumber')
       input(type="submit", value="register")
       label
         | For Pin Number

@@ -8,3 +8,20 @@ exports.list = function(req, res) {
     });
   });
 };
+
+exports.create = function(req, res) {
+  var p = new Participant({
+    pin: generatePin(),
+    phoneNumber: req.body.phoneNumber,
+    votedForBy: { }
+  });
+  p.votedForBy[req.body.phoneNumber] = null;
+  p.save(function (err) {
+    console.error(err); //duplicate phnumber
+  });
+  res.redirect('participants');
+};
+
+function generatePin() {
+  return 1234;
+}

@@ -30,6 +30,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 
 app.get('/participants', participants.list);
+app.post('/participants/create', participants.create);
 app.get('/force_directed', force_directed.force_directed);
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 var participantSchema = mongoose.Schema({
   pin: String,
-  phoneNumber: String,
+  phoneNumber: { type : String, unique : true }  ,
   votedForBy: { }
 });
 
