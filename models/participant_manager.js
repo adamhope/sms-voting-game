@@ -2,7 +2,6 @@ var Participant = require('./participant');
 
 exports.register = function(phoneNumber, errorHandler) {
   var p = new Participant({
-    pin: generatePin(),
     phoneNumber: phoneNumber,
     votedForBy: {phoneNumber: null}
   });

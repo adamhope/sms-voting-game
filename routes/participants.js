@@ -11,6 +11,13 @@ exports.list = function(req, res) {
 };
 
 exports.create = function(req, res) {
+  var phoneNumber = req.body.phoneNumber;
+
+  participantManager.register(phoneNumber, function(err) {
+    console.error(err);
+  });
+  res.redirect('participants');
+}
 
 exports.connect = function(req, res) {
   var phoneNumberFrom = req.body.phoneNumberFrom,
