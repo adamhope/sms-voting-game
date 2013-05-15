@@ -6,8 +6,8 @@ var express        = require('express'),
   routes           = require('./routes'),
   participants     = require('./routes/participants'),
   Participant      = require('./models/participant'),
-  scoreboard       = require('./routes/scoreboard');
-
+  scoreboard       = require('./routes/scoreboard')
+  seed = require('./seed');
 var app = express();
 
 // all environments
@@ -44,25 +44,4 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-// Participant seeding
-
-Participant.find(function(err, participants) {
-  if (participants.length === 0) {
-    new Participant({
-      pin: "0000",
-      phoneNumber: "0414213852",
-      votedForBy: {
-        '0404882585': null,
-        '0404882583': null
-      }
-    }).save();
-    new Participant({
-      pin: "0001",
-      phoneNumber: "0414213333",
-      votedForBy: {
-        '0404882585': null,
-        '0404882583': null
-      }
-    }).save();
-  }
-});
+seed();

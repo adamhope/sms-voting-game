@@ -10,5 +10,12 @@ var participantSchema = mongoose.Schema({
   votedForBy:  { }
 });
 
+//Hook for creation of random pin number.
+//Can still override it by explicitly creating model with pin
+participantSchema.path('phoneNumber').set(function (v) {
+  this.pin = Math.random().toString(36).substr(2, 5);
+  return v;
+});
+
 var Participant = mongoose.model('Participant', participantSchema); 
 module.exports = Participant;

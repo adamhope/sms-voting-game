@@ -11,7 +11,6 @@ exports.list = function(req, res) {
 
 exports.create = function(req, res) {
   var p = new Participant({
-    pin: generatePin(),
     phoneNumber: req.body.phoneNumber,
     votedForBy: { }
   });
@@ -21,8 +20,3 @@ exports.create = function(req, res) {
   });
   res.redirect('participants');
 };
-
-// TODO gerate pin randomly
-function generatePin() {
-  return 1234;
-}
