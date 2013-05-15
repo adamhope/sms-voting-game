@@ -1,12 +1,12 @@
-var express      = require('express'),
-  http           = require('http'),
-  path           = require('path'),
-  mongoose       = require('mongoose'),
-  stylus         = require('stylus'),
-  routes         = require('./routes'),
-  participants   = require('./routes/participants'),
-  Participant    = require('./models/participant'),
-  force_directed = require('./routes/d3_experiments');
+var express        = require('express'),
+  http             = require('http'),
+  path             = require('path'),
+  mongoose         = require('mongoose'),
+  stylus           = require('stylus'),
+  routes           = require('./routes'),
+  participants     = require('./routes/participants'),
+  Participant      = require('./models/participant'),
+  scoreboard       = require('./routes/scoreboard');
 
 var app = express();
 
@@ -35,7 +35,8 @@ if (app.get('env') == 'development') {
 app.get('/', routes.index);
 app.get('/participants', participants.list);
 app.post('/participants/create', participants.create);
-app.get('/d3', force_directed.force_directed);
+app.get('/scoreboard/d3', scoreboard.d3);
+app.get('/scoreboard/simple', scoreboard.simple);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
