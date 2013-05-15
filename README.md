@@ -23,3 +23,20 @@
 
 - Deployment to... somewhere, nodejitsu?
 - SMS'ing via http://burstsms.com.au
+- Try sigma.js for graphing
+
+
+### Alternative theme
+
+Connecting
+1. Register
+2a. I can connect to you
+2b. You can connect to me
+
+Winners are
+- most mutual connections
+- most persistant (outbound connections)
+- hoarder (most in bound connections)
+
+# Privacy
+- Once the stop button has been pressed replace phone numbers with automatically generated IDs
