@@ -16,12 +16,10 @@ exports.connect = function(phoneNumberFrom, pinTo, errorHandler) {
       set = {};
 
   query.exec(function(err, participant) {
-    console.log(participant);
     if (err) return errorHandler(err);
     set['votedForBy.' + phoneNumberFrom] = null;
     Participant.update({ _id: participant.id }, { $set: set}, function(err){
       if (err) return errorHandler(err);
-      console.log(participant);
     });
   });
 };
