@@ -12,6 +12,7 @@
     "stylus": "*",
     "jade": "*",
     "mongoose": "*",
-    "mocha": "*"
+    "mocha": "*",
+    "should": "*"
   }
 }

@@ -17,6 +17,13 @@ participantSchema.path('phoneNumber').set(function (v) {
   return v;
 });
 
-var Participant = mongoose.model('Participant', participantSchema); 
+participantSchema.virtual('score').get(function () {
+  var count = 0;
+  for (var prop in this.votedForBy) {
+    if (this.votedForBy.hasOwnProperty(prop)) { ++ count; }
+  }
+  return count;
+});
 
+var Participant = mongoose.model('Participant', participantSchema); 
 module.exports = Participant;

@@ -10,4 +10,7 @@ block content
   br
   ul
     each participant in participants
-      li= participant
+      br
+      li
+        pre= participant
+        p Scorecount is #{participant.score}
