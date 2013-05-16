@@ -12,4 +12,13 @@ test-w:
 		--ui tdd \
 		--watch
 
-.PHONY: test test-w
+debug:
+	node debug app
+
+install:
+	npm install
+
+clean: 
+	rm -rf node_modules
+
+.PHONY: debug clean install test test-w
