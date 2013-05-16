@@ -24,19 +24,20 @@
 - Deployment to... somewhere, nodejitsu?
 - SMS'ing via http://burstsms.com.au
 - Try sigma.js for graphing
+- A "stop" button to freeze the game
 
 
 ### Alternative theme
 
 Connecting
-1. Register
-2a. I can connect to you
-2b. You can connect to me
+1. Register  
+2a. I can connect to you  
+2b. You can connect to me  
 
 Winners are
 - most mutual connections
 - most persistant (outbound connections)
 - hoarder (most in bound connections)
 
-# Privacy
+# Privacy concerns?
 - Once the stop button has been pressed replace phone numbers with automatically generated IDs
