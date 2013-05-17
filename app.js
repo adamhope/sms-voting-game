@@ -2,6 +2,8 @@ var express        = require('express'),
   http             = require('http'),
   path             = require('path'),
   mongoose         = require('mongoose'),
+    db_url = process.env.MONGOHQ_URL || "mongodb://<dbuser>:<dbpassword>@ds033107.mongolab.com:33107/heroku_app15744823",
+    db = mongoose.connect(db_url),
   stylus           = require('stylus'),
   routes           = require('./routes'),
   participants     = require('./routes/participants'),
@@ -32,6 +34,11 @@ if (app.get('env') == 'development') {
   app.use(express.errorHandler());
   mongoose.connect('mongodb://localhost/sms-voting-game-development');
 }
+
+
+var mongoUri = process.env.MONGOLAB_URI || 
+  process.env.MONGOHQ_URL || 
+    'mongodb://localhost/mydb'; 
 
 app.get('/', routes.index);
 app.get('/participants', participants.list);
