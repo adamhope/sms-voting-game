@@ -14,8 +14,8 @@ describe('Participant', function() {
         if (err) return done(err);
         p.phoneNumber.should.equal(phoneNumberFrom);
         p.score.should.equal(1);
+        done();
       });
-      done();
     });
   });
 });

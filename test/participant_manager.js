@@ -22,8 +22,8 @@ describe("ParticipantManager", function(){
       participantManager.connect(phoneNumberFrom, participant.pin, function(err, p){
         if (err) return done(err);
         p.votedForBy.should.have.property(phoneNumberFrom);
+        done();
       });
-      done();
     });  
   });
   
