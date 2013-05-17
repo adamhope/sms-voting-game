@@ -24,14 +24,15 @@ participantSchema.virtual('score').get(function () {
   return count;
 });
 
-participantSchema.statics.register = function (phoneNumber, errorHandler) {
+participantSchema.statics.register = function (phoneNumber, callback) {
   var p = new Participant({
     phoneNumber: phoneNumber,
     votedForBy: {}
   });
   p.votedForBy[phoneNumber] = null;
-  p.save(function (err) {
-    return errorHandler(err);
+  p.save(function (err, p) {
+    if (err) return callback(err);
+    return callback(null, p);
   });
 };
 
