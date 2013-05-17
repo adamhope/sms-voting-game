@@ -11,15 +11,17 @@ exports.register = function(phoneNumber, errorHandler) {
   });
 }
 
-exports.connect = function(phoneNumberFrom, pinTo, errorHandler) {
+exports.connect = function(phoneNumberFrom, pinTo, callback) {
   var query = Participant.findOne({pin: pinTo}),
       set = {};
 
   query.exec(function(err, participant) {
-    if (err) return errorHandler(err);
+    if (err) return callback(err);
     set['votedForBy.' + phoneNumberFrom] = null;
-    Participant.update({ _id: participant.id }, { $set: set}, function(err){
-      if (err) return errorHandler(err);
+    
+    Participant.findByIdAndUpdate(participant.id, { $set: set}, function(err, p){
+      if (err) return callback(err);
+      return callback(null, p);
     });
   });
 };
