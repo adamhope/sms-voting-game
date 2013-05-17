@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 var participantSchema = mongoose.Schema({
   // TODO Enable unique for pin after generating it propertly
   pin:         { type: String, unique: true },
-  //pin:         { type: String },
   phoneNumber: { type: String, unique: true },
   votedForBy:  { }
 });
@@ -24,6 +23,17 @@ participantSchema.virtual('score').get(function () {
   }
   return count;
 });
+
+participantSchema.statics.register = function (phoneNumber, errorHandler) {
+  var p = new Participant({
+    phoneNumber: phoneNumber,
+    votedForBy: {}
+  });
+  p.votedForBy[phoneNumber] = null;
+  p.save(function (err) {
+    return errorHandler(err);
+  });
+};
 
 var Participant = mongoose.model('Participant', participantSchema); 
 module.exports = Participant;
