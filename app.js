@@ -2,8 +2,6 @@ var express        = require('express'),
   http             = require('http'),
   path             = require('path'),
   mongoose         = require('mongoose'),
-    db_url = process.env.MONGOHQ_URL || "mongodb://<dbuser>:<dbpassword>@ds033107.mongolab.com:33107/heroku_app15744823",
-    db = mongoose.connect(db_url),
   stylus           = require('stylus'),
   routes           = require('./routes'),
   participants     = require('./routes/participants'),
@@ -29,16 +27,16 @@ app.use(stylus.middleware({
  }));
 app.use(express.static(path.join(__dirname + '/public')));
 
-// development only
-if (app.get('env') == 'development') {
-  app.use(express.errorHandler());
-  mongoose.connect('mongodb://localhost/sms-voting-game-development');
-}
-
-
-var mongoUri = process.env.MONGOLAB_URI || 
+var uristring = 
+  process.env.MONGOLAB_URI || 
   process.env.MONGOHQ_URL || 
-    'mongodb://localhost/mydb'; 
+  'mongodb://localhost/sms-voting-game-development';
+
+mongoose.connect(uristring, function (err, res) {
+  if (err) console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  else console.log ('Succeeded connected to: ' + uristring);
+});
+
 
 app.get('/', routes.index);
 app.get('/participants', participants.list);
