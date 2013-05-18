@@ -43,6 +43,5 @@ describe("Participant", function(){
         done();
       });
     });
-
   });
 });

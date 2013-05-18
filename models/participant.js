@@ -42,12 +42,11 @@ participantSchema.statics.connect = function(phoneNumberFrom, pinTo, callback) {
     if (err) return callback(err);
     if (participant === null) return callback(new Error('No participant has pin code ' + pinTo));
 
-    set['votedForBy.' + phoneNumberFrom] = null;
-    
     Participant.findOne({phoneNumber: phoneNumberFrom}, function(err, participantFrom){
       if (err) return callback(err);
       if (participantFrom === null) return callback(new Error('No participant has phone number ' + phoneNumberFrom));
 
+      set['votedForBy.' + phoneNumberFrom] = null;
       Participant.findByIdAndUpdate(participant.id, { $set: set}, function(err, p){
         if (err) return callback(err);
         return callback(null, p);
