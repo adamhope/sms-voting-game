@@ -1,26 +1,40 @@
 var mongoose = require('mongoose'),
-  Participant = require('../models/participant');
+  Participant = require('../models/participant'),
+  should = require('should');
 
 mongoose.connect('mongodb://localhost/sms-voting-game-test');
 
 describe("Participant", function(){
   describe("#connect", function(){
-    var participant = null;
+    var participant = null,
+      anotherParticipant = null;
 
     beforeEach(function(done){
-      participant = new Participant({pin: '00001', votedForBy: {}});
-      participant.save(done);
+      participant = new Participant({pin: '00001', phoneNumber: '0400111100', votedForBy: {}});
+      participant.save(function(err){
+        if (err) return done(err);
+        anotherParticipant = new Participant({pin: '99991', phoneNumber: '0499999999', votedForBy: {}});
+        anotherParticipant.save(done);
+      });
     });
 
     afterEach(function(done){
       Participant.remove({}, done);
     });
     
-    it('adds the phoneNumber', function(done){
+    it('adds the phoneNumber of the registered participant', function(done){
+      Participant.connect(anotherParticipant.phoneNumber, participant.pin, function(err, p){
+        if (err) return done(err);
+        p.votedForBy.should.have.property(anotherParticipant.phoneNumber);
+        done();
+      });
+    });
+
+    it('does not allow to connect when no registered participant has the phone number', function(done) {
       var phoneNumberFrom = '0412121212';
       Participant.connect(phoneNumberFrom, participant.pin, function(err, p){
-        if (err) return done(err);
-        p.votedForBy.should.have.property(phoneNumberFrom);
+        should.exist(err);
+        err.message.should.match(/No participant has phone number/);
         done();
       });
     });  
