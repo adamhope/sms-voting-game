@@ -37,11 +37,11 @@ participantSchema.statics.register = function (phoneNumber, callback) {
 };
 
 participantSchema.statics.connect = function(phoneNumberFrom, pinTo, callback) {
-  var query = Participant.findOne({pin: pinTo}),
-      set = {};
-
-  query.exec(function(err, participant) {
+  Participant.findOne({pin: pinTo}, function(err, participant) {
+    var set = {};
     if (err) return callback(err);
+    if (participant === null) return callback(new Error('No participant has pin code ' + pinTo));
+
     set['votedForBy.' + phoneNumberFrom] = null;
     
     Participant.findOne({phoneNumber: phoneNumberFrom}, function(err, participantFrom){

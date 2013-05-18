@@ -31,12 +31,18 @@ describe("Participant", function(){
     });
 
     it('does not allow to connect when no registered participant has the phone number', function(done) {
-      var phoneNumberFrom = '0412121212';
-      Participant.connect(phoneNumberFrom, participant.pin, function(err, p){
-        should.exist(err);
+      Participant.connect('0412121212', participant.pin, function(err, p){
         err.message.should.match(/No participant has phone number/);
         done();
       });
-    });  
+    }); 
+
+    it('does not allow to connect when no registered participant has the pin code', function(done) {
+      Participant.connect(anotherParticipant.phoneNumber, '10101', function(err, p){
+        err.message.should.match(/No participant has pin code/);
+        done();
+      });
+    });
+
   });
 });
