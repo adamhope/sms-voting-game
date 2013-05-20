@@ -38,4 +38,9 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
-body{margin:1em}
+body{margin:1em;font-size:16px;line-height:24px}
+.masthead,.main{max-width:80em;margin:0 auto}
+fieldset legend{font-weight:bold}
+input,label{display:block}
+input[type='submit']{text-transform:capitalize}
+input{margin:.4em 0}

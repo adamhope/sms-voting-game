@@ -1,18 +1,15 @@
-form(action='/participants/create', method='post')
+form(action="/participants/create", method="post")
   fieldset
     legend Register
-    label
-      | New Phone Number
-      input(name='phoneNumber', id='phoneNumber')
-    input(type="submit", value="register")
+    label(for="phone-number") New Phone Number
+    input#phone-number(name="phone-number")
+    input(type="submit", value="Register")
 
-form(action='/participants/connect', method='post')
+form(action="/participants/connect", method="post")
   fieldset
     legend Vote
-    label
-      | From Phone Number
-      input(name='phoneNumberFrom', id='phoneNumberFrom')
-    label
-      | For Pin Number
-      input(name='pinNumberTo', id='pinNumberTo')
+    label From Phone Number
+      input#phone-number-from(name="phone-number-from")
+    label For Pin Number
+      input#pin-number-to(name="pin-number-to")
     input(type="submit", value="Connect")
