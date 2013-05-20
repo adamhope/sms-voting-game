@@ -6,7 +6,8 @@ var express        = require('express'),
   routes           = require('./routes'),
   participants     = require('./routes/participants'),
   Participant      = require('./models/participant'),
-  scoreboard       = require('./routes/scoreboard')
+  scoreboard       = require('./routes/scoreboard'),
+  sms              = require('./routes/sms'),
   seed = require('./seed');
 
 var app = express();
@@ -43,6 +44,8 @@ app.get('/participants', participants.list);
 app.post('/participants/create', participants.create);
 app.post('/participants/connect', participants.connect);
 
+app.get('/sms/handle', sms.handle);
+
 app.get('/scoreboard/1', scoreboard.highcharts);
 app.get('/scoreboard/2', scoreboard.sigma);
 app.get('/scoreboard/3', scoreboard.d3);
@@ -52,3 +55,5 @@ http.createServer(app).listen(app.get('port'), function(){
 });
 
 seed();
+
+module.exports = app;

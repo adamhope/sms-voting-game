@@ -14,7 +14,8 @@
     "jade": "*",
     "mongoose": "*",
     "mocha": "*",
-    "should": "*"
+    "should": "*",
+    "supertest": "*"
   },
   "engines": {
     "node": "0.10.x",
