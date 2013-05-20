@@ -28,16 +28,23 @@ app.use(stylus.middleware({
  }));
 app.use(express.static(path.join(__dirname + '/public')));
 
-var uristring =
-  process.env.MONGOLAB_URI ||
-  process.env.MONGOHQ_URL ||
-  'mongodb://localhost/sms-voting-game-development';
+// development only
+app.configure('development', function() {
+  var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/sms-voting-game-development';
 
-mongoose.connect(uristring, function (err, res) {
-  if (err) console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  else console.log ('Succeeded connected to: ' + uristring);
+  mongoose.connect(uristring, function (err, res) {
+    if (err) console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+    else console.log ('Succeeded connected to: ' + uristring);
+  });
 });
 
+app.configure('test', function() {
+  app.use(express.errorHandler());
+  mongoose.connect('mongodb://localhost/sms-voting-game-test'); 
+});
 
 app.get('/', routes.index);
 app.get('/participants', participants.list);

@@ -2,8 +2,6 @@ var mongoose = require('mongoose'),
   Participant = require('../models/participant'),
   should = require('should');
 
-mongoose.connect('mongodb://localhost/sms-voting-game-test');
-
 describe("Participant", function(){
   describe("#connect", function(){
     var participant = null,
