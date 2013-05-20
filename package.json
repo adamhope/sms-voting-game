@@ -15,7 +15,8 @@
     "mongoose": "*",
     "mocha": "*",
     "should": "*",
-    "supertest": "*"
+    "supertest": "*",
+    "sinon": "*"
   },
   "engines": {
     "node": "0.10.x",
