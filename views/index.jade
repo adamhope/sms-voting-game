@@ -3,3 +3,17 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  ul
+    li
+      a(href='/participants')
+        | Play
+    li
+      a(href='/scoreboard/1')
+        | Leaderboard
+    li
+      a(href='/scoreboard/2')
+        | Sigma.js
+    li
+      a(href='/scoreboard/3')
+        | D3

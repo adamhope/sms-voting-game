@@ -5,7 +5,12 @@ html
     link(href="/styles.css", rel="stylesheet", type="text/css")
 
     body
-      block content
+
+      header.masthead
+        block header
+
+      .main
+        block content
 
     script(src="http://code.jquery.com/jquery-1.7.1.min.js")
     block scripts

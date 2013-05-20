@@ -8,12 +8,14 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-; Tab indentation (no size specified)
 [*.js]
 indent_style = space
-index_size = 2
+indent_size = 2
 
-; Tab indentation (no size specified)
 [*.jade]
 indent_style = space
-index_size = 2
+indent_size = 2
+
+[*.styl]
+indent_style = space
+indent_size = 2

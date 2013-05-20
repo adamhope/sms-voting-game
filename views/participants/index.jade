@@ -1,17 +1,16 @@
 extends ../layout
 
+block header
+  h1.page-title= title
+  p Welcome to #{title}
+
 block content
-  header.masthead
-    h1.page-title= title
-    p Welcome to #{title}
 
-    .main
+  include ../includes/form
 
-      include ../includes/form
+  section.debug
 
-      section.debug
-
-        article
-          each participant in participants
-            pre= participant
-            p Scorecount is #{participant.score}
+    article
+      each participant in participants
+        pre= participant
+        p Scorecount is #{participant.score}

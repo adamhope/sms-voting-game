@@ -28,9 +28,9 @@ app.use(stylus.middleware({
  }));
 app.use(express.static(path.join(__dirname + '/public')));
 
-var uristring = 
-  process.env.MONGOLAB_URI || 
-  process.env.MONGOHQ_URL || 
+var uristring =
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
   'mongodb://localhost/sms-voting-game-development';
 
 mongoose.connect(uristring, function (err, res) {
@@ -41,6 +41,7 @@ mongoose.connect(uristring, function (err, res) {
 
 app.get('/', routes.index);
 app.get('/participants', participants.list);
+app.get('/participants/json', participants.json);
 app.post('/participants/create', participants.create);
 app.post('/participants/connect', participants.connect);
 
