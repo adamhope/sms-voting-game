@@ -6,11 +6,9 @@ block content
   p Welcome to #{title}
 
   include ../includes/form
-  br
-  br
+
   ul
     each participant in participants
-      br
       li
         pre= participant
         p Scorecount is #{participant.score}
