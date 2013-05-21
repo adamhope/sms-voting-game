@@ -25,14 +25,13 @@ participantSchema.virtual('score').get(function () {
 });
 
 participantSchema.statics.register = function (phoneNumber, callback) {
-  var p = new Participant({
-    phoneNumber: phoneNumber,
-    votedForBy: {}
-  });
-  p.votedForBy[phoneNumber] = null;
-  p.save(function (err, p) {
+  Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
     if (err) return callback(err);
-    return callback(null, p);
+    if (p) {
+      return callback(null, p);
+    } else {
+      return createParticipant(phoneNumber, callback);
+    }
   });
 };
 
@@ -49,6 +48,18 @@ participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
     });
   });
 };
+
+function createParticipant(phoneNumber, callback) {
+  var p = new Participant({
+    phoneNumber: phoneNumber,
+    votedForBy: {}
+  });
+  p.votedForBy[phoneNumber] = null;
+  p.save(function (err, p) {
+    if (err) return callback(err);
+    return callback(null, p);
+  });
+}
 
 var Participant = mongoose.model('Participant', participantSchema); 
 module.exports = Participant;

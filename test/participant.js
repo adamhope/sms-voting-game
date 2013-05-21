@@ -17,5 +17,18 @@ describe('Participant', function() {
         done();
       });
     });
+
+    it('does not add participant if already registered', function(done) {
+      var phoneNumberFrom = '041213852';
+      Participant.register(phoneNumberFrom, function(err, p1) {
+        
+        Participant.register(phoneNumberFrom, function(err, p2) {
+          p1.id.should.equal(p2.id);
+          p1.pin.should.equal(p2.pin);
+          p1.phoneNumber.should.equal(p2.phoneNumber);
+          done();
+        });
+      });
+    });
   });
 });
