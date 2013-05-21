@@ -28,9 +28,9 @@ participantSchema.statics.register = function (phoneNumber, callback) {
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
     if (err) return callback(err);
     if (p) {
-      return callback(null, p);
+      callback(null, p);
     } else {
-      return createParticipant(phoneNumber, callback);
+      createParticipant(phoneNumber, callback);
     }
   });
 };
@@ -42,10 +42,7 @@ participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
     if (participant === null) return callback(new Error('No participant has pin code ' + pinTo));
 
     set['votedForBy.' + phoneNumberFrom] = null;
-    Participant.findByIdAndUpdate(participant.id, { $set: set}, function(err, p) {
-      if (err) return callback(err);
-      return callback(null, p);
-    });
+    Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);
   });
 };
 
@@ -55,10 +52,7 @@ function createParticipant(phoneNumber, callback) {
     votedForBy: {}
   });
   p.votedForBy[phoneNumber] = null;
-  p.save(function (err, p) {
-    if (err) return callback(err);
-    return callback(null, p);
-  });
+  p.save(callback);
 }
 
 var Participant = mongoose.model('Participant', participantSchema); 
