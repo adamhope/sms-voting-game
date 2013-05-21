@@ -50,7 +50,7 @@ app.get('/', routes.index);
 app.get('/participants', participants.list);
 app.get('/participants/json', participants.json);
 app.post('/participants/create', participants.create);
-app.post('/participants/connect', participants.connect);
+app.post('/participants/vote', participants.vote);
 
 app.get('/sms/handle', sms.handle);
 

@@ -37,10 +37,10 @@ exports.create = function(req, res) {
   res.redirect('participants');
 };
 
-exports.connect = function(req, res) {
+exports.vote = function(req, res) {
   var phoneNumberFrom = req.body['phone-number-from'],
       pinTo = req.body['pin-number-to'];
-  Participant.connect(phoneNumberFrom, pinTo, function(err) {
+  Participant.vote(phoneNumberFrom, pinTo, function(err) {
     console.error(err);
   });
   res.redirect('participants');

@@ -21,22 +21,23 @@ describe("Participant", function(){
     });
     
     it('adds the phoneNumber of the registered participant', function(done){
-      Participant.connect(anotherParticipant.phoneNumber, participant.pin, function(err, p){
+      Participant.vote(anotherParticipant.phoneNumber, participant.pin, function(err, p){
         if (err) return done(err);
         p.votedForBy.should.have.property(anotherParticipant.phoneNumber);
         done();
       });
     });
 
-    it('does not allow to connect when no registered participant has the phone number', function(done) {
-      Participant.connect('0412121212', participant.pin, function(err, p){
-        err.message.should.match(/No participant has phone number/);
+    it('allows to vote when the voter is not registered', function(done) {
+      Participant.vote('0412121212', participant.pin, function(err, p){
+        // err.message.should.match(/No participant has phone number/);
+        p.votedForBy.should.have.property('0412121212');
         done();
       });
     }); 
 
-    it('does not allow to connect when no registered participant has the pin code', function(done) {
-      Participant.connect(anotherParticipant.phoneNumber, '10101', function(err, p){
+    it('does not allow to vote when no registered participant has the pin code', function(done) {
+      Participant.vote(anotherParticipant.phoneNumber, '10101', function(err, p){
         err.message.should.match(/No participant has pin code/);
         done();
       });
