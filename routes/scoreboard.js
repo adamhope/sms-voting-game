@@ -4,7 +4,7 @@
  */
 
 exports.highcharts = function(req, res){
-  res.render('scoreboard/scoreboard_highcharts', {title: 'Highcharts'});
+  res.render('scoreboard/scoreboard_highcharts', {title: 'Scoreboard'});
 };
 
 exports.sigma = function(req, res){

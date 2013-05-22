@@ -2,18 +2,10 @@ extends ../layout
 
 block content
 
-    .actions
-
-        button.switcher#column Column
-        button.switcher#area Area
-        button.switcher#line Line
-        button.switcher#spline Spine
-        button.switcher#areaspline Area spline
-
     #highchart
 
 block scripts
     script(src="/js/libs/highcharts.js")
-    script(src="/js/highcharts/gray.js")
+    script(src="/js/highcharts/theme.js")
     script(src="/js/highcharts/main.js")
 //- http://www.script-tutorials.com/active-charts-using-highcharts/
