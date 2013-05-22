@@ -7,6 +7,19 @@
 - You can't vote for yourself
 - You can't vote for anyone more than once
 
+# Decisions
+
+## Voting and registering
+
+- If you text anything that contains only numbers we consider you to be voting for a pin number
+- Players should have a username so that we can display something on screen which is not their phone number or pin number
+    - phone numbers = privacy issues
+    - pin numbers removes the need to talk to other players
+
+## Winning
+- Rules for winning have not been determined
+    - however the winners will not be the top 1-3 players who have voted for the most people as we want to encourage recipricale voting
+
 ## Ideas
 - Exponential point scoring
 - Display amount to be donated to charity on the scoreboard
@@ -30,9 +43,9 @@
 ### Alternative theme
 
 Connecting
-1. Register  
-2a. I can connect to you  
-2b. You can connect to me  
+1. Register
+2a. I can connect to you
+2b. You can connect to me
 
 Winners are
 - most mutual connections
