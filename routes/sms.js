@@ -1,24 +1,36 @@
 var Participant = require('../models/participant');
 
-exports.extract = function(req, keyword) {
+function extract(req, keyword) {
   return {
     phoneNumber: req.query["mobile"],
-    text: req.query["response"].split(keyword + " ")[1]
+    text: req.query["response"].toLowerCase().split(keyword + " ")[1]
   }
 };
 
-exports.vote = function(req, res) {
-  var options = this.extract(req, 'VOTE');
+function vote(res, options) {
   Participant.vote(options.phoneNumber, options.text, function(err) {
     console.error(err);
   });
   res.redirect('participants');
 };
 
-exports.register = function(req, res) {
-  Participant.register(this.extract(req, 'PIN').phoneNumber, function(err, participant) {
+function register(res, options) {
+  Participant.register(options.phoneNumber, function(err, participant) {
     if (err) console.log(err);
-    // send sms with participant.pin
+    res.redirect('participants');
   });
+};
+
+function isNumberOnly(text) {
+  return !!(/^\d+$/.exec(text));
+};
+
+exports.dispatch = function(req, res) {
+  var options = extract(req, 'tw');
+  if (isNumberOnly(options.text)) {
+    vote(res, options);
+  } else {
+    register(res, options)
+  }
 };
 
