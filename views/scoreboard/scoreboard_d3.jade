@@ -1,9 +1,12 @@
 extends ../layout
 
-block content
-    script(src="http://d3js.org/d3.v3.min.js")
-    //- script(src="/js/d3/force_directed.js")
-    script(src="/js/d3/heirarchial_edge_bundling.js")
 
-//- http://mbostock.github.io/d3/talk/20111116/bundle.html
-//- http://nvd3.org/ghpages/examples.html
+block content
+
+  #d3
+
+block scripts
+    script(src="http://mbostock.github.com/d3/d3.js?1.29.1")
+    script(src="http://mbostock.github.com/d3/d3.geom.js?1.29.1")
+    script(src="http://mbostock.github.com/d3/d3.layout.js?1.29.1")
+    script(src="/js/d3/force_directed_directional.js")

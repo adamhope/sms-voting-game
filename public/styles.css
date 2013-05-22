@@ -38,7 +38,15 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
-body{margin:1em;font-size:16px;line-height:24px;background-color:#000;color:#fff}
+body{background-color:#fff !important}
+path.link{fill:none;stroke:#666;stroke-width:1.5px}
+marker#licensing{fill:#008000}
+path.link.licensing{stroke:#008000}
+path.link.resolved{stroke-dasharray:0,2 1}
+circle{fill:#ccc;stroke:#333;stroke-width:1.5px}
+text{font:10px sans-serif;pointer-events:none}
+text.shadow{stroke:#fff;stroke-width:3px;stroke-opacity:.8}
+body{margin:1em;font-size:16px;line-height:24px;background-color:#fff;color:#000}
 .masthead,.main{max-width:80em;margin:0 auto}
 #donation{text-align:right}
 fieldset legend{font-weight:bold}

@@ -43,12 +43,13 @@ app.configure('development', function() {
 
 app.configure('test', function() {
   app.use(express.errorHandler());
-  mongoose.connect('mongodb://localhost/sms-voting-game-test'); 
+  mongoose.connect('mongodb://localhost/sms-voting-game-test');
 });
 
 app.get('/', routes.index);
 app.get('/participants', participants.list);
 app.get('/participants/json', participants.json);
+app.get('/participants/links', participants.links);
 app.post('/participants/create', participants.create);
 app.post('/participants/vote', participants.vote);
 
