@@ -52,7 +52,7 @@ app.get('/participants/json', participants.json);
 app.post('/participants/create', participants.create);
 app.post('/participants/vote', participants.vote);
 
-app.get('/sms/handle', sms.handle);
+app.get('/sms/vote', sms.vote);
 
 app.get('/scoreboard/1', scoreboard.highcharts);
 app.get('/scoreboard/2', scoreboard.sigma);
