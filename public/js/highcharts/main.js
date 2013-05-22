@@ -1,7 +1,7 @@
 // TODO: lots of refactoring
 var scoreData, chart;
 
-var renderGraph = function(data) {
+var draw = function(data) {
 
   scoreData = data.scoreData;
 
@@ -29,8 +29,10 @@ var renderGraph = function(data) {
     }]
   });
 
+  $('.amount').text(scoreData.totalScore * 1);
+
 };
 
 $(document).ready(function() {
-  $.getJSON('/participants/json', renderGraph);
+  $.getJSON('/participants/json', draw);
 });

@@ -14,7 +14,8 @@ exports.json = function(req, res) {
 
     var scoreData = {
       participants: [],
-      scores: []
+      scores: [],
+      totalScore: 0
     };
 
     var i = participants.length;
@@ -23,6 +24,10 @@ exports.json = function(req, res) {
       scoreData.participants.push(participants[i].phoneNumber);
       scoreData.scores.push(participants[i].score);
     }
+
+    scoreData.scores.map(function(s){
+      scoreData.totalScore += s;
+    });
 
     res.json({ scoreData: scoreData });
   });
