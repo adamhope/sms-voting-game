@@ -5,6 +5,8 @@ var draw = function(data) {
 
   scoreData = data.scoreData;
 
+  // http://api.highcharts.com/highstock#yAxis.minPadding
+
   chart = new Highcharts.Chart({
     chart: {
       renderTo: 'highchart',
