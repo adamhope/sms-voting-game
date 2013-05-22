@@ -20,15 +20,14 @@ var renderGraph = function(data) {
     yAxis: {
       title: {
         text: 'Points'
-      }
+      },
+      allowDecimals: false
     },
     series: [{
       name: 'Points',
       data: scoreData.scores
     }]
   });
-
-  setupGraphSwitcher();
 
 };
 
