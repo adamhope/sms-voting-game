@@ -56,8 +56,7 @@ app.post('/participants/vote', participants.vote);
 app.get('/sms', sms.dispatch);
 
 app.get('/scoreboard/1', scoreboard.highcharts);
-app.get('/scoreboard/2', scoreboard.sigma);
-app.get('/scoreboard/3', scoreboard.d3);
+app.get('/scoreboard/2', scoreboard.d3);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
