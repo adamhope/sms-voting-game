@@ -11,14 +11,14 @@ function vote(res, options) {
   Participant.vote(options.phoneNumber, options.text, function(err) {
     console.error(err);
   });
-  res.redirect('participants');
+  res.send(201);
 };
 
 function register(res, options) {
   Participant.register(options.phoneNumber, function(err, participant) {
     if (err) console.log(err);
-    res.redirect('participants');
   });
+  res.send(201);
 };
 
 function isNumberOnly(text) {
@@ -30,7 +30,7 @@ exports.dispatch = function(req, res) {
   if (isNumberOnly(options.text)) {
     vote(res, options);
   } else {
-    register(res, options)
+    register(res, options);
   }
 };
 

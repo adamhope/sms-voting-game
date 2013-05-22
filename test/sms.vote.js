@@ -3,11 +3,11 @@ var sms = require('../routes/sms'),
   sinon = require('sinon');
 
 describe('sms', function() {
-  describe('#register', function() {
+  describe('#vote', function() {
     var req = {
           query: {
             mobile: '1234567890',
-            response: 'TW ',
+            response: 'TW 12345',
             message_id: '0'
           }
         },
@@ -17,10 +17,10 @@ describe('sms', function() {
         };
 
     it('calls Participant#register', function() {
-      stubParticipant = sinon.stub(Participant, 'register'),
+      stubParticipant = sinon.stub(Participant, 'vote'),
       sms.dispatch(req, res);
       stubParticipant.called.should.be.true;
-      stubParticipant.withArgs(req.query.mobile).calledOnce.should.be.true;
+      stubParticipant.withArgs(req.query.mobile, '12345').calledOnce.should.be.true;
     });
   });
 });
