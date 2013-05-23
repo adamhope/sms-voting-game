@@ -18,6 +18,7 @@ describe('SMS dispatch', function(){
       var afterRequest = function(err, res) {
         stubParticipantRegister.called.should.be.true;
         stubParticipantRegister.withArgs("12345").calledOnce.should.be.true;
+        stubParticipantRegister.restore();
         done();
       }; 
 
@@ -33,6 +34,7 @@ describe('SMS dispatch', function(){
       var afterRequest = function(err, res) {
         stubParticipantVote.called.should.be.true;
         stubParticipantVote.withArgs('12345', '9900').calledOnce.should.be.true;
+        stubParticipantVote.restore();
         done();
       }; 
 
