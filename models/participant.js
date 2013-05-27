@@ -4,6 +4,7 @@ var mongoose = require('mongoose'),
 
 var participantSchema = mongoose.Schema({
   pin:         { type: String, unique: true },
+  username:    { type: String, unique: true }, 
   phoneNumber: { type: String, unique: true },
   votedForBy:  { }
 });
@@ -23,13 +24,14 @@ participantSchema.virtual('score').get(function () {
   return count;
 });
 
-participantSchema.statics.register = function (phoneNumber, callback) {
+//TODO - check username doesnt exist either
+participantSchema.statics.register = function (phoneNumber, username, callback) {
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
     if (err) return callback(err);
     if (p) {
       callback(null, p);
     } else {
-      createParticipant(phoneNumber, callback);
+      createParticipant(phoneNumber, username, callback);
     }
   });
 };
@@ -45,9 +47,10 @@ participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
   });
 };
 
-function createParticipant(phoneNumber, callback) {
+function createParticipant(phoneNumber, username, callback) {
   var p = new Participant({
     phoneNumber: phoneNumber,
+    username: username,
     votedForBy: {}
   });
   p.votedForBy[phoneNumber] = null;

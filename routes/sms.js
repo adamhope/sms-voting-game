@@ -1,9 +1,9 @@
 var Participant = require('../models/participant');
 
-function extract(req, keyword) {
+function extract(req) {
   return {
     phoneNumber: req.query["mobile"],
-    text: req.query["response"].toLowerCase().split(keyword + " ")[1]
+    text: req.query["response"].toLowerCase()
   }
 };
 
@@ -15,8 +15,8 @@ function vote(res, options) {
 };
 
 function register(res, options) {
-  Participant.register(options.phoneNumber, function(err, participant) {
-    if (err) console.log(err);
+  Participant.register(options.phoneNumber, options.text, function(err, participant) {
+    if (err) console.error(err);
   });
   res.send(201);
 };
@@ -26,7 +26,7 @@ function isNumberOnly(text) {
 };
 
 exports.dispatch = function(req, res) {
-  var options = extract(req, 'tw');
+  var options = extract(req);
   if (isNumberOnly(options.text)) {
     vote(res, options);
   } else {

@@ -8,10 +8,10 @@ describe("Participant", function(){
       anotherParticipant = null;
 
     beforeEach(function(done){
-      participant = new Participant({pin: '00001', phoneNumber: '0400111100', votedForBy: {}});
+      participant = new Participant({pin: '00001', username: "Hodor", phoneNumber: '0400111100', votedForBy: {}});
       participant.save(function(err){
         if (err) return done(err);
-        anotherParticipant = new Participant({pin: '99991', phoneNumber: '0499999999', votedForBy: {}});
+        anotherParticipant = new Participant({pin: '99991', username: "Hodor2", phoneNumber: '0499999999', votedForBy: {}});
         anotherParticipant.save(done);
       });
     });

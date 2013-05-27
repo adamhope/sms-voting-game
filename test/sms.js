@@ -12,7 +12,7 @@ describe('SMS dispatch', function(){
 
   describe('#register', function() {
     it('respond with 201', function(done){
-      var url = '/sms/?mobile=12345&response=TW+Username&message_id=0',
+      var url = '/sms/?mobile=12345&response=Username&message_id=0',
           stubParticipantRegister = sinon.stub(Participant, 'register');
       
       var afterRequest = function(err, res) {
@@ -28,7 +28,7 @@ describe('SMS dispatch', function(){
 
   describe('#vote', function() {
     it('respond with 201', function(done){
-      var url = '/sms/?mobile=12345&response=TW+9900&message_id=0',
+      var url = '/sms/?mobile=12345&response=9900&message_id=0',
           stubParticipantVote = sinon.stub(Participant, 'vote');
       
       var afterRequest = function(err, res) {

@@ -3,6 +3,8 @@ form(action="/participants/create", method="post")
     legend Register
     label(for="phone-number") New Phone Number
     input#phone-number(name="phone-number")
+    label(for="username") New Username
+    input#username(name="username")
     input(type="submit", value="Register")
 
 form(action="/participants/vote", method="post")

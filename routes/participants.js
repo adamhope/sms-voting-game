@@ -79,8 +79,9 @@ exports.links = function (req, res) {
 
 exports.create = function(req, res) {
   var phoneNumber = req.body['phone-number'];
+  var username = req.body['username'];
 
-  Participant.register(phoneNumber, function(err) {
+  Participant.register(phoneNumber, username, function(err) {
     console.error(err);
   });
   res.redirect('participants');
