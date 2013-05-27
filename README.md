@@ -20,6 +20,25 @@
 - Rules for winning have not been determined
     - however the winners will not be the top 1-3 players who have voted for the most people as we want to encourage recipricale voting
 
+
+## Routes
+##### Message contents: <username> dispatched to /sms/?mobile=<phone_number>&response=<username>&message_id=0
+    if <username> is registered and mobile number matches registered user
+        Send back generated <pin_no>
+    else if <username> is registered but mobile number does not match:
+        Send exception back "User already taken"
+    else:
+        Register participant with <username> and send back pin
+        
+##### Message contents: <username> dispatched to /sms/?mobile=<phone_number>&response=<pin_no>&message_id=0
+    if <pin_no> exists:
+        vote for user corresponding with pin.
+    else:
+        send back error "User with pin <pin_no> not found" (optional)
+
+Constraints:
+Pin number must be a NUMBER (no alphabetic chars).
+
 ## Ideas
 - Exponential point scoring
 - Display amount to be donated to charity on the scoreboard
