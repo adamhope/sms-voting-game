@@ -2,12 +2,26 @@ var app = require('../app')
   , request = require('supertest')
   , express = require('express'),
   Participant = require('../models/participant'),
-  sinon = require('sinon');
+  sinon = require('sinon'),
+  sms = require('../routes/sms');
 
 describe('SMS dispatch', function(){
 
   afterEach(function(done) {
     Participant.remove({}, done);
+  });
+
+  describe('URL building function', function() {
+    it('should return correct URL', function() {
+      var apiSettings = { 
+        key: "someKey",
+        secret: "thoughtworks",
+        url: "http://www.some-url.com/sms/"
+      };
+      var url = sms.buildSendSmsURL("Hello world", "0414213852", apiSettings);
+      var expectedURL = "http://www.some-url.com/sms/messages.single?apikey=someKey&apisecret=thoughtworks&mobile=0414213852&message=Hello+world&caller_id=thoughtworks"
+      url.should.equal(expectedURL);
+    });
   });
 
   describe('#register', function() {

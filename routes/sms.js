@@ -25,6 +25,18 @@ function isNumberOnly(text) {
   return !!(/^\d+$/.exec(text));
 };
 
+
+exports.buildSendSmsURL = function(message, recipientNumber, apiSettings) {
+  return apiSettings.url + 
+  "messages.single?" + 
+  "apikey=" + apiSettings.key + "&" +
+  "apisecret=" + apiSettings.secret + "&" +
+  "mobile=" + recipientNumber + "&" +
+  "message=" + message.split(" ").join("+") + "&" +
+  "caller_id=" + "thoughtworks";
+};
+
+
 exports.dispatch = function(req, res) {
   var options = extract(req);
   if (isNumberOnly(options.text)) {
