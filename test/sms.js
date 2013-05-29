@@ -3,41 +3,55 @@ var app = require('../app')
   , express = require('express'),
   Participant = require('../models/participant'),
   sinon = require('sinon'),
-  sms = require('../routes/sms');
+  sms = require('../routes/sms')
+  http = require('http');
+
+
+
+describe('#buildSendSmsUrl', function() {
+  it('should return correct URL', function() {
+    var smsSettings = { 
+      key: "someKey",
+      secret: "thoughtworks",
+      url: "http://www.some-url.com/sms/"
+    };
+    var url = sms.buildSendSmsUrl("Hello world", "0414213852", smsSettings);
+    var expectedURL = "http://www.some-url.com/sms/messages.single?apikey=someKey&apisecret=thoughtworks&mobile=0414213852&message=Hello+world&caller_id=thoughtworks"
+    url.should.equal(expectedURL);
+  });
+});
+
+describe('#sendSms', function() {
+  var smsSettings = { 
+    key: "someKey",
+    secret: "thoughtworks",
+    url: "http://burst.transmitsms.com/api"
+  };
+
+  it('sends SMS', function(done) {
+    var stubHttpGet = sinon.stub(http, 'get', function(url, callback) { callback(url); }),
+    // var stubHttpGet = sinon.stub(http, 'get'),
+      stubSmsBuildSendSmsUrl = sinon.stub(sms, 'buildSendSmsUrl');
+      req = {on: function(){}};
+    // stubHttpGet.returns(req);
+    stubSmsBuildSendSmsUrl.returns('aUrl');
+    var afterTest = function(err, res) {
+      stubHttpGet.called.should.be.true;
+      stubHttpGet.withArgs('aUrl').calledOnce.should.be.true;
+      stubHttpGet.restore();
+      stubSmsBuildSendSmsUrl.restore();
+      done();
+    };
+      
+    sms.sendSms("Hello world", "0411221122", smsSettings, afterTest);
+  });
+});
 
 describe('SMS dispatch', function(){
 
   afterEach(function(done) {
     Participant.remove({}, done);
   });
-
-  describe('URL building function', function() {
-    it('should return correct URL', function(done) {
-      var apiSettings = { 
-        key: "someKey",
-        secret: "thoughtworks",
-        url: "http://www.some-url.com/sms/"
-      };
-      var url = sms.buildSendSmsURL("Hello world", "0414213852", apiSettings);
-      var expectedURL = "http://www.some-url.com/sms/messages.single?apikey=someKey&apisecret=thoughtworks&mobile=0414213852&message=Hello+world&caller_id=thoughtworks"
-      url.should.equal(expectedURL);
-      done();
-    });
-  });
-
-   describe('SMS sending function', function() {
-
-    var apiSettings = { 
-      key: "someKey",
-      secret: "thoughtworks",
-      url: "http://burst.transmitsms.com/api"
-    };
-
-    it('should send SMS', function(done) {
-      var result = sms.sendSMS("Hello world", "0414213852", apiSettings, done);
-    });
-  });
-
 
   describe('#register', function() {
     it('respond with 201', function(done){

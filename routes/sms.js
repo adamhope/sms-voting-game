@@ -25,41 +25,27 @@ function register(res, options) {
   res.send(201);
 };
 
-exports.sendSMS = function(message, recipientNumber, apiSettings, callback) {
-  var url = this.buildSendSmsURL(message, recipientNumber, apiSettings);
-  // http.get(url, function(res) {
-  //   console.log(res);
-  // }).on ("error", function(err) {
-  //   console.log("ERRROROOROR");
-  //   console.log(err);
-  // });
-
-  http.get("http://www.google.com/index.html", function(res) {
-    console.log("Got response: " + res.statusCode);
+exports.sendSms = function(message, recipientNumber, smsSettings, callback) {
+  var url = this.buildSendSmsUrl(message, recipientNumber, smsSettings);
+  http.get(url, function(res) {
     callback(null, res);
-  }).on('error', function(e) {
-    console.log("Got error: " + e.message);
-    callback(e);
+  // }).on('error', function(e) {
+  //   callback(e);
   });
 };
-
-
-
 
 function isNumberOnly(text) {
   return !!(/^\d+$/.exec(text));
 };
 
-
-exports.buildSendSmsURL = function(message, recipientNumber, apiSettings) {
-  return apiSettings.url + "messages.single?" + 
-  "apikey=" + apiSettings.key + "&" +
-  "apisecret=" + apiSettings.secret + "&" +
+exports.buildSendSmsUrl = function(message, recipientNumber, smsSettings) {
+  return smsSettings.url + "messages.single?" + 
+  "apikey=" + smsSettings.key + "&" +
+  "apisecret=" + smsSettings.secret + "&" +
   "mobile=" + recipientNumber + "&" +
   "message=" + message.split(" ").join("+") + "&" +
   "caller_id=" + "thoughtworks";
 };
-
 
 exports.dispatch = function(req, res) {
   var options = extract(req);
