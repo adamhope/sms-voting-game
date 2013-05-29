@@ -34,8 +34,7 @@ describe('SMS dispatch', function(){
     };
 
     it('should send SMS', function(done) {
-      var result = sms.sendSMS("Hello world", "0414213852", apiSettings);
-      done();
+      var result = sms.sendSMS("Hello world", "0414213852", apiSettings, done);
     });
   });
 

@@ -25,7 +25,7 @@ function register(res, options) {
   res.send(201);
 };
 
-exports.sendSMS = function(message, recipientNumber, apiSettings) {
+exports.sendSMS = function(message, recipientNumber, apiSettings, callback) {
   var url = this.buildSendSmsURL(message, recipientNumber, apiSettings);
   // http.get(url, function(res) {
   //   console.log(res);
@@ -36,8 +36,10 @@ exports.sendSMS = function(message, recipientNumber, apiSettings) {
 
   http.get("http://www.google.com/index.html", function(res) {
     console.log("Got response: " + res.statusCode);
+    callback(null, res);
   }).on('error', function(e) {
     console.log("Got error: " + e.message);
+    callback(e);
   });
 };
 
