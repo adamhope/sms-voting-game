@@ -1,24 +1,28 @@
 body
-  background-color: #FFFFFF !important
+  background-color: #000 !important
+  margin: 0
 
 path.link
   fill: none
-  stroke: #666
-  stroke-width: 1.5px
+  stroke: #0bf
+  stroke-width: 2px
 
 marker#licensing
-  fill: green
-
-path.link.licensing
-  stroke: green
+  fill: none
 
 path.link.resolved
   stroke-dasharray: 0,2 1
 
 circle
-  fill: #ccc
-  stroke: #333
-  stroke-width: 1.5px
+  fill: #fff
+  stroke: rgba(255,255,255,0.5)
+  stroke-width: 0
+  transition: all 300ms ease
+
+circle:hover,
+circle:active,
+circle:focus
+  stroke-width: 10px
 
 text
   font: 10px sans-serif

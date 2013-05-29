@@ -42,6 +42,7 @@ function draw(data) {
     link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
   });
 
+  // TODO Make viewport width
   var w = 960,
       h = 500;
 
@@ -88,17 +89,19 @@ function draw(data) {
       .data(force.nodes())
     .enter().append("svg:g");
 
-  // A copy of the text with a thick white stroke for legibility.
-  text.append("svg:text")
-      .attr("x", 8)
-      .attr("y", ".31em")
-      .attr("class", "shadow")
-      .text(function(d) { return d.name; });
+  // TODO - Style this into a tooltip
 
-  text.append("svg:text")
-      .attr("x", 8)
-      .attr("y", ".31em")
-      .text(function(d) { return d.name; });
+  // A copy of the text with a thick white stroke for legibility.
+  // text.append("svg:text")
+  //     .attr("x", 8)
+  //     .attr("y", ".31em")
+  //     .attr("class", "shadow")
+  //     .text(function(d) { return d.name; });
+
+  // text.append("svg:text")
+  //     .attr("x", 8)
+  //     .attr("y", ".31em")
+  //     .text(function(d) { return d.name; });
 
   // Use elliptical arc path segments to doubly-encode directionality.
   function tick() {
