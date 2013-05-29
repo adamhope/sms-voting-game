@@ -17,20 +17,20 @@ function vote(res, options) {
 
 function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
-    if (err) console.error(err);
-    else {
+    if (err) {
+      console.error(err);
+    } else {
       //send sms
     }
   });
   res.send(201);
+
 };
 
-exports.sendSms = function(message, recipientNumber, smsSettings, callback) {
-  var url = this.buildSendSmsUrl(message, recipientNumber, smsSettings);
-  http.get(url, function(res) {
-    callback(null, res);
-  // }).on('error', function(e) {
-  //   callback(e);
+exports.sendSms = function(message, recipientNumber, smsSettings) {
+  var url = exports.buildSendSmsUrl(message, recipientNumber, smsSettings);
+  http.get(url).on('error', function(err) {
+    console.log(err);
   });
 };
 
