@@ -8,6 +8,7 @@ var express        = require('express'),
   Participant      = require('./models/participant'),
   scoreboard       = require('./routes/scoreboard'),
   sms              = require('./routes/sms'),
+  apiSettings         = require('./settings-template'),
   seed = require('./seed');
 
 var app = express();

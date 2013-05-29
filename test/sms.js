@@ -12,7 +12,7 @@ describe('SMS dispatch', function(){
   });
 
   describe('URL building function', function() {
-    it('should return correct URL', function() {
+    it('should return correct URL', function(done) {
       var apiSettings = { 
         key: "someKey",
         secret: "thoughtworks",
@@ -21,8 +21,24 @@ describe('SMS dispatch', function(){
       var url = sms.buildSendSmsURL("Hello world", "0414213852", apiSettings);
       var expectedURL = "http://www.some-url.com/sms/messages.single?apikey=someKey&apisecret=thoughtworks&mobile=0414213852&message=Hello+world&caller_id=thoughtworks"
       url.should.equal(expectedURL);
+      done();
     });
   });
+
+   describe('SMS sending function', function() {
+
+    var apiSettings = { 
+      key: "someKey",
+      secret: "thoughtworks",
+      url: "http://burst.transmitsms.com/api"
+    };
+
+    it('should send SMS', function(done) {
+      var result = sms.sendSMS("Hello world", "0414213852", apiSettings);
+      done();
+    });
+  });
+
 
   describe('#register', function() {
     it('respond with 201', function(done){

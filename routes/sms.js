@@ -1,4 +1,5 @@
-var Participant = require('../models/participant');
+var Participant = require('../models/participant'),
+  http = require('http');
 
 function extract(req) {
   return {
@@ -17,9 +18,31 @@ function vote(res, options) {
 function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
     if (err) console.error(err);
+    else {
+      //send sms
+    }
   });
   res.send(201);
 };
+
+exports.sendSMS = function(message, recipientNumber, apiSettings) {
+  var url = this.buildSendSmsURL(message, recipientNumber, apiSettings);
+  // http.get(url, function(res) {
+  //   console.log(res);
+  // }).on ("error", function(err) {
+  //   console.log("ERRROROOROR");
+  //   console.log(err);
+  // });
+
+  http.get("http://www.google.com/index.html", function(res) {
+    console.log("Got response: " + res.statusCode);
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+  });
+};
+
+
+
 
 function isNumberOnly(text) {
   return !!(/^\d+$/.exec(text));
@@ -27,8 +50,7 @@ function isNumberOnly(text) {
 
 
 exports.buildSendSmsURL = function(message, recipientNumber, apiSettings) {
-  return apiSettings.url + 
-  "messages.single?" + 
+  return apiSettings.url + "messages.single?" + 
   "apikey=" + apiSettings.key + "&" +
   "apisecret=" + apiSettings.secret + "&" +
   "mobile=" + recipientNumber + "&" +
