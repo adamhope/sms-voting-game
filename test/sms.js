@@ -28,22 +28,19 @@ describe('#sendSms', function() {
     url: "http://burst.transmitsms.com/api"
   };
 
-  it('sends SMS', function(done) {
-    var stubHttpGet = sinon.stub(http, 'get', function(url, callback) { callback(url); }),
-    // var stubHttpGet = sinon.stub(http, 'get'),
+  it('sends SMS', function() {
+    var stubHttpGet = sinon.stub(http, 'get'),
       stubSmsBuildSendSmsUrl = sinon.stub(sms, 'buildSendSmsUrl');
       req = {on: function(){}};
-    // stubHttpGet.returns(req);
+    stubHttpGet.returns(req);
     stubSmsBuildSendSmsUrl.returns('aUrl');
-    var afterTest = function(err, res) {
-      stubHttpGet.called.should.be.true;
-      stubHttpGet.withArgs('aUrl').calledOnce.should.be.true;
-      stubHttpGet.restore();
-      stubSmsBuildSendSmsUrl.restore();
-      done();
-    };
-      
-    sms.sendSms("Hello world", "0411221122", smsSettings, afterTest);
+    
+    sms.sendSms("Hello world", "0411221122", smsSettings);
+
+    stubHttpGet.called.should.be.true;
+    stubHttpGet.withArgs('aUrl').calledOnce.should.be.true;
+    stubHttpGet.restore();
+    stubSmsBuildSendSmsUrl.restore();
   });
 });
 
