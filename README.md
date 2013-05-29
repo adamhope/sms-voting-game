@@ -57,6 +57,8 @@ Pin number must be a NUMBER (no alphabetic chars).
 - SMS'ing via http://burstsms.com.au
 - Try sigma.js for graphing
 - A "stop" button to freeze the game
+- Make D3 scoreboard full viewport width
+- Style player label
 
 
 ### Alternative theme
