@@ -1,5 +1,6 @@
 var Participant = require('../models/participant'),
-  http = require('http');
+  http = require('http'),
+  settings = require('../settings');
 
 function extract(req) {
   return {
@@ -20,7 +21,7 @@ function register(res, options) {
     if (err) {
       console.error(err);
     } else {
-      //send sms
+      exports.sendSms('This is your PIN: ' + participant.pin, participant.phoneNumber, settings.burstApi);
     }
   });
   res.send(201);

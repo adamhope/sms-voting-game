@@ -3,10 +3,9 @@ var app = require('../app')
   , express = require('express'),
   Participant = require('../models/participant'),
   sinon = require('sinon'),
-  sms = require('../routes/sms')
-  http = require('http');
-
-
+  sms = require('../routes/sms'),
+  http = require('http')
+  settings = require('../settings');
 
 describe('#buildSendSmsUrl', function() {
   it('should return correct URL', function() {
@@ -22,20 +21,14 @@ describe('#buildSendSmsUrl', function() {
 });
 
 describe('#sendSms', function() {
-  var smsSettings = { 
-    key: "someKey",
-    secret: "thoughtworks",
-    url: "http://burst.transmitsms.com/api"
-  };
-
   it('sends SMS', function() {
     var stubHttpGet = sinon.stub(http, 'get'),
       stubSmsBuildSendSmsUrl = sinon.stub(sms, 'buildSendSmsUrl');
       req = {on: function(){}};
     stubHttpGet.returns(req);
     stubSmsBuildSendSmsUrl.returns('aUrl');
-    
-    sms.sendSms("Hello world", "0411221122", smsSettings);
+
+    sms.sendSms("Hello world", "0411221122", settings.burst);
 
     stubHttpGet.called.should.be.true;
     stubHttpGet.withArgs('aUrl').calledOnce.should.be.true;
@@ -51,14 +44,21 @@ describe('SMS dispatch', function(){
   });
 
   describe('#register', function() {
-    it('respond with 201', function(done){
+    it('sends sms pin and responds with 201', function(done){
       var url = '/sms/?mobile=12345&response=Username&message_id=0',
-          stubParticipantRegister = sinon.stub(Participant, 'register');
-      
+        participant = {pin: '1234', phoneNumber: '1234567890'},
+        stubParticipantRegister = sinon.stub(Participant, 'register', function(phoneNumber, username, callback){
+        callback(null, participant);
+      }),
+      stubSmsSendSms = sinon.stub(sms, 'sendSms');
+
       var afterRequest = function(err, res) {
         stubParticipantRegister.called.should.be.true;
         stubParticipantRegister.withArgs("12345").calledOnce.should.be.true;
+        stubSmsSendSms.called.should.be.true;
+        stubSmsSendSms.withArgs('This is your PIN: 1234', '1234567890', settings.burstApi).calledOnce.should.be.true;
         stubParticipantRegister.restore();
+        stubSmsSendSms.restore();
         done();
       }; 
 
@@ -67,7 +67,7 @@ describe('SMS dispatch', function(){
   });
 
   describe('#vote', function() {
-    it('respond with 201', function(done){
+    it('responds with 201', function(done){
       var url = '/sms/?mobile=12345&response=9900&message_id=0',
           stubParticipantVote = sinon.stub(Participant, 'vote');
       
