@@ -11,9 +11,11 @@ function extract(req) {
 
 function vote(res, options) {
   Participant.vote(options.phoneNumber, options.text, function(err) {
-    console.error(err);
+    if (err) {
+      exports.sendSms('User with pin '+ options.text + ' not found', options.phoneNumber, settings.burstApi);
+    }
+    res.send(201);
   });
-  res.send(201);
 };
 
 function register(res, options) {
@@ -23,9 +25,8 @@ function register(res, options) {
     } else {
       exports.sendSms('This is your PIN: ' + participant.pin, participant.phoneNumber, settings.burstApi);
     }
+    res.send(201);
   });
-  res.send(201);
-
 };
 
 exports.sendSms = function(message, recipientNumber, smsSettings) {
