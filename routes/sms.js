@@ -45,7 +45,7 @@ exports.buildSendSmsUrl = function(message, recipientNumber, smsSettings) {
   "apisecret=" + smsSettings.secret + "&" +
   "mobile=" + recipientNumber + "&" +
   "message=" + message.split(" ").join("+") + "&" +
-  "caller_id=" + "thoughtworks";
+  "caller_id=" + smsSettings.callerId;
 };
 
 exports.dispatch = function(req, res) {

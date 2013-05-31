@@ -12,10 +12,11 @@ describe('#buildSendSmsUrl', function() {
     var smsSettings = { 
       key: "someKey",
       secret: "thoughtworks",
-      url: "http://www.some-url.com/sms/"
+      url: "http://www.some-url.com/sms/",
+      callerId: '041111111111'
     };
     var url = sms.buildSendSmsUrl("Hello world", "0414213852", smsSettings);
-    var expectedURL = "http://www.some-url.com/sms/messages.single?apikey=someKey&apisecret=thoughtworks&mobile=0414213852&message=Hello+world&caller_id=thoughtworks"
+    var expectedURL = "http://www.some-url.com/sms/messages.single?apikey=someKey&apisecret=thoughtworks&mobile=0414213852&message=Hello+world&caller_id=041111111111"
     url.should.equal(expectedURL);
   });
 });
