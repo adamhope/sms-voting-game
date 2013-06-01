@@ -21,13 +21,21 @@ function vote(res, options) {
 function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
     if (err) {
-      console.error(err);
+      handleRegisterError(err, options);
     } else {
       exports.sendSms('This is your PIN: ' + participant.pin, participant.phoneNumber, settings.burstApi);
     }
     res.send(201);
   });
 };
+
+function handleRegisterError(err, options) {
+  if (!!(/duplicate key error.+username/i.exec(err))) {
+    exports.sendSms('Username already taken', options.phoneNumber, settings.burstApi);
+  } else {
+    console.log(err);
+  }
+}
 
 exports.sendSms = function(message, recipientNumber, smsSettings) {
   var url = exports.buildSendSmsUrl(message, recipientNumber, smsSettings);

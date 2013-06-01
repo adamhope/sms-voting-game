@@ -2,13 +2,15 @@ var sinon = require('sinon'),
   app = require('../app'),
   request = require('supertest'),
   sms = require('../routes/sms'),
-  settings = require('../settings');
+  settings = require('../settings'),
+  Participant = require('../models/participant');
 
 describe('SMS dispatch', function() {
   var stubSmsSendSms;
 
-  beforeEach(function() {
+  beforeEach(function(done) {
     stubSmsSendSms = sinon.stub(sms, 'sendSms');
+    Participant.remove({}, done);
   });
 
   afterEach(function(done) {
@@ -17,26 +19,45 @@ describe('SMS dispatch', function() {
   });
 
   describe('#register', function() {
-    it('sends sms pin and responds with 201', function(done) {
-      var url = '/sms/?mobile=1234567890&response=Username&message_id=0',
-        participant = {
-          pin: '1234',
-          phoneNumber: '1234567890'
-        },
-        stubParticipantRegister = sinon.stub(Participant, 'register', function(phoneNumber, username, callback) {
-          callback(null, participant);
+    
+    describe('when valid username', function(){
+      it('sends sms pin and responds with 201', function(done) {
+        var url = '/sms/?mobile=1234567890&response=Username&message_id=0',
+          participant = {
+            pin: '1234',
+            phoneNumber: '1234567890'
+          },
+          stubParticipantRegister = sinon.stub(Participant, 'register', function(phoneNumber, username, callback) {
+            callback(null, participant);
+          });
+
+        var afterRequest = function(err, res) {
+          stubParticipantRegister.calledOnce.should.be.true;
+          stubParticipantRegister.withArgs("1234567890", 'username').calledOnce.should.be.true;
+          stubSmsSendSms.called.should.be.true;
+          stubSmsSendSms.withArgs('This is your PIN: 1234', '1234567890', settings.burstApi).calledOnce.should.be.true;
+          stubParticipantRegister.restore();
+          done();
+        };
+
+        request(app).get(url).expect(201, afterRequest);
+      });
+    });
+
+    describe('when username taken', function() {
+      it('sends sms username taken', function(done) {
+        Participant.register('0411222111', 'username', function(err, p) {
+          var url = '/sms/?mobile=1234567890&response=username&message_id=0';
+          var afterRequest = function(err, res) {
+            if (err) done(err);
+            stubSmsSendSms.called.should.be.true;
+            stubSmsSendSms.withArgs('Username already taken', '1234567890', settings.burstApi).calledOnce.should.be.true;
+            done();
+        };
+
+        request(app).get(url).expect(201, afterRequest);
         });
-
-      var afterRequest = function(err, res) {
-        stubParticipantRegister.calledOnce.should.be.true;
-        // stubParticipantRegister.withArgs("1234567890", 'username').calledOnce.should.be.true;
-        stubSmsSendSms.called.should.be.true;
-        stubSmsSendSms.withArgs('This is your PIN: 1234', '1234567890', settings.burstApi).calledOnce.should.be.true;
-        stubParticipantRegister.restore();
-        done();
-      };
-
-      request(app).get(url).expect(201, afterRequest);
+      });
     });
   });
 
