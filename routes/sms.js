@@ -12,7 +12,7 @@ function extract(req) {
 function vote(res, options) {
   Participant.vote(options.phoneNumber, options.text, function(err) {
     if (err) {
-      exports.sendSms('User with pin '+ options.text + ' not found', options.phoneNumber, settings.burstApi);
+      exports.sendSms('User with pin: "'+ options.text + '" not found', options.phoneNumber, settings.burstApi);
     }
     res.send(201);
   });

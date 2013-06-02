@@ -83,7 +83,7 @@ describe('SMS dispatch', function() {
           stubParticipantVote.called.should.be.true;
           stubParticipantVote.withArgs('12345', '9900').calledOnce.should.be.true;
           stubSmsSendSms.called.should.be.true;
-          stubSmsSendSms.withArgs('User with pin 9900 not found', '12345', settings.burstApi).calledOnce.should.be.true;
+          stubSmsSendSms.withArgs('User with pin: "9900" not found', '12345', settings.burstApi).calledOnce.should.be.true;
             
           stubParticipantVote.restore();
           done();
