@@ -24,15 +24,15 @@
 ## Routes
 ##### Message contents: <username> dispatched to /sms/?mobile=<phone_number>&response=<username>&message_id=0
     if <username> is registered and mobile number matches registered user
-        Send back generated <pin_no>
+        Send back "You are already registered <username>. Your PIN is <pin_no>.
     else if <username> is registered but mobile number does not match:
         Send exception back "User already taken"
     else:
-        Register participant with <username> and send back pin
+        Register participant with <username> and send "Thank you for registering <username>. Your pin is <pin_no><
         
-##### Message contents: <username> dispatched to /sms/?mobile=<phone_number>&response=<pin_no>&message_id=0
+##### Message contents: <pin_no> dispatched to /sms/?mobile=<phone_number>&response=<pin_no>&message_id=0
     if <pin_no> exists:
-        vote for user corresponding with pin.
+        vote for user corresponding with pin, and return "Thank you for voting to <pin_no>
     else:
         send back error "User with pin <pin_no> not found" (optional)
 
