@@ -16,7 +16,7 @@ var seed = function() {
         username: "Hodor",
         phoneNumber: "0414213333",
         votedForBy: {
-          '0041421333': null
+          '0414213333': null
         }
       }).save();
     }
