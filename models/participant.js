@@ -24,7 +24,6 @@ participantSchema.virtual('score').get(function () {
   return count;
 });
 
-//TODO - check username doesnt exist either
 participantSchema.statics.register = function (phoneNumber, username, callback) {
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
     if (err) return callback(err);

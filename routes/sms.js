@@ -10,10 +10,15 @@ function extract(req) {
 };
 
 function vote(res, options) {
-  Participant.vote(options.phoneNumber, options.text, function(err) {
+  Participant.vote(options.phoneNumber, options.text, function(err, participant) {
+    var message;
     if (err) {
-      exports.sendSms('User with pin: "'+ options.text + '" not found', options.phoneNumber, settings.burstApi);
+      message = 'User with pin: "'+ options.text + '" not found';
+    } else {
+      message = 'Thank you for voting to ' + participant.pin;
     }
+    console.log(message);
+    exports.sendSms(message, options.phoneNumber, settings.burstApi);
     res.send(201);
   });
 };

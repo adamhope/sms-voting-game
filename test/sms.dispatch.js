@@ -43,9 +43,8 @@ describe('SMS dispatch', function() {
             stubSmsSendSms.called.should.be.true;
             stubSmsSendSms.withArgs('Username already taken', '1234567890', settings.burstApi).calledOnce.should.be.true;
             done();
-        };
-
-        request(app).get(url).expect(201, afterRequest);
+          };
+          request(app).get(url).expect(201, afterRequest);
         });
       });
     });
@@ -53,22 +52,16 @@ describe('SMS dispatch', function() {
 
   describe('#vote', function() {
     describe('when no error', function() {
-
       it('responds with 201', function(done) {
-        var url = '/sms/?mobile=12345&response=9900&message_id=0',
-          stubParticipantVote = sinon.stub(Participant, 'vote', function(a,b,cb) {
-              cb();
-          });
-
-        var afterRequest = function(err, res) {
-          stubParticipantVote.called.should.be.true;
-          stubParticipantVote.withArgs('12345', '9900').calledOnce.should.be.true;
-          stubSmsSendSms.called.should.be.false;
-          stubParticipantVote.restore();
-          done();
-        };
-
-        request(app).get(url).expect(201, afterRequest);
+        Participant.register('0411222111', 'username', function(err, p) {
+          var url = '/sms/?mobile=12345&response=' + p.pin + '&message_id=0';
+          var afterRequest = function(err, res) {
+            stubSmsSendSms.called.should.be.true;
+            stubSmsSendSms.withArgs('Thank you for voting to ' + p.pin, '12345', settings.burstApi).calledOnce.should.be.true;
+            done();
+          };
+          request(app).get(url).expect(201, afterRequest);
+        });
       });
     });
 
