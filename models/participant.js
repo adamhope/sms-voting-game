@@ -34,7 +34,7 @@ participantSchema.statics.register = function (phoneNumber, username, callback) 
       Participant.findOne({username: username}, function(err, p) {
         if (err) return callback(err);
         if (p) {
-          callback(new ApplicationError.UsernameTaken, p);
+          callback(new ApplicationError.UsernameTaken(), p);
         } else {
           createParticipant(phoneNumber, username, callback);
         }
@@ -47,7 +47,7 @@ participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
   Participant.findOne({pin: pinTo}, function(err, participant) {
     var set = {};
     if (err) return callback(err);
-    if (participant === null) return callback(new Error('No participant has pin code ' + pinTo));
+    if (participant === null) return callback(new ApplicationError.InvalidPin());
 
     set['votedForBy.' + phoneNumberFrom] = null;
     Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);

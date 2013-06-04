@@ -1,9 +1,10 @@
 var mongoose = require('mongoose'),
   Participant = require('../models/participant'),
-  should = require('should');
+  should = require('should'),
+  ApplicationError = require('../models/application_error');
 
 describe("Participant", function(){
-  describe("#connect", function(){
+  describe("#vote", function(){
     var participant = null,
       anotherParticipant = null;
 
@@ -36,9 +37,9 @@ describe("Participant", function(){
       });
     }); 
 
-    it('does not allow to vote when no registered participant has the pin code', function(done) {
+    it('returns invalid pin error when no registered participant has the pin code', function(done) {
       Participant.vote(anotherParticipant.phoneNumber, '10101', function(err, p){
-        err.message.should.match(/No participant has pin code/);
+        err.should.be.an.instanceof(ApplicationError.InvalidPin);
         done();
       });
     });
