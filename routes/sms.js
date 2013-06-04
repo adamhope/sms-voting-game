@@ -21,7 +21,7 @@ function register(res, options) {
         console.log(err);
       }
     } else {
-      exports.sendSms('This is your PIN: ' + participant.pin, participant.phoneNumber, settings.burstApi);
+      exports.sendSms('Thank you for registering. Your PIN is ' + participant.pin, participant.phoneNumber, settings.burstApi);
     }
     res.send(201);
   });
