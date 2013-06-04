@@ -29,8 +29,10 @@ function register(res, options) {
     if (err) {
       if (err instanceof ApplicationError.AlreadyRegistered) {
         exports.sendSms('You are already registered. Your PIN is ' + participant.pin, options.phoneNumber, settings.burstApi);
-      } else {
+      } else if(err instanceof ApplicationError.UsernameTaken) {
         exports.sendSms('Username already taken', options.phoneNumber, settings.burstApi);
+      } else {
+        console.log(err);
       }
     } else {
       exports.sendSms('This is your PIN: ' + participant.pin, participant.phoneNumber, settings.burstApi);
