@@ -9,6 +9,10 @@ describe('Participant', function() {
   });
 
   describe('#register', function() {
+    var phoneNumberFrom = '041213852',
+        anotherNumberFrom = '0422222222',
+        username = "Hodor";
+
     describe('not registered yet', function(){
       it('adds a new participant to the database', function(done) {
         var phoneNumberFrom = '041213852';
@@ -23,14 +27,9 @@ describe('Participant', function() {
       });
     });
 
-
     describe('already registered', function() {
-      var phoneNumberFrom = '041213852',
-        username = "Hodor";
-
       it('returns already registered error', function(done) {
         Participant.register(phoneNumberFrom, username, function(err, p1) {
-          
           Participant.register(phoneNumberFrom, username, function(err, p2) {
             err.should.be.an.instanceof(ApplicationError.AlreadyRegistered);
             done();
@@ -49,6 +48,28 @@ describe('Participant', function() {
         });
       });
 
+    });
+
+    describe('username already taken', function() {
+      it('returns an error', function(done) {
+        Participant.register(phoneNumberFrom, username, function(err, p1) {
+          Participant.register(anotherNumberFrom, username, function(err, p2) {
+            err.should.be.an.instanceof(ApplicationError.UsernameTaken);
+            done();
+          });
+        });
+      });
+
+      it('does not add a new the participant', function(done) {
+        Participant.register(phoneNumberFrom, username, function(err, p1) {
+          Participant.register(anotherNumberFrom, username, function(err, p2) {
+            Participant.count({}, function(err, count){
+              count.should.equal(1);
+              done();
+            });
+          });
+        });
+      });
     });
   });
 });
