@@ -20,7 +20,7 @@ describe('SMS dispatch', function() {
 
   describe('#register', function() {
     
-    describe('when valid username', function(){
+    describe('when valid username and not registered', function(){
       it('sends sms pin and responds with 201', function(done) {
         var url = '/sms/?mobile=1234567890&response=Username&message_id=0';
         var afterRequest = function(err, res) {
@@ -32,6 +32,23 @@ describe('SMS dispatch', function() {
         };
 
         request(app).get(url).expect(201, afterRequest);
+      });
+
+      describe('when registered', function(){
+        it('sends sms already registered and pin and responds with 201', function(done) {
+          var url = '/sms/?mobile=1234567890&response=Username&message_id=0';
+          Participant.register('1234567890', 'username', function(err, p){
+            var afterRequest = function(err, res) {
+              stubSmsSendSms.called.should.be.true;
+              Participant.findOne({phoneNumber: '1234567890'}, function(err, p) {
+                stubSmsSendSms.withArgs('You are already registered. Your PIN is ' + p.pin, '1234567890', settings.burstApi).calledOnce.should.be.true;
+                done();
+              });
+            };
+
+            request(app).get(url).expect(201, afterRequest);
+          });
+        });
       });
     });
 

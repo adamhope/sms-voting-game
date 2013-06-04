@@ -1,6 +1,7 @@
 var Participant = require('../models/participant'),
   http = require('http'),
-  settings = require('../settings');
+  settings = require('../settings'),
+  ApplicationError = require('../models/application_error');
 
 function extract(req) {
   return {
@@ -26,21 +27,17 @@ function vote(res, options) {
 function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
     if (err) {
-      handleRegisterError(err, options);
+      if (err instanceof ApplicationError.AlreadyRegistered) {
+        exports.sendSms('You are already registered. Your PIN is ' + participant.pin, options.phoneNumber, settings.burstApi);
+      } else {
+        exports.sendSms('Username already taken', options.phoneNumber, settings.burstApi);
+      }
     } else {
       exports.sendSms('This is your PIN: ' + participant.pin, participant.phoneNumber, settings.burstApi);
     }
     res.send(201);
   });
 };
-
-function handleRegisterError(err, options) {
-  if (!!(/duplicate key error.+username/i.exec(err))) {
-    exports.sendSms('Username already taken', options.phoneNumber, settings.burstApi);
-  } else {
-    console.log(err);
-  }
-}
 
 exports.sendSms = function(message, recipientNumber, smsSettings) {
   var url = exports.buildSendSmsUrl(message, recipientNumber, smsSettings);

@@ -29,7 +29,7 @@ participantSchema.statics.register = function (phoneNumber, username, callback) 
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
     if (err) return callback(err);
     if (p) {
-      callback(new ApplicationError.AlreadyRegistered());
+      callback(new ApplicationError.AlreadyRegistered(), p);
     } else {
       createParticipant(phoneNumber, username, callback);
     }
