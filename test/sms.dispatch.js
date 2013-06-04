@@ -84,18 +84,10 @@ describe('SMS dispatch', function() {
 
     describe('when invalid pin', function() {
       it('sends sms with the error and responds with 201', function(done) {
-        var url = '/sms/?mobile=12345&response=9900&message_id=0',
-          stubParticipantVote = sinon.stub(Participant, 'vote', function(a,b,cb) {
-              cb(new Error());
-          });
-
+        var url = '/sms/?mobile=12345&response=9900&message_id=0';
         var afterRequest = function(err, res) {
-          stubParticipantVote.called.should.be.true;
-          stubParticipantVote.withArgs('12345', '9900').calledOnce.should.be.true;
           stubSmsSendSms.called.should.be.true;
           stubSmsSendSms.withArgs('User with pin: "9900" not found', '12345', settings.burstApi).calledOnce.should.be.true;
-            
-          stubParticipantVote.restore();
           done();
         };
 
