@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  ObjectId = Schema.ObjectId;
+  ObjectId = Schema.ObjectId,
+  ApplicationError = require('./application_error');
 
 var participantSchema = mongoose.Schema({
   pin:         { type: String, unique: true },
@@ -28,7 +29,7 @@ participantSchema.statics.register = function (phoneNumber, username, callback) 
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
     if (err) return callback(err);
     if (p) {
-      callback(null, p);
+      callback(new ApplicationError.AlreadyRegistered());
     } else {
       createParticipant(phoneNumber, username, callback);
     }
