@@ -87,7 +87,7 @@ describe('SMS dispatch', function() {
         var url = '/sms/?mobile=12345&response=9900&message_id=0';
         var afterRequest = function(err, res) {
           stubSmsSendSms.called.should.be.true;
-          stubSmsSendSms.withArgs('User with pin: "9900" not found', '12345', settings.burstApi).calledOnce.should.be.true;
+          stubSmsSendSms.withArgs('User with pin 9900 not found', '12345', settings.burstApi).calledOnce.should.be.true;
           done();
         };
 

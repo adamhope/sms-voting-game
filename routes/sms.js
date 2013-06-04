@@ -32,7 +32,7 @@ function vote(res, options) {
     var message;
     if (err) {
       if (err instanceof ApplicationError.InvalidPin) {
-        message = 'User with pin: "'+ options.text + '" not found';
+        message = 'User with pin '+ options.text + ' not found';
         exports.sendSms(message, options.phoneNumber, settings.burstApi);
       } else {
         console.log(err);
