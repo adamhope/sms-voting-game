@@ -6,6 +6,19 @@
 - Impliment layout on graph page including donation amount: DOM???
 - Put instructions in text message with pin number get your friends to text your pin to 614 1891 7876: FRED???
 
+#TODOs
+
+- A "stop" button to freeze the game before announcing winners
+- Make D3 scoreboard full viewport width
+- More styling on the graph / dashboard
+- Display amount to be donated to charity on the scoreboard
+- Establishing winning criteria(s)
+    - 1st place most in bound connections: hoarder
+    - 2nd, 3rd most in bound connections?
+    - alternatively
+        -most mutual connections
+        - most persistant (outbound connections)
+
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
 - You give 1 vote when you text someone elses pin number
@@ -13,7 +26,7 @@
 - You can't vote for yourself
 - You can't vote for anyone more than once
 
-# Decisions
+# Decisions made
 
 ## Voting and registering
 
@@ -23,11 +36,12 @@
     - pin numbers removes the need to talk to other players
 
 ## Winning
-- Rules for winning have not been determined
+- Rules for winning have not been finalised
     - however the winners will not be the top 1-3 players who have voted for the most people as we want to encourage recipricale voting
 
 
 ## Routes
+
 ##### Message contents: <username> dispatched to /sms/?mobile=<phone_number>&response=<username>&message_id=0
     if <username> is registered and mobile number matches registered user
         Send back "You are already registered <username>. Your PIN is <pin_no>.
@@ -35,7 +49,7 @@
         Send exception back "User already taken"
     else:
         Register participant with <username> and send "Thank you for registering <username>. Your pin is <pin_no><
-        
+
 ##### Message contents: <pin_no> dispatched to /sms/?mobile=<phone_number>&response=<pin_no>&message_id=0
     if <pin_no> exists:
         vote for user corresponding with pin, and return "Thank you for voting to <pin_no>
@@ -47,38 +61,21 @@ Pin number must be a NUMBER (no alphabetic chars).
 
 ## Ideas
 - Exponential point scoring
-- Display amount to be donated to charity on the scoreboard
+- Acheivements
+- Announcemments:
+    - 10 minutes with no votes
+    - Player joins the game
+    - Player gives / receives 10 votes
+    - most votes in under 1 minute
+    - ...
 - Pin numbers vs. names
     - pins are harder to guess, you have to talk to someone to vote for them / have them vote for you
     - names might be easier and lesse clunky
-- Graph network relationships instead of number of votes per participant
 
 - Analytics:
   - Top participant (person who's given most votes)
   - Top recipient (person who's receive the most votes)
 
-#TODOs
-
-- A "stop" button to freeze the game
-- Make D3 scoreboard full viewport width
-- Style player label
-- Instructions on page
-- Establishing winning criteria(s)
-- Donations total on same page as network graph
-
-
-
-### Alternative theme
-
-Connecting
-1. Register
-2a. I can connect to you
-2b. You can connect to me
-
-Winners are
-- most mutual connections
-- most persistant (outbound connections)
-- hoarder (most in bound connections)
 
 # Privacy concerns?
 - Once the stop button has been pressed replace phone numbers with automatically generated IDs
