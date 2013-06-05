@@ -1,4 +1,10 @@
-#The SMS Voting-Game
+# The SMS Voting-Game
+
+## TODOs for Friday demo
+
+- Make network graph readable: ADAM
+- Impliment layout on graph page including donation amount: DOM???
+- Put instructions in text message with pin number get your friends to text your pin to 614 1891 7876: FRED???
 
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
