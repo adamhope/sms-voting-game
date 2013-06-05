@@ -53,12 +53,13 @@ Pin number must be a NUMBER (no alphabetic chars).
 
 #TODOs
 
-- Deployment to... somewhere, nodejitsu?
-- SMS'ing via http://burstsms.com.au
-- Try sigma.js for graphing
 - A "stop" button to freeze the game
 - Make D3 scoreboard full viewport width
 - Style player label
+- Instructions on page
+- Establishing winning criteria(s)
+- Donations total on same page as network graph
+
 
 
 ### Alternative theme
