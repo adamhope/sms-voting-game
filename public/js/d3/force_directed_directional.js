@@ -1,9 +1,4 @@
-// // Based on http://bl.ocks.org/mbostock/1062383
-// // TODO
-// // - more refactoring
-// // - dynamically add nodes
-// // - update appearnce of node as number of connections increases
-// // - find out where undefined node comes from...
+// TODO: lots of refactoring
 
 // // SVG Document Structure
 // // - SVG
@@ -293,21 +288,23 @@ function myGraph(el) {
         .start();
   };
 
-
   // Make it all go
   update();
 
 }
 
-function drawGraph(data) {
-
-  console.log(data);
+function initGraph(data) {
 
   graph = new myGraph("#svgdiv");
 
+  updateGraph();
+
+}
+
+function updateGraph(data) {
+
   data.nodes.forEach(function (node) {
     graph.addNode(node.id);
-    console.log(node.v);
   });
 
   data.links.forEach(function (link) {
@@ -317,5 +314,10 @@ function drawGraph(data) {
 }
 
 $(document).ready(function() {
-  $.getJSON('/participants/links', drawGraph);
+  $.getJSON('/participants/links', initGraph);
 });
+
+// NOTE: Forcibly redrawing the graph will cause it to expand infinitely? this should only be called when there is new data, socket.io?!
+setInterval(function () {
+  $.getJSON('/participants/links', updateGraph);
+}, 1000);
