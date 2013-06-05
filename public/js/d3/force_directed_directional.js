@@ -1,3 +1,4 @@
+// Based on http://bl.ocks.org/mbostock/1062383
 // TODO
 // - more refactoring
 // - dynamically add nodes
