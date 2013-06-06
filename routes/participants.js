@@ -15,6 +15,7 @@ exports.json = function(req, res) {
     var scoreData = {
       participants: [],
       scores: [],
+      // XXX the logic and code for total score are not the same as donation amount used on the D3 display
       totalScore: 0
     };
 
