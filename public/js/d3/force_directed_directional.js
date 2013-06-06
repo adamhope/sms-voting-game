@@ -142,7 +142,7 @@ function myGraph(el) {
       .attr('class', 'nodeStrokeClass');
 
     nodeEnter.append('svg:text')
-      .attr('class', 'textClass')
+      .attr('class', 'nodeLabel')
       .attr('x', 8)
       .attr('y', '.31em')
       .text( function(d){return d.id;});
@@ -161,16 +161,19 @@ function myGraph(el) {
     force
       .gravity(0.05)
       .distance(50)
-      .charge(-300)
+      // .charge(-300)
       .linkDistance(90)
       .size([w, h])
       .start();
   };
 
-  // Make it all go
   update();
 
 }
+
+// XXX these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
+var nodeCount = 0,
+    linkCount = 0;
 
 function initGraph(data) {
   graph = new myGraph('#svgdiv');
@@ -179,13 +182,20 @@ function initGraph(data) {
 
 function updateGraph(data) {
 
-  data.nodes.forEach(function (node) {
-    graph.addNode(node.id);
-  });
+  if (data.nodeCount != nodeCount || data.linkCount != linkCount) {
 
-  data.links.forEach(function (link) {
-    graph.addLink(link.source, link.target, 10);
-  });
+    nodeCount = data.nodeCount;
+    linkCount = data.linkCount;
+
+    data.nodes.forEach(function (node) {
+      graph.addNode(node.id);
+    });
+
+    data.links.forEach(function (link) {
+      graph.addLink(link.source, link.target, 10);
+    });
+
+  }
 
 }
 

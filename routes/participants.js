@@ -38,9 +38,13 @@ exports.links = function (req, res) {
 
     var nodes  = [],
         links  = [],
-        i      = participants.length;
+        i      = participants.length,
+        linkCount = 0,
+        nodeCount = 0;
 
     while (i--) {
+
+      nodeCount ++;
 
       var p      = participants[i],
           nodeId = p.phoneNumber,
@@ -52,6 +56,9 @@ exports.links = function (req, res) {
 
       for (var voter in voters) {
         if (voters.hasOwnProperty(voter)) {
+
+          linkCount++;
+
           links.push({
             source: voter,
             target: nodeId
@@ -61,7 +68,13 @@ exports.links = function (req, res) {
 
     }
 
-    res.json({ nodes: nodes, links: links });
+    res.json({
+      nodes: nodes,
+      links: links,
+      // XXX these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
+      nodeCount: nodeCount,
+      linkCount: linkCount
+    });
 
   });
 };
