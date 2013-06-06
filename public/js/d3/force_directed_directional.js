@@ -174,7 +174,7 @@ function myGraph(el) {
 
 function initGraph(data) {
   graph = new myGraph('#svgdiv');
-  updateGraph();
+  updateGraph(data);
 }
 
 function updateGraph(data) {
