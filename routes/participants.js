@@ -40,7 +40,9 @@ exports.links = function (req, res) {
         links  = [],
         i      = participants.length,
         linkCount = 0,
-        nodeCount = 0;
+        nodeCount = 0,
+        donationPerVote = 1,
+        totalDonation = 0;
 
     while (i--) {
 
@@ -57,6 +59,7 @@ exports.links = function (req, res) {
       for (var voter in voters) {
         if (voters.hasOwnProperty(voter)) {
 
+          totalDonation += donationPerVote;
           linkCount++;
 
           links.push({
@@ -71,6 +74,7 @@ exports.links = function (req, res) {
     res.json({
       nodes: nodes,
       links: links,
+      totalDonation: totalDonation,
       // XXX these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
       nodeCount: nodeCount,
       linkCount: linkCount

@@ -182,6 +182,8 @@ function initGraph(data) {
 
 function updateGraph(data) {
 
+  $('.amount').text(data.totalDonation);
+
   if (data.nodeCount != nodeCount || data.linkCount != linkCount) {
 
     nodeCount = data.nodeCount;
