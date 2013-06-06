@@ -98,7 +98,7 @@ exports.vote = function(req, res) {
   var phoneNumberFrom = req.body['phone-number-from'],
       pinTo = req.body['pin-number-to'];
   Participant.vote(phoneNumberFrom, pinTo, function(err) {
-    console.error(err);
+    if (err) console.error(err);
   });
   res.redirect('participants');
 };
