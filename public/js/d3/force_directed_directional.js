@@ -161,7 +161,7 @@ function myGraph(el) {
     force
       .gravity(0.05)
       .distance(50)
-      // .charge(-300)
+      .charge(-100)
       .linkDistance(90)
       .size([w, h])
       .start();
