@@ -12,6 +12,9 @@ test-w:
 		--ui tdd \
 		--watch
 
+start-test-server:
+	@NODE_ENV=test node app.js
+
 test-performance:
 	@NODE_ENV=test node ./test_performance/app.js
 
