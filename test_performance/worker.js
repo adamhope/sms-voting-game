@@ -1,15 +1,20 @@
-var http = require('http');
+var http = require('http'),
+  async = require('async');
 
+// message is [[number,response],[number,response], ...]
 process.on('message', function(message, callback) {
-  console.log('Worker: echoing ', message);
-  sendSms(callback);
+  async.each(message, function(req, cb) {
+    sendSms(req[0], req[1], cb);
+  }, function(err) {
+    callback();
+  });
 });
 
-function sendSms(callback) {
+function sendSms(number, response, callback) {
   var options = {
     hostname: 'localhost',
     port: 3000,
-    path: '/sms/?mobile=0123232&response=fred&message_id=0&sms=disabled',
+    path: '/sms/?mobile='+number+'&response='+response+'&message_id=0&sms=disabled',
     method: 'GET'
   };
   var req = http.request(options, function(res) {

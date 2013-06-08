@@ -8,11 +8,10 @@ mongoose.connect(database);
 
 Participant.remove({}, function(err) {
   
-  var workers = [backgrounder.spawn(__dirname + "/worker.js"), backgrounder.spawn(__dirname + "/worker.js")];
-
+  var workers = initWorkers();
   async.each(workers, function(worker, callback) {
-    worker.send({}, function() {
-      worker.terminate()
+    worker.process.send(worker.message, function() {
+      worker.process.terminate();
       callback();
     });
   }, function(err){
@@ -20,4 +19,11 @@ Participant.remove({}, function(err) {
     mongoose.disconnect();
   });
 
+  function initWorkers() {
+    var workers = [];
+    workers.push({process: backgrounder.spawn(__dirname + "/worker.js"), message: [['000', 'a000'], ['001', 'a001']]});
+    workers.push({process: backgrounder.spawn(__dirname + "/worker.js"), message: [['003', 'a003'], ['004', 'a004']]});
+
+    return workers;
+  }
 });
