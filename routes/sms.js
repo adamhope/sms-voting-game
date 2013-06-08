@@ -1,9 +1,11 @@
 var Participant = require('../models/participant'),
   http = require('http'),
   settings = require('../settings'),
-  ApplicationError = require('../models/application_error');
+  ApplicationError = require('../models/application_error'),
+  smsEnabled = false;
 
 function extract(req) {
+  smsEnabled = !!!(/disabled/.exec(req.query['sms']));
   return {
     phoneNumber: req.query["mobile"],
     text: req.query["response"].toLowerCase()
@@ -46,10 +48,12 @@ function vote(res, options) {
 };
 
 exports.sendSms = function(message, recipientNumber, smsSettings) {
-  var url = exports.buildSendSmsUrl(message, recipientNumber, smsSettings);
-  http.get(url).on('error', function(err) {
-    console.log(err);
-  });
+  if (smsEnabled) {
+    var url = exports.buildSendSmsUrl(message, recipientNumber, smsSettings);
+    http.get(url).on('error', function(err) {
+      console.log(err);
+    });
+  }
 };
 
 function isNumberOnly(text) {

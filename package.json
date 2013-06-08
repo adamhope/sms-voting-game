@@ -16,7 +16,9 @@
     "mocha": "*",
     "should": "*",
     "supertest": "*",
-    "sinon": "*"
+    "sinon": "*",
+    "backgrounder": "*",
+    "async": "*"
   },
   "engines": {
     "node": "0.10.x",
