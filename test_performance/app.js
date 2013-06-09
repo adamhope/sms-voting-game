@@ -6,7 +6,7 @@ var Participant = require('../models/participant'),
 
 var database = 'mongodb://localhost/sms-voting-game-test',
   NB_WORKERS = 2,
-  NB_REGISTRATIONS_PER_WORKER = 10,
+  NB_REGISTRATIONS_PER_WORKER = 20,
   NB_VOTES_PER_WORKER = 100;
 
 mongoose.connect(database);
