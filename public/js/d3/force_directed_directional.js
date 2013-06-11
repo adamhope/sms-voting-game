@@ -1,4 +1,4 @@
-// TODO: lots of refactoring
+  // TODO: lots of refactoring
 
 //     // Per-type markers, as they don't inherit styles.
 //     svg.append('svg:defs').selectAll('marker')
@@ -137,7 +137,7 @@ function myGraph(el) {
       .call(force.drag);
 
     nodeEnter.append('svg:circle')
-      .attr('r', function(d) { return d.size * 10 })
+      .attr('r', function(d) { return d.size * 5 })
       .attr('id',function(d) { return 'Node;'+d.id;})
       .attr('class', 'nodeStrokeClass');
 
