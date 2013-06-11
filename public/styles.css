@@ -43,10 +43,9 @@ path.link.resolved{stroke-dasharray:0,2 1}
 circle{fill:#f00;stroke:rgba(255,255,255,0.5);stroke-width:0;transition:all 300ms ease}
 circle:hover,circle:active,circle:focus{stroke-width:10px}
 .nodeLabel{stroke:#666;font:10px sans-serif;pointer-events:none}
-body{margin:1em;font-size:16px;line-height:24px;font-family:"Arial Black","Arial Bold",Gadget,sans-serif;background-color:#fff;color:#000}
-.masthead,.main{max-width:80em;margin:0 auto}
-.masthead{margin-top:1em}
-.notification-bar{text-align:center}
+body{margin:0;font-size:16px;line-height:24px;font-family:"Arial Black","Arial Bold",Gadget,sans-serif;background-color:#fff;color:#000}
+.main{width:1920px;height:1080px;background-image:url("/img/bg_1080p.png")}
+#d3{position:absolute;top:310px;left:640px}
 fieldset legend{font-weight:bold}
 input,label{display:block}
 input{margin:.4em 0}

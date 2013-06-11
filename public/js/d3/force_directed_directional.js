@@ -92,10 +92,10 @@ function myGraph(el) {
   };
 
   // set up the D3 visualisation in the specified element
-  var w = 960,
-      h = 500;
+  var w = 1200,
+      h = 700;
 
-  var vis = d3.select('body')
+  var vis = d3.select(el)
     .append('svg:svg')
     .attr('width', w)
     .attr('height', h)
@@ -176,7 +176,7 @@ var nodeCount = 0,
     linkCount = 0;
 
 function initGraph(data) {
-  graph = new myGraph('#svgdiv');
+  graph = new myGraph('#d3');
   updateGraph(data);
 }
 
