@@ -1,24 +1,12 @@
 # The SMS Voting-Game
 
-## TODOs for Friday demo
-
-- Display usernames instead of phone numbers on the graph
-- Make the graph zoom out as it grows
-- Impliment layout on graph page including donation amount: DOM???
-- Put instructions in text message with pin number get your friends to text your pin to 614 1891 7876: FRED???
-
 #TODOs
-
+- Display donation amount on Dashboard page
+- Send confirmation after connecting with someone via SMS telling you how many connections you currently have
+- Confirm phone number
 - A "stop" button to freeze the game before announcing winners
-- Make D3 scoreboard full viewport width
-- More styling on the graph / dashboard
-- Display amount to be donated to charity on the scoreboard
-- Establishing winning criteria(s)
+- Ensure leaderboard screen shows the correct winnder
     - 1st place most in bound connections: hoarder
-    - 2nd, 3rd most in bound connections?
-    - alternatively
-        -most mutual connections
-        - most persistant (outbound connections)
 
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
