@@ -51,10 +51,14 @@ exports.links = function (req, res) {
 
       var p      = participants[i],
           nodeId = p.phoneNumber,
-          voters = p.votedForBy;
+          voters = p.votedForBy,
+          name   = p.username,
+          size   = p.score;
 
       nodes.push({
-        id: nodeId
+        id: nodeId,
+        name: name,
+        size: size
       });
 
       for (var voter in voters) {

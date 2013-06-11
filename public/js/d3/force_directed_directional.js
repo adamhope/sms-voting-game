@@ -33,8 +33,8 @@ var graph;
 function myGraph(el) {
 
   // Add and remove elements on the graph object
-  this.addNode = function (id) {
-    nodes.push({'id':id});
+  this.addNode = function (node) {
+    nodes.push({'id' : node.id, 'name' : node.name, 'size' : node.size });
     update();
   };
 
@@ -137,7 +137,7 @@ function myGraph(el) {
       .call(force.drag);
 
     nodeEnter.append('svg:circle')
-      .attr('r', 6)
+      .attr('r', function(d) { return d.size * 10 })
       .attr('id',function(d) { return 'Node;'+d.id;})
       .attr('class', 'nodeStrokeClass');
 
@@ -145,7 +145,7 @@ function myGraph(el) {
       .attr('class', 'nodeLabel')
       .attr('x', 8)
       .attr('y', '.31em')
-      .text( function(d){return d.id;});
+      .text( function(d){ return d.name;});
 
     node.exit().remove();
 
@@ -160,9 +160,9 @@ function myGraph(el) {
     // Restart the force layout.
     force
       .gravity(0.05)
-      .distance(50)
+      .distance(100)
       .charge(-100)
-      .linkDistance(90)
+      .linkDistance(200)
       .size([w, h])
       .start();
   };
@@ -190,7 +190,7 @@ function updateGraph(data) {
     linkCount = data.linkCount;
 
     data.nodes.forEach(function (node) {
-      graph.addNode(node.id);
+      graph.addNode(node);
     });
 
     data.links.forEach(function (link) {
