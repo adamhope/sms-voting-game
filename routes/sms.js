@@ -8,7 +8,7 @@ function extract(req) {
   smsEnabled = !!!(/disabled/.exec(req.query['sms']));
   return {
     phoneNumber: req.query["mobile"],
-    text: req.query["response"].toLowerCase()
+    text: req.query["response"]
   }
 };
 
