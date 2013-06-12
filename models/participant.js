@@ -13,9 +13,23 @@ var participantSchema = mongoose.Schema({
 //Hook for creation of random pin number.
 //Can still override it by explicitly creating model with pin
 participantSchema.path('phoneNumber').set(function (v) {
-  this.pin = Math.random().toString().substr(2, 4);
+  var randomPin = Math.random().toString().substr(2, 4);
+  this.pin = randomPin;
   return v;
 });
+
+var generateRandomPin = function() {
+  var randomPin = Math.random().toString().substr(2, 4);
+  Participant.findOne({pin: randomPin}, function(err, p) {
+    if (err) return callback(err);
+    if (p) {
+      console.log("Recursion");
+      generateRandomPin();
+    } else {
+      return randomPin;
+    }
+  });
+};
 
 participantSchema.virtual('score').get(function () {
   var count = 0;
@@ -24,6 +38,7 @@ participantSchema.virtual('score').get(function () {
   }
   return count;
 });
+
 
 participantSchema.statics.register = function (phoneNumber, username, callback) {
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {

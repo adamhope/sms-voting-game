@@ -51,8 +51,8 @@ function zeroPad(num, places) {
 var seedMore = function() {
   Participant.find(function(err, participants) {
     if (participants.length === 0) {
-      var NUMBER_OF_PARTICIPANTS = 30;
-      var MAX_NUMBER_OF_CONNECTIONS = 10;
+      var NUMBER_OF_PARTICIPANTS = 3000;
+      var MAX_NUMBER_OF_CONNECTIONS = 3;
       var unconnected_participants = [];
 
       for(var i = 0; i < NUMBER_OF_PARTICIPANTS; i++) {
