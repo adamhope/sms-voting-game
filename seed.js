@@ -50,16 +50,16 @@ function zeroPad(num, places) {
 
 var seedMore = function() {
   Participant.find(function(err, participants) {
-    if (participants.length === 0) {
-      var NUMBER_OF_PARTICIPANTS = 3000;
+    //if (paricipants.length === 0) {
+      var NUMBER_OF_PARTICIPANTS = 300;
       var MAX_NUMBER_OF_CONNECTIONS = 3;
       var unconnected_participants = [];
 
       for(var i = 0; i < NUMBER_OF_PARTICIPANTS; i++) {
         var ph = Faker.PhoneNumber.phoneNumberFormat(6);
-        console.log(ph);
+        //console.log(ph);
         var p = new Participant({
-          pin: zeroPad(i, 5),
+          //pin: zeroPad(i, 5),
           username: Faker.Internet.userName(),
           phoneNumber: ph,
         });   
@@ -78,7 +78,7 @@ var seedMore = function() {
         }
         p.save();
       }
-    }
+    //}
   });
 };
 
