@@ -38,6 +38,7 @@ app.configure('development', function() {
   mongoose.connect(uristring, function (err, res) {
     if (err) console.log ('ERROR connecting to: ' + uristring + '. ' + err);
     else console.log ('Succeeded connected to: ' + uristring);
+    seed();
   });
 });
 
@@ -61,7 +62,5 @@ app.get('/scoreboard/2', scoreboard.d3);
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-seed();
 
 module.exports = app;
