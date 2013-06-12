@@ -7,6 +7,7 @@
 - A "stop" button to freeze the game before announcing winners
 - Ensure leaderboard screen shows the correct winnder
     - 1st place most in bound connections: hoarder
+- Check Heroku can support our needs. Do we need a non free account?
 
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
