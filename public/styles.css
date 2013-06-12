@@ -44,7 +44,7 @@ circle{fill:#f00;stroke:rgba(255,255,255,0.5);stroke-width:0;transition:all 300m
 circle:hover,circle:active,circle:focus{stroke-width:10px}
 .nodeLabel{stroke:#666;font:10px sans-serif;pointer-events:none}
 body{margin:0;font-size:16px;line-height:24px;font-family:"Arial Black","Arial Bold",Gadget,sans-serif;background-color:#fff;color:#000}
-.main{width:1920px;height:1080px;background-image:url("/img/bg_1080p.png")}
+#dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #d3{position:absolute;top:310px;left:640px}
 fieldset legend{font-weight:bold}
 input,label{display:block}
