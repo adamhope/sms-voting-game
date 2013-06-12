@@ -43,8 +43,13 @@ participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
     if (participant === null) return callback(new ApplicationError.InvalidPin());
 
     set['votedForBy.' + phoneNumberFrom] = null;
+    set['score'] = participant.score + 1;
     Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);
   });
+};
+
+participantSchema.statics.rank = function(callback) {
+  var query = Participant.find({}).sort({score: 'desc'}).exec(callback);
 };
 
 function createParticipant(phoneNumber, username, callback) {
