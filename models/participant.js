@@ -7,6 +7,7 @@ var participantSchema = mongoose.Schema({
   pin:         { type: String, unique: true },
   username:    { type: String, unique: true }, 
   phoneNumber: { type: String, unique: true },
+  score: {type: Number, default: "1"},
   votedForBy:  { }
 });
 
@@ -15,14 +16,6 @@ var participantSchema = mongoose.Schema({
 participantSchema.path('phoneNumber').set(function (v) {
   this.pin = Math.random().toString().substr(2, 4);
   return v;
-});
-
-participantSchema.virtual('score').get(function () {
-  var count = 0;
-  for (var prop in this.votedForBy) {
-    if (this.votedForBy.hasOwnProperty(prop)) { ++ count; }
-  }
-  return count;
 });
 
 participantSchema.statics.register = function (phoneNumber, username, callback) {
