@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  h1 SMS
+  h2 Broadcasting
+  p #{broadcastingMessage}
+
+  form(action="/sms/startbroadcast", method="post")
+    label(for="minutes") Time(min)
+    input#ms(name="minutes")
+    input(type="submit", value="Start")
+  br
+    
+  form(action="/sms/stopbroadcast", method="post")
+    input(type="submit", value="Stop")  

@@ -57,40 +57,6 @@ exports.sendSms = function(message, recipientNumber, smsSettings) {
   }
 };
 
-var timer;
-function setBroadcasting(ms) {
-  timer = setInterval(function(){
-    Participant.rank(function(err, participants){
-      if (err) {
-        console.log(err);
-        return;
-      }
-      
-      _.each(participants, function(p, index) {
-        var message = p.username + ' you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
-        console.log(message);
-        // exports.sendSms(message, p.phoneNumber, settings.burstApi);
-      });
-    });
-  }, ms);
-}
-
-
-exports.startBroadcast = function(req, res) {
-  var minutes = Number(req.body['minutes']);
-  if (minutes) {
-    exports.setBroadcasting(minutes * 1000 * 60);
-    res.redirect('/');
-  } else {
-    res.send(400, req.body['minutes'] + ' is not a number');
-  }
-}
-
-exports.stopBroadcast = function(req, res) {
-  clearInterval(timer);
-  res.redirect('/');
-}
-
 function isNumberOnly(text) {
   return !!(/^\d+$/.exec(text));
 };
@@ -112,4 +78,51 @@ exports.dispatch = function(req, res) {
     register(res, options);
   }
 };
+
+var timer,
+  timeInMinutes;
+
+exports.index = function(req, res) {
+  var message;
+  if (timeInMinutes) {
+    message = 'A timer has been set to broadcast every ' + timeInMinutes + ' minutes.';
+  } else {
+    message = 'No timer has been set so far.'
+  }
+  res.render('sms/index', {broadcastingMessage: message});
+}
+
+exports.startBroadcast = function(req, res) {
+  timeInMinutes = Number(req.body['minutes']);
+  if (timeInMinutes) {
+    setBroadcasting(timeInMinutes * 1000 * 60);
+    res.redirect('/sms');
+  } else {
+    timeInMinutes = null;
+    res.send(400, req.body['minutes'] + ' is not a number');
+  }
+}
+
+exports.stopBroadcast = function(req, res) {
+  clearInterval(timer);
+  timeInMinutes = null;
+  res.redirect('/sms');
+}
+
+function setBroadcasting(ms) {
+  timer = setInterval(function(){
+    Participant.rank(function(err, participants){
+      if (err) {
+        console.log(err);
+        return;
+      }
+      
+      _.each(participants, function(p, index) {
+        var message = p.username + ' you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
+        console.log(message);
+        // exports.sendSms(message, p.phoneNumber, settings.burstApi);
+      });
+    });
+  }, ms);
+}
 
