@@ -19,7 +19,8 @@
     "sinon": "*",
     "backgrounder": "*",
     "async": "*",
-    "Faker": "*"
+    "Faker": "*",
+    "underscore": "*"
   },
   "engines": {
     "node": "0.10.x",
