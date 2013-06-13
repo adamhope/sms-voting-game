@@ -137,7 +137,7 @@ function myGraph(el) {
       .call(force.drag);
 
     nodeEnter.append('svg:circle')
-      .attr('r', function(d) { return d.size * 5 })
+      .attr('r', function(d) { return Math.pow(d.size, 1.3) + 5;})
       .attr('id',function(d) { return 'Node;'+d.id;})
       .attr('class', 'nodeStrokeClass');
 
