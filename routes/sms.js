@@ -80,19 +80,22 @@ exports.dispatch = function(req, res) {
 };
 
 var timer,
-  timeInMinutes;
+  timeInMinutes,
+  dateTimerSet;
 
 exports.index = function(req, res) {
   var message;
   if (timeInMinutes) {
-    message = 'A timer has been set to broadcast every ' + timeInMinutes + ' minutes.';
+    message = '[' + dateTimerSet.getHours() + ':' + dateTimerSet.getMinutes() + '] A timer has been set to broadcast every ' + timeInMinutes + ' minutes.';
   } else {
-    message = 'No timer has been set so far.'
+    message = 'No timer has been set.'
   }
   res.render('sms/index', {broadcastingMessage: message});
 }
 
 exports.startBroadcast = function(req, res) {
+  clearInterval(timer);
+  dateTimerSet = new Date(Date.now());  
   timeInMinutes = Number(req.body['minutes']);
   if (timeInMinutes) {
     setBroadcasting(timeInMinutes * 1000 * 60);
