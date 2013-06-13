@@ -17,14 +17,14 @@ function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
     if (err) {
       if (err instanceof ApplicationError.AlreadyRegistered) {
-        exports.sendSms('You are already registered. Your PIN is ' + participant.pin, options.phoneNumber, settings.burstApi);
+        exports.sendSms(participant.username + ', you are already registered and your PIN is ' + participant.pin, options.phoneNumber, settings.burstApi);
       } else if(err instanceof ApplicationError.UsernameTaken) {
-        exports.sendSms('Username already taken', options.phoneNumber, settings.burstApi);
+        exports.sendSms('Sorry, ' + options.text + ' is already taken. Please try a different one.', options.phoneNumber, settings.burstApi);
       } else {
         console.log(err);
       }
     } else {
-      exports.sendSms('Thank you for registering. Your PIN is ' + participant.pin, participant.phoneNumber, settings.burstApi);
+      exports.sendSms(participant.username + ', thank you for registering. Your PIN is ' + participant.pin, participant.phoneNumber, settings.burstApi);
     }
     res.send(201);
   });
@@ -35,13 +35,13 @@ function vote(res, options) {
     var message;
     if (err) {
       if (err instanceof ApplicationError.InvalidPin) {
-        message = 'User with pin '+ options.text + ' not found';
+        message = 'Sorry, user with pin '+ options.text + ' not found.';
         exports.sendSms(message, options.phoneNumber, settings.burstApi);
       } else {
         console.log(err);
       }
     } else {
-      message = 'Thank you for voting to ' + participant.pin;
+      message = 'Thank you for voting for ' + participant.username;
       exports.sendSms(message, options.phoneNumber, settings.burstApi);
     }
     res.send(201);
