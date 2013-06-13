@@ -14,3 +14,16 @@ block content
     li
       a(href='/scoreboard/2')
         | Network diagram
+
+  br
+  
+  form(action="/sms/startbroadcast", method="post")
+    fieldset
+      legend Broadcast
+      label(for="minutes") Time(min)
+      input#ms(name="minutes")
+      input(type="submit", value="Start")
+  form(action="/sms/stopbroadcast", method="post")
+    fieldset
+      legend Broadcast
+      input(type="submit", value="Stop")

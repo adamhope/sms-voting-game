@@ -53,8 +53,9 @@ app.get('/participants/json', participants.json);
 app.get('/participants/links', participants.links);
 app.post('/participants/create', participants.create);
 app.post('/participants/vote', participants.vote);
-
 app.get('/sms', sms.dispatch);
+app.post('/sms/startbroadcast', sms.startBroadcast);
+app.post('/sms/stopbroadcast', sms.stopBroadcast);
 
 app.get('/scoreboard/1', scoreboard.highcharts);
 app.get('/scoreboard/2', scoreboard.d3);

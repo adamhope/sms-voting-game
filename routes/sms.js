@@ -2,7 +2,8 @@ var Participant = require('../models/participant'),
   http = require('http'),
   settings = require('../settings'),
   ApplicationError = require('../models/application_error'),
-  smsEnabled = false;
+  smsEnabled = false,
+  _ = require('underscore');
 
 function extract(req) {
   smsEnabled = !!!(/disabled/.exec(req.query['sms']));
@@ -55,6 +56,40 @@ exports.sendSms = function(message, recipientNumber, smsSettings) {
     });
   }
 };
+
+var timer;
+function setBroadcasting(ms) {
+  timer = setInterval(function(){
+    Participant.rank(function(err, participants){
+      if (err) {
+        console.log(err);
+        return;
+      }
+      
+      _.each(participants, function(p, index) {
+        var message = p.username + ' you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
+        console.log(message);
+        // exports.sendSms(message, p.phoneNumber, settings.burstApi);
+      });
+    });
+  }, ms);
+}
+
+
+exports.startBroadcast = function(req, res) {
+  var minutes = Number(req.body['minutes']);
+  if (minutes) {
+    exports.setBroadcasting(minutes * 1000 * 60);
+    res.redirect('/');
+  } else {
+    res.send(400, req.body['minutes'] + ' is not a number');
+  }
+}
+
+exports.stopBroadcast = function(req, res) {
+  clearInterval(timer);
+  res.redirect('/');
+}
 
 function isNumberOnly(text) {
   return !!(/^\d+$/.exec(text));
