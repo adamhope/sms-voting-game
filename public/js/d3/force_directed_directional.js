@@ -147,7 +147,7 @@ function myGraph(el) {
       .style("fill", function(d) { return d.color; })
       .attr("stroke-width", 10)
       .style("stroke", "#FF0000");
-      
+
     nodeEnter.append('svg:text')
       .attr('class', 'nodeLabel')
       .attr('x', 8)
@@ -165,11 +165,17 @@ function myGraph(el) {
     });
 
     // Restart the force layout.
+    // force
+    //   .gravity(0.05)
+    //   .distance(100)
+    //   .charge(2)
+    //   .linkDistance(300)
+    //   .size([w, h])
+    //   .start();
     force
-      .gravity(0.05)
-      .distance(100)
-      .charge(-100)
-      .linkDistance(200)
+      .gravity(.05)
+      .charge(-200)
+      .linkDistance( 200 )
       .size([w, h])
       .start();
   };
