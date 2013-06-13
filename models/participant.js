@@ -1,13 +1,13 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   ObjectId = Schema.ObjectId,
-  ApplicationError = require('./application_error');
+  ApplicationError = require('./application_error'),
+  _ = require('underscore');
 
 var participantSchema = mongoose.Schema({
   pin:         { type: String, unique: true },
   username:    { type: String, unique: true }, 
   phoneNumber: { type: String, unique: true },
-  score: {type: Number, default: "1"},
   votedForBy:  { }
 });
 
@@ -16,6 +16,14 @@ var participantSchema = mongoose.Schema({
 participantSchema.path('phoneNumber').set(function (v) {
   this.pin = Math.random().toString().substr(2, 4);
   return v;
+});
+
+participantSchema.virtual('score').get(function () {
+  var count = 0;
+  for (var prop in this.votedForBy) {
+    if (this.votedForBy.hasOwnProperty(prop)) { ++ count; }
+  }
+  return count;
 });
 
 participantSchema.statics.register = function (phoneNumber, username, callback) {
@@ -43,13 +51,15 @@ participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
     if (participant === null) return callback(new ApplicationError.InvalidPin());
 
     set['votedForBy.' + phoneNumberFrom] = null;
-    set['score'] = participant.score + 1;
     Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);
   });
 };
 
 participantSchema.statics.rank = function(callback) {
-  var query = Participant.find({}).sort({score: 'desc'}).exec(callback);
+  Participant.find({}, function(err, participants) {
+    if (err) {return callback(err);}
+    callback(null, _.sortBy(participants, function(p) {return p.score;}).reverse());
+  });
 };
 
 function createParticipant(phoneNumber, username, callback) {

@@ -25,9 +25,12 @@ describe('Participant', function() {
       },
 
       function(nextSerie) {
-        async.timesSeries(3, function(n, next){
+        async.times(3, function(n, next){
           if (n == 1) { return next(); }
-          Participant.vote(participants[n].phoneNumber, participants[1].pin, next);
+          Participant.vote(participants[n].phoneNumber, participants[1].pin, function(err, p) {
+            if(err) {console.log(err);}
+            next();
+          });
         }, nextSerie);
       },
 
