@@ -108,70 +108,61 @@ function myGraph(el) {
     .attr('pointer-events', 'all')
     .attr('viewBox', '0 0 ' + w + ' ' + h)
     .attr('perserveAspectRatio', 'xMinYMid')
-    .append('svg:g');
 
   var force = d3.layout.force(),
-      nodes = force.nodes(),
-      links = force.links();
+      links = force.links(),
+      nodes = force.nodes();
+      
 
   var update = function () {
+    var node = vis.selectAll('node')
+      .data(nodes, function(d) {
+        return d.id;
+      });
+
+    var nodeEnter = node.enter()      
+      .append('svg:circle')
+      .call(force.drag)
+      .attr('class', 'node')
+      .attr('r', function(d) { return Math.pow(d.size, 1.3) + 5;})
+      .attr('id',function(d) { return 'Node;'+d.id;})
+      .style("fill", function(d) { return d.color; })
+      .attr("stroke-width", 10)
+      .style("stroke", "#FF0000")
+      .append('svg:text')
+        .attr('class', 'nodeLabel')
+        .attr('x', 8)
+        .attr('y', '.31em')
+        .text( function(d){ return d.name;});
+
+    node.exit().remove();
 
     var link = vis.selectAll('line')
       .data(links, function(d) {
         return d.source.id + '-' + d.target.id;
       });
 
-    link.enter().append('line')
-      .attr('id',function(d){return d.source.id + '-' + d.target.id;})
-      .attr('class', 'link');
-
-    link.append('title')
-      .text(function(d){
-          return d.value;
-      });
-
+    link.enter().append('svg:line')
+      .attr('id',function(d) { return d.source.id + '-' + d.target.id; })
+      .attr('class', 'link')
+      .append('title')
+        .text(function(d){
+            return d.value;
+        });
+        
     link.exit().remove();
 
-    var node = vis.selectAll('g.node')
-      .data(nodes, function(d) {
-        return d.id;
-      });
 
-    var nodeEnter = node.enter().append('g')
-      .attr('class', 'node')
-      .call(force.drag);
-
-    nodeEnter.append('svg:circle')
-      .attr('r', function(d) { return Math.pow(d.size, 1.3) + 5;})
-      .attr('id',function(d) { return 'Node;'+d.id;})
-      .style("fill", function(d) { return d.color; })
-      .attr("stroke-width", 10)
-      .style("stroke", "#FF0000");
-
-    nodeEnter.append('svg:text')
-      .attr('class', 'nodeLabel')
-      .attr('x', 8)
-      .attr('y', '.31em')
-      .text( function(d){ return d.name;});
-
-    node.exit().remove();
 
     force.on('tick', function() {
-      node.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; });
+      
       link.attr('x1', function(d) { return d.source.x; })
         .attr('y1', function(d) { return d.source.y; })
         .attr('x2', function(d) { return d.target.x; })
         .attr('y2', function(d) { return d.target.y; });
+      node.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; });
     });
 
-    // Restart the force layout.
-    // force
-    //   .gravity(0.05)
-    //   .distance(100)
-    //   .charge(2)
-    //   .linkDistance(300)
-    //   .size([w, h])
-    //   .start();
     force
       .gravity(.05)
       .charge(-200)
@@ -209,9 +200,7 @@ function updateGraph(data) {
     data.links.forEach(function (link) {
       graph.addLink(link.source, link.target, 10);
     });
-
   }
-
 }
 
 $(document).ready(function() {
