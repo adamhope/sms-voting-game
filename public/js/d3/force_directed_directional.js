@@ -34,7 +34,12 @@ function myGraph(el) {
 
   // Add and remove elements on the graph object
   this.addNode = function (node) {
-    nodes.push({'id' : node.id, 'name' : node.name, 'size' : node.size });
+    nodes.push({
+      'id' : node.id, 
+      'name' : node.name, 
+      'size' : node.size, 
+      'color': '#'+Math.floor(Math.random()*16777215).toString(16) 
+    });
     update();
   };
 
@@ -139,8 +144,10 @@ function myGraph(el) {
     nodeEnter.append('svg:circle')
       .attr('r', function(d) { return Math.pow(d.size, 1.3) + 5;})
       .attr('id',function(d) { return 'Node;'+d.id;})
-      .attr('class', 'nodeStrokeClass');
-
+      .style("fill", function(d) { return d.color; })
+      .attr("stroke-width", 10)
+      .style("stroke", "#FF0000");
+      
     nodeEnter.append('svg:text')
       .attr('class', 'nodeLabel')
       .attr('x', 8)
