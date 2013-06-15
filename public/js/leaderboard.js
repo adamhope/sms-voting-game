@@ -1,5 +1,3 @@
-var leaderboard = d3.select('#leaderboard');
-
 function updateLeaderboard(data) {
 
   // NOTE: from http://d3-generator.com/
@@ -23,9 +21,9 @@ function updateLeaderboard(data) {
 
   // scales
   var yScale = d3.scale.ordinal().domain(d3.range(0, sortedData.length)).rangeBands([0, sortedData.length * barHeight]);
-  var y = function(d, i) { return yScale(i); };
-  var yText = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
-  var x = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
+  var y      = function(d, i) { return yScale(i); };
+  var yText  = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
+  var x      = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
 
   // svg container element
   var chart = d3.select('#leaderboard').append('svg')
