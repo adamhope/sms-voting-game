@@ -9,28 +9,23 @@ exports.list = function(req, res) {
   });
 };
 
+// TODO: needs tests
 exports.json = function(req, res) {
   Participant.find(function(err, participants) {
 
-    var scoreData = {
-      participants: [],
-      scores: [],
-      // XXX the logic and code for total score are not the same as donation amount used on the D3 display
-      totalScore: 0
-    };
-
-    var i = participants.length;
+    // TODO sort participants by score
+    var scoreData = [],
+        i = participants.length;
 
     while (i--) {
-      scoreData.participants.push(participants[i].phoneNumber);
-      scoreData.scores.push(participants[i].score);
+      var player = participants[i];
+      scoreData.push({
+        username: player.username,
+        score: player.score
+      });
     }
 
-    scoreData.scores.map(function(s){
-      scoreData.totalScore += s;
-    });
-
-    res.json({ scoreData: scoreData });
+    res.json(scoreData);
   });
 };
 

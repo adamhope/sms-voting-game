@@ -64,8 +64,8 @@ app.get('/sms', sms.index);
 app.post('/sms/startbroadcast', sms.startBroadcast);
 app.post('/sms/stopbroadcast', sms.stopBroadcast);
 
-app.get('/scoreboard/1', scoreboard.highcharts);
-app.get('/scoreboard/2', scoreboard.d3);
+app.get('/leaderboard', scoreboard.leaderboard);
+app.get('/dashboard', scoreboard.dashboard);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

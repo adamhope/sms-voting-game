@@ -38,14 +38,9 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
-path.link{fill:none;stroke:#0bf;stroke-width:2px}
-path.link.resolved{stroke-dasharray:0,2 1}
-circle{fill:#f00;stroke:rgba(255,255,255,0.5);stroke-width:0;transition:all 300ms ease}
-circle:hover,circle:active,circle:focus{stroke-width:10px}
-.nodeLabel{stroke:#666;font:10px sans-serif;pointer-events:none}
 body{margin:0;font-size:16px;line-height:24px;font-family:"Arial Black","Arial Bold",Gadget,sans-serif;background-color:#fff;color:#000}
 #dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
-#donation{position:absolute;top:330px;left:1700px;color:#fff}
+#donation{position:absolute;top:330px;left:1700px;color:#fff;text-align:righta}
 #d3{position:absolute;top:310px;left:640px}
 fieldset legend{font-weight:bold}
 input,label{display:block}
@@ -53,3 +48,7 @@ input{margin:.4em 0}
 input[type='submit'],button{background:none repeat scroll 0 0 #e3e3e3;border:1px solid #bbb;border-radius:3px 3px 3px 3px;box-shadow:0 0 1px 1px #f6f6f6 inset;color:#333;font:bold 12px;margin:0 5px;padding:8px 0 9px;text-align:center;text-shadow:0 1px 0 #fff;width:150px}
 input[type='submit']:hover,button:hover{background:none repeat scroll 0 0 #d9d9d9;box-shadow:0 0 1px 1px #eaeaea inset;color:#222;cursor:pointer}
 button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #e3e3e3 inset;color:#000}
+#leaderboard .bar{font:10px sans-serif;background-color:#4682b4;text-align:right;padding:3px;margin:1px;color:#fff}
+circle{stroke:rgba(255,255,255,0.5);stroke-width:1;transition:all 300ms ease}
+circle:hover,circle:active,circle:focus{stroke-width:5px}
+.nodeLabel{stroke:#666;font:10px sans-serif;pointer-events:none}

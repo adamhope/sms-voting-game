@@ -3,10 +3,10 @@
  * A simple bargraph showing number of votes per person / connections to a person
  */
 
-exports.highcharts = function(req, res){
-  res.render('scoreboard/scoreboard_highcharts', {title: 'Scoreboard'});
+exports.leaderboard = function(req, res){
+  res.render('scoreboard/leaderboard', {title: 'Scoreboard'});
 };
 
-exports.d3 = function(req, res){
-  res.render('scoreboard/scoreboard_d3', {title: 'D3'});
+exports.dashboard = function(req, res){
+  res.render('scoreboard/dashboard', {title: 'D3'});
 };
