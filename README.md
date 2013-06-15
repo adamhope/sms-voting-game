@@ -1,12 +1,20 @@
 # The SMS Voting-Game
 
 #TODOs
-- Send confirmation after connecting with someone via SMS telling you how many connections you currently have
-- Confirm phone number
-- A "stop" button to freeze the game before announcing winners
+
+## MVP
+- Style leaderboard (at least when it's displayed on the dashboard page)
+- Make the leaderboard and network-graph switch places every few seconds with a nice transition
+- Document text messages the game sends and when/why (so we can run them by Olivia)
+- User testing: Reset the game on Heroku and play it properly
 - Ensure leaderboard screen shows the correct winnder
     - 1st place most in bound connections: hoarder
 - Check Heroku can support our needs. Do we need a non free account?
+- Timed broadcast to all players telling them their current rank on the leaderboard (or maybe just what band they're in e.g. top 10)
+
+## Wishlist
+- A "stop" button to freeze the game before announcing winners
+- Acheivements
 
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
