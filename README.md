@@ -3,6 +3,7 @@
 #TODOs
 
 ## MVP
+- Leader board on the dashboard page should only show the top 10!
 - Style leaderboard (at least when it's displayed on the dashboard page)
 - Make the leaderboard and network-graph switch places every few seconds with a nice transition
 - Document text messages the game sends and when/why (so we can run them by Olivia)
@@ -14,7 +15,7 @@
 
 ## Wishlist
 - A "stop" button to freeze the game before announcing winners
-- Acheivements
+- Acheivements / announcements
 
 ## Rules
 - You get 1 vote and a pin number when you register by texting your name
