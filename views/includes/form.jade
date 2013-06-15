@@ -15,3 +15,8 @@ form(action="/participants/vote", method="post")
     label For Pin Number
       input#pin-number-to(name="pin-number-to")
     input(type="submit", value="Connect")
+
+form(action="/participants/delete", method="post", onsubmit="return confirm('Are you sure you want to delete all participants?');")
+  fieldset
+    legend Delete All
+    input(type="submit", value="Delete")

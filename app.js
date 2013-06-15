@@ -49,6 +49,7 @@ app.get('/participants/json', participants.json);
 app.get('/participants/links', participants.links);
 app.post('/participants/create', auth, participants.create);
 app.post('/participants/vote', auth, participants.vote);
+app.post('/participants/delete', auth, participants.delete);
 app.get('/sms/dispatch', sms.dispatch);
 app.get('/sms', auth, sms.index);
 app.post('/sms/startbroadcast', auth, sms.startBroadcast);

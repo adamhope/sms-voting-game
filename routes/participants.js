@@ -101,3 +101,10 @@ exports.vote = function(req, res) {
   });
   res.redirect('participants');
 };
+
+exports.delete = function(req, res) {
+  Participant.remove({}, function(err) {
+    if (err) {console.log(err);}
+    res.redirect('participants');
+  });
+}
