@@ -89,9 +89,3 @@ function updateLeaderboard(data) {
     .style('stroke', '#000');
 
 }
-
-$(document).ready(function() {
-  setInterval(function () {
-    $.getJSON('/participants/json', updateLeaderboard);
-  }, 2000);
-});

@@ -1,32 +1,4 @@
-  // TODO: lots of refactoring
-
-//     // Per-type markers, as they don't inherit styles.
-//     svg.append('svg:defs').selectAll('marker')
-//         // TODO change this to ['participant']
-//         .data(['suit', 'licensing', 'resolved'])
-//       .enter().append('svg:marker')
-//         .attr('id', String)
-//         .attr('viewBox', '0 -5 10 10')
-//         .attr('refX', 15)
-//         .attr('refY', -1.5)
-//         .attr('markerWidth', 6)
-//         .attr('markerHeight', 6)
-//         .attr('orient', 'auto')
-//       .append('svg:path')
-//         .attr('d', 'M0,-5L10,0L0,5');
-
-// // A copy of the text with a thick white stroke for legibility.
-// text.append('svg:text')
-//     .attr('x', 8)
-//     .attr('y', '.31em')
-//     .attr('class', 'shadow')
-//     .text(function(d) { return d.name; });
-
-// text.append('svg:text')
-//     .attr('x', 8)
-//     .attr('y', '.31em')
-//     .text(function(d) { return d.name; });
-
+// TODO: lots of refactoring
 
 var graph;
 
@@ -35,10 +7,10 @@ function myGraph(el) {
   // Add and remove elements on the graph object
   this.addNode = function (node) {
     nodes.push({
-      'id' : node.id, 
-      'name' : node.name, 
-      'size' : node.size, 
-      'color': '#'+Math.floor(Math.random()*16777215).toString(16) 
+      'id' : node.id,
+      'name' : node.name,
+      'size' : node.size,
+      'color': '#'+Math.floor(Math.random()*16777215).toString(16)
     });
     update();
   };
@@ -112,7 +84,7 @@ function myGraph(el) {
   var force = d3.layout.force(),
       links = force.links(),
       nodes = force.nodes();
-      
+
 
   var update = function () {
     var node = vis.selectAll('node')
@@ -120,7 +92,7 @@ function myGraph(el) {
         return d.id;
       });
 
-    var nodeEnter = node.enter()      
+    var nodeEnter = node.enter()
       .append('svg:circle')
       .call(force.drag)
       .attr('class', 'node')
@@ -149,13 +121,13 @@ function myGraph(el) {
         .text(function(d){
             return d.value;
         });
-        
+
     link.exit().remove();
 
 
 
     force.on('tick', function() {
-      
+
       link.attr('x1', function(d) { return d.source.x; })
         .attr('y1', function(d) { return d.source.y; })
         .attr('x2', function(d) { return d.target.x; })
@@ -180,7 +152,7 @@ var nodeCount = 0,
     linkCount = 0;
 
 function initGraph(data) {
-  graph = new myGraph('#d3');
+  graph = new myGraph('#network-graph');
   updateGraph(data);
 }
 
@@ -202,12 +174,3 @@ function updateGraph(data) {
     });
   }
 }
-
-$(document).ready(function() {
-  $.getJSON('/participants/links', initGraph);
-});
-
-// TODO: quick hack to prevent graph from re-drawing if data hasn't actually changed until we implement socket.io
-setInterval(function () {
-  $.getJSON('/participants/links', updateGraph);
-}, 2000);
