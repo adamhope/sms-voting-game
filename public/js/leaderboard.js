@@ -25,6 +25,9 @@ function updateLeaderboard(data) {
   var yText  = function(d, i) { return y(d, i) + yScale.rangeBand() / 2; };
   var x      = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
 
+  // NOTE: remove the old leaderboard, this is lame, but fine for now
+  $('#leaderboard').empty();
+
   // svg container element
   var chart = d3.select('#leaderboard').append('svg')
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
@@ -40,12 +43,12 @@ function updateLeaderboard(data) {
     .text(String);
 
   // vertical grid lines
-  gridContainer.selectAll('line').data(x.ticks(10)).enter().append('line')
-    .attr('x1', x)
-    .attr('x2', x)
-    .attr('y1', 0)
-    .attr('y2', yScale.rangeExtent()[1] + gridChartOffset)
-    .style('stroke', '#ccc');
+  // gridContainer.selectAll('line').data(x.ticks(10)).enter().append('line')
+  //   .attr('x1', x)
+  //   .attr('x2', x)
+  //   .attr('y1', 0)
+  //   .attr('y2', yScale.rangeExtent()[1] + gridChartOffset)
+  //   .style('stroke', '#ccc');
 
   // bar labels
   var labelsContainer = chart.append('g')
@@ -87,13 +90,8 @@ function updateLeaderboard(data) {
 
 }
 
-
-
 $(document).ready(function() {
-  $.getJSON('/participants/json', updateLeaderboard);
+  setInterval(function () {
+    $.getJSON('/participants/json', updateLeaderboard);
+  }, 2000);
 });
-
-// TODO: quick hack to prevent graph from re-drawing if data hasn't actually changed until we implement socket.io
-// setInterval(function () {
-//   $.getJSON('/participants/links', updateLeaderboard);
-// }, 2000);
