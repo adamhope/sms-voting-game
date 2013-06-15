@@ -30,10 +30,11 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 // development only
 app.configure('development', function() {
+  var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
   mongoose.connect('mongodb://localhost/sms-voting-game-development', function (err, res) {
     if (err) {
       console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-    } else { 
+    } else {
       console.log ('Succeeded connected to: ' + uristring);
       seed();
     }
