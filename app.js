@@ -8,11 +8,11 @@ var express        = require('express'),
   Participant      = require('./models/participant'),
   scoreboard       = require('./routes/scoreboard'),
   sms              = require('./routes/sms'),
-  seed = require('./seed');
+  seed = require('./seed'),
+  settings        = require('./settings');
 
 var app = express();
 
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -27,42 +27,32 @@ app.use(stylus.middleware({
     dest    : __dirname + '/public'
  }));
 app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.errorHandler());
 
-// development only
+mongoose.connect(settings.db.uri, function (err, res) {
+  if (err) {
+    console.log ('ERROR connecting to: ' + settings.db.uri + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + settings.db.uri);
+  }
+});
+
 app.configure('development', function() {
-  var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
-  mongoose.connect('mongodb://localhost/sms-voting-game-development', function (err, res) {
-    if (err) {
-      console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-    } else {
-      console.log ('Succeeded connected to: ' + uristring);
-      seed();
-    }
-  });
+    seed();  
 });
 
-app.configure('test', function() {
-  app.use(express.errorHandler());
-  mongoose.connect('mongodb://localhost/sms-voting-game-test');
-});
-
-app.configure('production', function() {
-  var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL;
-  mongoose.connect(uristring, function (err, res) {
-    if (err) console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  });
-});
+var auth = express.basicAuth(settings.auth.username, settings.auth.password);
 
 app.get('/', routes.index);
-app.get('/participants', participants.list);
+app.get('/participants', auth, participants.list);
 app.get('/participants/json', participants.json);
 app.get('/participants/links', participants.links);
-app.post('/participants/create', participants.create);
-app.post('/participants/vote', participants.vote);
+app.post('/participants/create', auth, participants.create);
+app.post('/participants/vote', auth, participants.vote);
 app.get('/sms/dispatch', sms.dispatch);
-app.get('/sms', sms.index);
-app.post('/sms/startbroadcast', sms.startBroadcast);
-app.post('/sms/stopbroadcast', sms.stopBroadcast);
+app.get('/sms', auth, sms.index);
+app.post('/sms/startbroadcast', auth, sms.startBroadcast);
+app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
 app.get('/leaderboard', scoreboard.leaderboard);
 app.get('/dashboard', scoreboard.dashboard);
