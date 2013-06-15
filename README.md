@@ -1,7 +1,6 @@
 # The SMS Voting-Game
 
 #TODOs
-- Display donation amount on Dashboard page
 - Send confirmation after connecting with someone via SMS telling you how many connections you currently have
 - Confirm phone number
 - A "stop" button to freeze the game before announcing winners
