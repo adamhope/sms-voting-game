@@ -10,14 +10,12 @@ function myGraph(el) {
       'id' : node.id,
       'name' : node.name,
       'size' : node.size,
-      'color': '#'+Math.floor(Math.random()*16777215).toString(16)
+      'color': generateColor()
     });
-    // update();
   };
 
   this.addLink = function (source, target, value) {
     links.push({'source':findNode(source),'target':findNode(target),'value':value});
-    // update();
   };
 
   this.removeNode = function (id) {
@@ -58,6 +56,10 @@ function myGraph(el) {
     update();
   };
 
+  var generateColor = function() {
+    return ('00000'+(Math.random()*(1<<24)|0).toString(16)).slice(-6);
+  };
+
   var findNode = function(id) {
     for (var i in nodes) {
       if (nodes[i].id === id) return nodes[i];
@@ -84,6 +86,8 @@ function myGraph(el) {
     .attr('pointer-events', 'all')
     .attr('viewBox', '0 0 ' + w + ' ' + h)
     .attr('perserveAspectRatio', 'xMinYMid')
+    .attr("pointer-events", "all")
+    .call(d3.behavior.zoom().on("zoom", update))
 
   
   var linkGroup = vis.append("g").attr('class', 'links');
@@ -95,8 +99,8 @@ function myGraph(el) {
 
 
   var update = function () {
-    //LINKS
 
+    //LINKS
     var link = linkGroup.selectAll('.link')
       .data(links, function(d) {
         return d.source.id + '-' + d.target.id;
@@ -104,8 +108,7 @@ function myGraph(el) {
 
     link.enter().append('line')
       .attr('id',function(d){return d.source.id + '-' + d.target.id;})
-      .attr('class', 'link')
-      .style("stroke-width", "5" );
+      .attr('class', 'link');
 
     link.exit().remove();
 
@@ -121,16 +124,17 @@ function myGraph(el) {
       .call(force.drag);
 
     nodeEnter.append('svg:circle')
-      .attr('r', function(d) { return Math.pow(d.size, 1.3) + 20;})
+      .attr('r', function(d) { return Math.pow(d.size, 2.0) + 10;})
       .attr('id',function(d) { return 'Node;'+d.id;})
       .style("fill", function(d) { return d.color; })
       .attr("stroke-width", 10)
-      .style("stroke", "#FF0000")
 
     nodeEnter.append('svg:text')
-      .attr('class', 'nodeLabel')
-      .attr('x', 8)
-      .attr('y', '.31em')
+      .attr("font-family", "sans-serif")                
+      .attr("font-size", "16px")
+      .attr("x", 16)
+      .attr("dy", ".35em")
+      .attr("fill", "#9ecae1")
       .text( function(d){ return d.name;});
 
     node.exit().remove();
@@ -145,9 +149,9 @@ function myGraph(el) {
     });
 
     force
-      .gravity(.05)
-      .charge(-200)
-      .linkDistance( 200 )
+      .gravity(.04)
+      .charge(function(d) { return d._children ? -d.size * 10 : -200 ;}) // -200
+      .linkDistance(function(d) { return d.target._children ? 100 : 100; }) // 100
       .size([w, h])
       .start();
   };
