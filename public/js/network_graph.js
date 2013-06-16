@@ -130,7 +130,7 @@ function myGraph(el) {
       .attr("stroke-width", 10)
 
     nodeEnter.append('svg:text')
-      .attr("font-family", "sans-serif")                
+      .attr("font-family", "'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;")                
       .attr("font-size", "16px")
       .attr("x", 16)
       .attr("dy", ".35em")
