@@ -21,4 +21,4 @@ setInterval(function() {
     $("#leaderboard").hide();
     $("#network-graph").show();
   }
-}, 2000);
+}, 20000);
