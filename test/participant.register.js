@@ -25,6 +25,16 @@ describe('Participant', function() {
           done();
         });
       });
+
+      it('troncates username', function(done) {
+        var phoneNumberFrom = '041213852';
+        var username = "1234567890123456789012345";
+        Participant.register(phoneNumberFrom, username, function(err, p) {
+          if (err) return done(err);
+          p.username.should.equal('12345678901234567890');
+          done();
+        });
+      });
     });
 
     describe('already registered', function() {

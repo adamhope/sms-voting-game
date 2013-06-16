@@ -11,35 +11,6 @@ var participantSchema = mongoose.Schema({
   votedForBy:  { }
 });
 
-participantSchema.pre('validate', function(next) {
-  that = this;
-  if (!this.pin) {
-    createUniquePin(function(err, uniquePin) {
-      if (err) {
-        next(err);
-      } else {
-        that.pin = uniquePin;
-        next();
-      }
-    });
-  } else {
-    next();
-  }
-});
-
-function createUniquePin(callback) {
-  Participant.count(function(err, count) {
-    if (err) {return callback(err);}
-    callback(null, Number('' + _.random(10, 99) + pad(count,3)));
-  });
-}
-
-function pad(num, size) {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
-}
-
 participantSchema.virtual('score').get(function () {
   var count = 0;
   for (var prop in this.votedForBy) {
@@ -87,11 +58,28 @@ participantSchema.statics.rank = function(callback) {
 function createParticipant(phoneNumber, username, callback) {
   var p = new Participant({
     phoneNumber: phoneNumber,
-    username: username,
+    username: username.substr(0, 20),
     votedForBy: {}
   });
   p.votedForBy[phoneNumber] = null;
-  p.save(callback);
+  createUniquePin(function(err, pin) {
+    if (err) return callback(err);
+    p.pin = pin;
+    p.save(callback);
+  });
+}
+
+function createUniquePin(callback) {
+  Participant.count(function(err, count) {
+    if (err) {return callback(err);}
+    callback(null, Number('' + _.random(10, 99) + pad(count,3)));
+  });
+}
+
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
 }
 
 var Participant = mongoose.model('Participant', participantSchema); 
