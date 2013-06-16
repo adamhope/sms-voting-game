@@ -85,6 +85,10 @@ function myGraph(el) {
     .attr('viewBox', '0 0 ' + w + ' ' + h)
     .attr('perserveAspectRatio', 'xMinYMid')
 
+  
+  var linkGroup = vis.append("g").attr('class', 'links');
+  var nodeGroup = vis.append("g").attr('class', 'nodes');
+
   var force = d3.layout.force(),
       links = force.links(),
       nodes = force.nodes();
@@ -93,7 +97,7 @@ function myGraph(el) {
   var update = function () {
     //LINKS
 
-    var link = vis.selectAll('.link')
+    var link = linkGroup.selectAll('.link')
       .data(links, function(d) {
         return d.source.id + '-' + d.target.id;
       });
@@ -107,7 +111,7 @@ function myGraph(el) {
 
     //NODES
 
-    var node = vis.selectAll('.node')
+    var node = nodeGroup.selectAll('.node')
       .data(nodes, function(d) {
         return d.id;
       });
