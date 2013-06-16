@@ -20,44 +20,32 @@ participantSchema.virtual('score').get(function () {
 });
 
 participantSchema.statics.register = function (phoneNumber, username, callback) {
-  var promise = new mongoose.Promise();
-  promise.addBack(callback);
   Participant.findOne({phoneNumber: phoneNumber}, function(err, p) {
-    if (err) return promise.error(err);
+    if (err) return callback(err);
     if (p) {
-      promise.error(new ApplicationError.AlreadyRegistered());
+      callback(new ApplicationError.AlreadyRegistered());
     } else {
       Participant.findOne({username: username}, function(err, p) {
-        if (err) return promise.error(err);
+        if (err) return callback(err);
         if (p) {
-          promise.error(new ApplicationError.UsernameTaken());
+          callback(new ApplicationError.UsernameTaken());
         } else {
-          createParticipant(phoneNumber, username, function(err, p){
-            if (err) return promise.error(err);
-            promise.complete(p);
-          });
+          createParticipant(phoneNumber, username, callback);
         }
       });
     }
   });
-  return promise;
 };
 
 participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
-  var promise = new mongoose.Promise();
-  promise.addBack(callback);
   Participant.findOne({pin: pinTo}, function(err, participant) {
     var set = {};
-    if (err) return promise.error(err);
-    if (participant === null) return promise.error(new ApplicationError.InvalidPin());
+    if (err) return callback(err);
+    if (participant === null) return callback(new ApplicationError.InvalidPin());
 
     set['votedForBy.' + phoneNumberFrom] = null;
-    Participant.findByIdAndUpdate(participant.id, { $set: set}, function(err, p){
-      if (err) return promise.error(err);
-      promise.complete(p);
-    });
+    Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);
   });
-  return promise;
 };
 
 participantSchema.statics.rank = function(callback) {

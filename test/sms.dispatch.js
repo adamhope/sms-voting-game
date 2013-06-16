@@ -3,8 +3,7 @@ var sinon = require('sinon'),
   request = require('supertest'),
   sms = require('../routes/sms'),
   settings = require('../settings'),
-  Participant = require('../models/participant'),
-  should = require("should");
+  Participant = require('../models/participant');
 
 describe('SMS dispatch', function() {
   var stubSmsSendSms;

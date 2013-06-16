@@ -15,7 +15,7 @@ describe('Participant', function() {
       },
 
       function(nextSerie) {
-        async.times(3, function(n, next) {
+        async.timesSeries(3, function(n, next) {
           Participant.register('04000' + n, 'username' + n, function(err, p){
             participants.push(p);
             next();
@@ -25,7 +25,7 @@ describe('Participant', function() {
       },
 
       function(nextSerie) {
-        async.times(3, function(n, next){
+        async.timesSeries(3, function(n, next){
           if (n == 1) { return next(); }
           Participant.vote(participants[n].phoneNumber, participants[1].pin, function(err, p) {
             if(err) {console.log(err);}
