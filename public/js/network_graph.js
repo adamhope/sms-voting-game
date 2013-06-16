@@ -149,8 +149,8 @@ function myGraph(el) {
     });
 
     force
-      .gravity(.04)
-      .charge(function(d) { return d._children ? -d.size * 10 : -200 ;}) // -200
+      .gravity(0.06)
+      .charge(function(d) { return d._children ? 0 : -100 ;}) // -200
       .linkDistance(function(d) { return d.target._children ? 100 : 100; }) // 100
       .size([w, h])
       .start();
