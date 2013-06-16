@@ -137,8 +137,8 @@ function setBroadcasting(ms) {
       
       _.each(participants, function(p, index) {
         var message = p.username + ' you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
-        console.log(message);
-        // exports.sendSms(message, p.phoneNumber, settings.burstApi);
+        // console.log(message);
+        exports.sendSms(message, p.phoneNumber, settings.burstApi);
       });
     });
   }, ms);
