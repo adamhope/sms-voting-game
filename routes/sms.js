@@ -3,7 +3,8 @@ var Participant = require('../models/participant'),
   settings = require('../settings'),
   ApplicationError = require('../models/application_error'),
   smsEnabled = false,
-  _ = require('underscore');
+  _ = require('underscore'),
+  async = require('async');
 
 function extract(req) {
   smsEnabled = !!!(/disabled/.exec(req.query['sms']));
@@ -16,20 +17,31 @@ function extract(req) {
 function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
     var message;
-    if (err) {
-      if (err instanceof ApplicationError.AlreadyRegistered) {
-        message = participant.username + ', you are already registered and your PIN is ' + participant.pin
-      } else if(err instanceof ApplicationError.UsernameTaken) {
-        message = 'Sorry, ' + options.text + ' is already taken. Please try a different one.';
-      } else {
-        console.log(err);
-        message = 'Sorry something went wrong. Please try again.';
-      }
-    } else {
-      message = participant.username + ', thank you for registering. Your PIN is ' + participant.pin;
-    }
-    exports.sendSms(message, options.phoneNumber, settings.burstApi);
-    res.send(201);
+    async.series([
+      function(nextSerie) {
+        if (err) {
+          if (err instanceof ApplicationError.AlreadyRegistered) {
+            Participant.findOne({phoneNumber: options.phoneNumber}, function(err, participant) {
+              message = participant.username + ', you are already registered and your PIN is ' + participant.pin
+              nextSerie();
+            });
+          } else if(err instanceof ApplicationError.UsernameTaken) {
+            message = 'Sorry, ' + options.text + ' is already taken. Please try a different one.';
+            nextSerie();
+          } else {
+            console.log(err);
+            message = 'Sorry something went wrong. Please try again.';
+            nextSerie();
+          }
+        } else {
+          message = participant.username + ', thank you for registering. Your PIN is ' + participant.pin;
+          nextSerie();
+        }
+
+      }], function() {
+        exports.sendSms(message, options.phoneNumber, settings.burstApi);
+        res.send(201);
+    });
   });
 };
 

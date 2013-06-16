@@ -15,7 +15,7 @@ describe('Participant', function() {
       },
 
       function(nextSerie) {
-        async.timesSeries(3, function(n, next) {
+        async.times(3, function(n, next) {
           Participant.register('04000' + n, 'username' + n, function(err, p){
             participants.push(p);
             next();
