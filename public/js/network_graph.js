@@ -87,52 +87,41 @@ function myGraph(el) {
 
 
   var update = function () {
-    var node = vis.selectAll('node')
-      .data(nodes, function(d) {
-        return d.id;
-      });
+    //LINKS
 
-    var nodeEnter = node.enter()
-      .append('svg:circle')
-      .call(force.drag)
-      .attr('class', 'node')
-      .attr('r', function(d) { return Math.pow(d.size, 1.3) + 5;})
-      .attr('id',function(d) { return 'Node;'+d.id;})
-      .style("fill", function(d) { return d.color; })
-      .attr("stroke-width", 10)
-      .style("stroke", "#FF0000")
-      .append('svg:text')
-        .attr('class', 'nodeLabel')
-        .attr('x', 8)
-        .attr('y', '.31em')
-        .text( function(d){ return d.name;});
-
-    node.exit().remove();
-
-    var link = vis.selectAll('line')
+    var link = vis.selectAll('.link')
       .data(links, function(d) {
         return d.source.id + '-' + d.target.id;
       });
 
-    link.enter().append('svg:line')
-      .attr('id',function(d) { return d.source.id + '-' + d.target.id; })
-      .attr('class', 'link')
-      .append('title')
-        .text(function(d){
-            return d.value;
-        });
+    link.enter().append('line')
+      .attr('id',function(d){return d.source.id + '-' + d.target.id;})
+      .attr('class', 'link');
 
     link.exit().remove();
 
+    //NODES
+    var node = vis.selectAll('.node')
+        .data(nodes);
 
+    var nodeEnter = node.enter().append('circle')
+      .attr('class', 'node')
+      .attr('r', function(d) { return Math.pow(d.size, 1.3) + 20;})
+      .attr('id',function(d) { return 'Node;'+d.id;})
+      .style("fill", function(d) { return d.color; })
+      .attr("stroke-width", 10)
+      .style("stroke", "#FF0000")
+      .call(force.drag);
+
+    node.exit().remove();
 
     force.on('tick', function() {
-
-      link.attr('x1', function(d) { return d.source.x; })
+      node.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; });
+       link.attr('x1', function(d) { return d.source.x; })
         .attr('y1', function(d) { return d.source.y; })
         .attr('x2', function(d) { return d.target.x; })
         .attr('y2', function(d) { return d.target.y; });
-      node.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; });
+      
     });
 
     force
