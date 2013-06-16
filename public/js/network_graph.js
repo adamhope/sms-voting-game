@@ -101,17 +101,28 @@ function myGraph(el) {
     link.exit().remove();
 
     //NODES
-    var node = vis.selectAll('.node')
-        .data(nodes);
 
-    var nodeEnter = node.enter().append('circle')
+    var node = vis.selectAll('.node')
+      .data(nodes, function(d) {
+        return d.id;
+      });
+
+    var nodeEnter = node.enter().append('g')
       .attr('class', 'node')
+      .call(force.drag);
+
+    nodeEnter.append('svg:circle')
       .attr('r', function(d) { return Math.pow(d.size, 1.3) + 20;})
       .attr('id',function(d) { return 'Node;'+d.id;})
       .style("fill", function(d) { return d.color; })
       .attr("stroke-width", 10)
       .style("stroke", "#FF0000")
-      .call(force.drag);
+
+    nodeEnter.append('svg:text')
+      .attr('class', 'nodeLabel')
+      .attr('x', 8)
+      .attr('y', '.31em')
+      .text( function(d){ return d.name;});
 
     node.exit().remove();
 
