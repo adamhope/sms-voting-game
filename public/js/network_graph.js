@@ -12,12 +12,12 @@ function myGraph(el) {
       'size' : node.size,
       'color': '#'+Math.floor(Math.random()*16777215).toString(16)
     });
-    update();
+    // update();
   };
 
   this.addLink = function (source, target, value) {
     links.push({'source':findNode(source),'target':findNode(target),'value':value});
-    update();
+    // update();
   };
 
   this.removeNode = function (id) {
@@ -54,7 +54,7 @@ function myGraph(el) {
     update();
   };
 
-  this.update = function() {
+  this.upd = function() {
     update();
   };
 
@@ -100,7 +100,8 @@ function myGraph(el) {
 
     link.enter().append('line')
       .attr('id',function(d){return d.source.id + '-' + d.target.id;})
-      .attr('class', 'link');
+      .attr('class', 'link')
+      .style("stroke-width", "5" );
 
     link.exit().remove();
 
@@ -177,6 +178,6 @@ function updateGraph(data) {
       graph.addLink(link.source, link.target, 10);
     });
 
-    update();
+    graph.upd();
   }
 }
