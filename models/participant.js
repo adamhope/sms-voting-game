@@ -5,9 +5,9 @@ var mongoose = require('mongoose'),
   _ = require('underscore');
 
 var participantSchema = mongoose.Schema({
-  pin:         { type: String, unique: true },
-  username:    { type: String, unique: true }, 
-  phoneNumber: { type: String, unique: true },
+  pin:         { type: String, unique: true, required: true },
+  username:    { type: String, unique: true, required: true }, 
+  phoneNumber: { type: String, unique: true, required: true },
   votedForBy:  { }
 });
 
