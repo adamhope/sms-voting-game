@@ -127,6 +127,11 @@ exports.stopBroadcast = function(req, res) {
   res.redirect('/sms');
 }
 
+var suffix = function (n) {
+  n = n % 10;
+  return n > 3 ? 'th' : ['th', 'st', 'nd', 'rd'][n];
+};
+
 function setBroadcasting(ms) {
   timer = setInterval(function(){
     Participant.rank(function(err, participants){
@@ -136,8 +141,7 @@ function setBroadcasting(ms) {
       }
       
       _.each(participants, function(p, index) {
-        var message = p.username + ', you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
-        // console.log(message);
+        var message = p.username + ', you are in ' + (index+1) + suffix(index+1) + ' place with ' + p.score + ' votes.';
         exports.sendSms(message, p.phoneNumber, settings.burstApi);
       });
     });
