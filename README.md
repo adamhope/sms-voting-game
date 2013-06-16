@@ -2,6 +2,15 @@
 
 #TODOs
 
+## Final list
+- Style the leaderboard properly
+- Style the network graph (fix the bug Dom introduced)
+- Make network graph and leaderboard switch places
+- Testing (broadcasting etc)
+- Check Heroku is sufficient
+- Check BurstSMS is still good
+- 
+
 ## MVP
 - Leader board on the dashboard page should only show the top 10!
 - Style leaderboard (at least when it's displayed on the dashboard page)
