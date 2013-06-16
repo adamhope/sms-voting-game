@@ -11,12 +11,34 @@ var participantSchema = mongoose.Schema({
   votedForBy:  { }
 });
 
-//Hook for creation of random pin number.
-//Can still override it by explicitly creating model with pin
-participantSchema.path('phoneNumber').set(function (v) {
-  this.pin = Math.random().toString().substr(2, 4);
-  return v;
+participantSchema.pre('validate', function(next) {
+  that = this;
+  if (!this.pin) {
+    createUniquePin(function(err, uniquePin) {
+      if (err) {
+        next(err);
+      } else {
+        that.pin = uniquePin;
+        next();
+      }
+    });
+  } else {
+    next();
+  }
 });
+
+function createUniquePin(callback) {
+  Participant.count(function(err, count) {
+    if (err) {return callback(err);}
+    callback(null, Number('' + _.random(10, 99) + pad(count,3)));
+  });
+}
+
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
 
 participantSchema.virtual('score').get(function () {
   var count = 0;
