@@ -26,7 +26,7 @@ function register(res, options) {
               nextSerie();
             });
           } else if(err instanceof ApplicationError.UsernameTaken) {
-            message = 'Sorry, ' + options.text + ' is already taken. Please try a different one.';
+            message = 'Sorry, ' + options.text + ' is already taken. Please try a different username.';
             nextSerie();
           } else {
             console.log(err);
@@ -136,7 +136,7 @@ function setBroadcasting(ms) {
       }
       
       _.each(participants, function(p, index) {
-        var message = p.username + ' you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
+        var message = p.username + ', you are in ' + (index+1) + ' th place with ' + p.score + ' votes.';
         // console.log(message);
         exports.sendSms(message, p.phoneNumber, settings.burstApi);
       });

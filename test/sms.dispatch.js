@@ -59,7 +59,7 @@ describe('SMS dispatch', function() {
           var url = '/sms/dispatch/?mobile=1234567890&response=Fred&message_id=0';
           var afterRequest = function(err, res) {
             stubSmsSendSms.called.should.be.true;
-            stubSmsSendSms.withArgs('Sorry, Fred is already taken. Please try a different one.', '1234567890', settings.burstApi).calledOnce.should.be.true;
+            stubSmsSendSms.withArgs('Sorry, Fred is already taken. Please try a different username.', '1234567890', settings.burstApi).calledOnce.should.be.true;
             done();
           };
           request(app).get(url).expect(201, afterRequest);
