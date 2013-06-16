@@ -15,6 +15,11 @@ function myGraph(el) {
     update();
   };
 
+  this.addLink = function (source, target, value) {
+    links.push({'source':findNode(source),'target':findNode(target),'value':value});
+    update();
+  };
+
   this.removeNode = function (id) {
     var i = 0,
         n = findNode(id);
@@ -49,8 +54,7 @@ function myGraph(el) {
     update();
   };
 
-  this.addLink = function (source, target, value) {
-    links.push({'source':findNode(source),'target':findNode(target),'value':value});
+  this.update = function() {
     update();
   };
 
@@ -172,5 +176,7 @@ function updateGraph(data) {
     data.links.forEach(function (link) {
       graph.addLink(link.source, link.target, 10);
     });
+
+    update();
   }
 }
