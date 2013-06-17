@@ -10,8 +10,8 @@ function extract(req) {
   return {
     phoneNumber: req.query["mobile"],
     text: req.query["response"]
-  }
-};
+  };
+}
 
 function register(res, options) {
   Participant.register(options.phoneNumber, options.text, function(err, participant) {
@@ -21,7 +21,7 @@ function register(res, options) {
         if (err) {
           if (err instanceof ApplicationError.AlreadyRegistered) {
             Participant.findOne({phoneNumber: options.phoneNumber}, function(err, participant) {
-              message = participant.username + ', you are already registered and your PIN is ' + participant.pin
+              message = participant.username + ', you are already registered and your PIN is ' + participant.pin;
               nextSerie();
             });
           } else if(err instanceof ApplicationError.UsernameTaken) {
@@ -49,13 +49,13 @@ function vote(res, options) {
     var message;
     if (err) {
       if (err instanceof ApplicationError.InvalidPin) {
-        message = 'Sorry, user with pin '+ options.text + ' not found.';
+        message = 'Sorry, I can\t find a user with PIN '+ options.text + '.';
       } else {
         console.log(err);
         message = 'Sorry something went wrong. Please try again.';
       }
     } else {
-      message = 'Thank you for voting for ' + participant.username;
+      message = 'You are now connected to ' + participant.username;
     }
     exports.sendSms(message, options.phoneNumber, settings.burstApi);
     res.send(201);
@@ -76,7 +76,7 @@ function isNumberOnly(text) {
 };
 
 exports.buildSendSmsUrl = function(message, recipientNumber, smsSettings) {
-  return smsSettings.url + "messages.single?" + 
+  return smsSettings.url + "messages.single?" +
   "apikey=" + smsSettings.key + "&" +
   "apisecret=" + smsSettings.secret + "&" +
   "mobile=" + recipientNumber + "&" +
@@ -109,7 +109,7 @@ exports.index = function(req, res) {
 
 exports.startBroadcast = function(req, res) {
   clearInterval(timer);
-  dateTimerSet = new Date(Date.now());  
+  dateTimerSet = new Date(Date.now());
   timeInMinutes = Number(req.body['minutes']);
   if (timeInMinutes) {
     setBroadcasting(timeInMinutes * 1000 * 60);
@@ -138,7 +138,7 @@ function setBroadcasting(ms) {
         console.log(err);
         return;
       }
-      
+
       _.each(participants, function(p, index) {
         var message = p.username + ', you are in ' + (index+1) + suffix(index+1) + ' place with ' + p.score + ' votes.';
         exports.sendSms(message, p.phoneNumber, settings.burstApi);
