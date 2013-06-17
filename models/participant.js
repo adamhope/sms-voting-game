@@ -72,7 +72,7 @@ function createParticipant(phoneNumber, username, callback) {
 function createUniquePin(callback) {
   Participant.count(function(err, count) {
     if (err) {return callback(err);}
-    callback(null, Number('' + _.random(10, 99) + pad(count,3)));
+    callback(null, Number('' + _.random(1, 9) + pad(count,3)));
   });
 }
 

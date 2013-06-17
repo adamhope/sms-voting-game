@@ -38,7 +38,7 @@ describe('Participant', function() {
     });
 
     it('creates unique pin of 5 digits', function() {
-      _.every(participants, function(p){return p.pin >= 10000 && p.pin <= 99999;}).should.be.true;
+      _.every(participants, function(p){return p.pin >= 1000 && p.pin <= 9999;}).should.be.true;
     }); 
   });
 });
