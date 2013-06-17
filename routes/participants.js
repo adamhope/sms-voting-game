@@ -25,19 +25,21 @@ exports.json = function(req, res) {
 exports.links = function (req, res) {
   Participant.find(function(err, participants) {
 
-    var nodes            = [],
-        links            = [],
-        i                = participants.length,
-        linkCount        = 0,
-        nodeCount        = 0,
-        donationPerPoint = 4,
-        totalDonation    = 0,
+    var nodes  = [],
+        links  = [],
+        nodeIds = [],
+        linkCount = 0,
+        nodeCount = 0,
+        donationPerVote = 1,
+        totalDonation = 0;
         donationLimit    = 1000;
 
-    while (i--) {
+  for (var i = 0; i < participants.length; i ++) {
+    nodeIds.push(participants[i].phoneNumber);
+  }
+  console.log(nodeIds);
 
-      nodeCount ++;
-
+  for (var i = 0; i < participants.length; i ++) {
       var p      = participants[i],
           nodeId = p.phoneNumber,
           voters = p.votedForBy,
@@ -52,8 +54,8 @@ exports.links = function (req, res) {
 
       for (var voter in voters) {
         if (voters.hasOwnProperty(voter)) {
-          if (_.find(nodes, function(node) {return node.id == voter;})) {
-            totalDonation += donationPerPoint;
+          if (_.contains(nodeIds, voter)) {
+            totalDonation += donationPerVote;
             linkCount++;
 
             links.push({
