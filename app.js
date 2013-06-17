@@ -38,7 +38,7 @@ mongoose.connect(settings.db.uri, function (err, res) {
 });
 
 app.configure('development', function() {
-    seed();  
+    seed();
 });
 
 var auth = express.basicAuth(settings.auth.username, settings.auth.password);

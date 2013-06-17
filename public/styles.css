@@ -41,15 +41,17 @@ table{border-collapse:collapse;border-spacing:0}
 body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#fff;color:#000}
 #leaderboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
+#dashboard-title{position:absolute;top:320px;left:700px;color:#fff;text-align:left}
 #donation{position:absolute;top:320px;left:1500px;color:#fff;text-align:right}
 #network-graph{position:absolute;top:310px;left:640px}
-#leaderboard{position:absolute;top:340px;left:740px}
+#leaderboard{position:absolute;top:380px;left:740px}
 fieldset legend{font-weight:bold}
 input,label{display:block}
 input{margin:.4em 0}
 input[type='submit'],button{background:none repeat scroll 0 0 #e3e3e3;border:1px solid #bbb;border-radius:3px 3px 3px 3px;box-shadow:0 0 1px 1px #f6f6f6 inset;color:#333;font:bold 12px;margin:0 5px;padding:8px 0 9px;text-align:center;text-shadow:0 1px 0 #fff;width:150px}
 input[type='submit']:hover,button:hover{background:none repeat scroll 0 0 #d9d9d9;box-shadow:0 0 1px 1px #eaeaea inset;color:#222;cursor:pointer}
 button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #e3e3e3 inset;color:#000}
+#leaderboard text{font-size:24px}
 #leaderboard .leaderboard-title{color:#fff}
 #leaderboard .bar-container{fill:#008000;stroke:#fff}
 #leaderboard .bar-label{stroke:none;fill:#fff}

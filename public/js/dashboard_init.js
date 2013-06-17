@@ -1,24 +1,32 @@
-$(document).ready(function() {
-  $("#leaderboard").hide();
-  $.getJSON('/participants/links', initGraph);
-  $.getJSON('/participants/json', updateLeaderboard);
-});
+// NOTE: OMG this is horrible...
+var state                   = 'networkGraph',
+    leaderBoardDisplayTime  = 5000,
+    networkGraphDisplayTime = 10000;
 
-// TODO: quick hack to prevent graph from re-drawing if data hasn't actually changed until we implement socket.io
+// TODO: this code should probably put in the respective JS files
 setInterval(function () {
   $.getJSON('/participants/links', updateGraph);
   $.getJSON('/participants/json', updateLeaderboard);
 }, 2000);
 
+function displayNetworkGraph() {
+  clearInterval(window.timer);
+  window.timer = setTimeout(displayLeaderboard, networkGraphDisplayTime);
+  $('#leaderboard').fadeOut();
+  $('#network-graph').fadeIn();
+  $('#dashboard-title h1').text('Mingle Map');
+}
 
+function displayLeaderboard() {
+  clearInterval(window.timer);
+  window.timer = setTimeout(displayNetworkGraph, leaderBoardDisplayTime);
+  $('#network-graph').fadeOut();
+  $('#leaderboard').fadeIn();
+  $('#dashboard-title h1').text('Top 10 Minglers');
+}
 
-setInterval(function() { 
-
-  if ($("#network-graph").is(":visible")) {
-    $("#network-graph").hide();
-    $("#leaderboard").show();
-  } else {
-    $("#leaderboard").hide();
-    $("#network-graph").show();
-  }
-}, 20000);
+$(document).ready(function() {
+  $.getJSON('/participants/links', initGraph);
+  $.getJSON('/participants/json', updateLeaderboard);
+  displayNetworkGraph();
+});
