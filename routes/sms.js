@@ -49,7 +49,7 @@ function vote(res, options) {
     var message;
     if (err) {
       if (err instanceof ApplicationError.InvalidPin) {
-        message = 'Sorry, I can\t find a user with PIN '+ options.text + '.';
+        message = 'Sorry, I can\'t find a user with PIN '+ options.text + '.';
       } else {
         console.log(err);
         message = 'Sorry something went wrong. Please try again.';
