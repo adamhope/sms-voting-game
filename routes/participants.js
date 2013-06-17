@@ -14,8 +14,8 @@ exports.list = function(req, res) {
 exports.json = function(req, res) {
   Participant.find(function(err, participants) {
 
-    sorted = _.map(_.first(_.sortBy(participants, function(p) {return p.score * -1;}), 15), function(p){
-      return {username: p.username, score: p.score}
+    var sorted = _.map(_.first(_.sortBy(participants, function(p) {return p.score * -1;}), 15), function(p){
+      return {username: p.username, score: p.score};
     });
 
     res.json(sorted);
@@ -25,13 +25,14 @@ exports.json = function(req, res) {
 exports.links = function (req, res) {
   Participant.find(function(err, participants) {
 
-    var nodes  = [],
-        links  = [],
-        i      = participants.length,
-        linkCount = 0,
-        nodeCount = 0,
-        donationPerVote = 1,
-        totalDonation = 0;
+    var nodes            = [],
+        links            = [],
+        i                = participants.length,
+        linkCount        = 0,
+        nodeCount        = 0,
+        donationPerPoint = 4,
+        totalDonation    = 0,
+        donationLimit    = 1000;
 
     while (i--) {
 
@@ -51,8 +52,8 @@ exports.links = function (req, res) {
 
       for (var voter in voters) {
         if (voters.hasOwnProperty(voter)) {
-          if (_.find(nodes, function(node) { return node.id == voter; })) {
-            totalDonation += donationPerVote;
+          if (_.find(nodes, function(node) {return node.id == voter;})) {
+            totalDonation += donationPerPoint;
             linkCount++;
 
             links.push({
@@ -62,14 +63,13 @@ exports.links = function (req, res) {
           }
         }
       }
-
     }
 
     res.json({
       nodes: nodes,
       links: links,
-      totalDonation: totalDonation,
-      // XXX these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
+      totalDonation: totalDonation > donationLimit ? donationLimit : totalDonation,
+      // NOTE these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
       nodeCount: nodeCount,
       linkCount: linkCount
     });
