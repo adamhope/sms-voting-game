@@ -142,7 +142,7 @@ function setBroadcasting(ms) {
 
       if (participants.length >= 1) {
         var topScore = _.first(participants).score,
-          message = p.username + ', you are in the lead.';
+          message = _.first(participants).username + ', you are in the lead.';
         exports.sendSms(message, _.first(participants).phoneNumber, settings.burstApi);
 
         _.each(_.rest(participants), function(p) {
