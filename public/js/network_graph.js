@@ -1,9 +1,7 @@
 // TODO: lots of refactoring
-
 var graph;
 
 function myGraph(el) {
-
   // Add and remove elements on the graph object
   this.addNode = function (node) {
     nodes.push({
@@ -113,7 +111,6 @@ function myGraph(el) {
     link.exit().remove();
 
     //NODES
-
     var node = nodeGroup.selectAll('.node')
       .data(nodes, function(d) {
         return d.id;
@@ -125,7 +122,7 @@ function myGraph(el) {
 
     nodeEnter.append('svg:circle')
       .attr('r', function(d) { return Math.pow(d.size, 2.0) + 10;})
-      .attr('id',function(d) { return 'Node;'+d.id;})
+      .attr('id',function(d) { return "node-" +d.id})
       .style("fill", function(d) { return d.color; })
       .attr("stroke-width", 10)
 
@@ -136,6 +133,12 @@ function myGraph(el) {
       .attr("dy", ".35em")
       .attr("fill", "#9ecae1")
       .text( function(d){ return d.name;});
+
+    nodes.forEach(function(node) {
+      nodeGroup.select('#node-' + node.id)
+        .transition().duration(500)
+        .attr("r", Math.pow(node.size, 2.0) + 10);
+    }); 
 
     node.exit().remove();
 
@@ -162,21 +165,27 @@ function myGraph(el) {
 
 // XXX these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
 var nodeCount = 0,
-    linkCount = 0;
+    linkCount = 0,
+    totalScores = 0;
 
 function initGraph(data) {
   graph = new myGraph('#network-graph');
   updateGraph(data);
 }
 
+function sizesChanged(data) {
+  var sum = 0;
+  for (var i = 0; i < data.nodes.length; i++) {
+    sum += data.nodes[i].size;
+  }
+  return sum;
+}
+
 function updateGraph(data) {
 
   $('.amount').text(data.totalDonation);
 
-  if (data.nodeCount != nodeCount || data.linkCount != linkCount) {
-
-    nodeCount = data.nodeCount;
-    linkCount = data.linkCount;
+  if (data.nodeCount != nodeCount || data.linkCount != linkCount || sizesChanged(data) != totalScores ) {
 
     data.nodes.forEach(function (node) {
       graph.addNode(node);
@@ -186,6 +195,9 @@ function updateGraph(data) {
       graph.addLink(link.source, link.target, 10);
     });
 
+    totalScores = sizesChanged(data);
+    nodeCount = data.nodeCount;
+    linkCount = data.linkCount;
     graph.upd();
   }
 }
