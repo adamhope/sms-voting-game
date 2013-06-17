@@ -3,7 +3,8 @@ var Participant = require('../models/participant'),
   settings = require('../settings'),
   ApplicationError = require('../models/application_error'),
   smsEnabled = false,
-  _ = require('underscore');
+  _ = require('underscore')
+  async = require('async');
 
 function extract(req) {
   smsEnabled = !!!(/disabled/.exec(req.query['sms']));
