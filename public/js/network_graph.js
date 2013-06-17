@@ -129,7 +129,7 @@ function myGraph(el) {
     nodeEnter.append('svg:text')
       .attr("font-family", "'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;")                
       .attr("font-size", "16px")
-      .attr("x", 16)
+      .attr("x", function(d) { return Math.pow(d.size, 2.0) + 20; })
       .attr("dy", ".35em")
       .attr("fill", "#9ecae1")
       .text( function(d){ return d.name;});
