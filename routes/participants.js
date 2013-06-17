@@ -1,5 +1,5 @@
-var Participant = require('../models/participant');
-var _ = require('underscore');
+var Participant = require('../models/participant'),
+  _ = require('underscore');
 
 exports.list = function(req, res) {
   Participant.find(function(err, participants) {
@@ -14,19 +14,11 @@ exports.list = function(req, res) {
 exports.json = function(req, res) {
   Participant.find(function(err, participants) {
 
-    // TODO sort participants by score
-    var scoreData = [],
-        i = participants.length;
+    sorted = _.map(_.first(_.sortBy(participants, function(p) {return p.score * -1;}), 15), function(p){
+      return {username: p.username, score: p.score}
+    });
 
-    while (i--) {
-      var player = participants[i];
-      scoreData.push({
-        username: player.username,
-        score: player.score
-      });
-    }
-
-    res.json(scoreData);
+    res.json(sorted);
   });
 };
 

@@ -39,10 +39,11 @@ table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
 body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#fff;color:#000}
+#leaderboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #donation{position:absolute;top:320px;left:1600px;color:#fff;text-align:right}
 #network-graph{position:absolute;top:310px;left:640px}
-#leaderboard{position:absolute;top:310px;left:640px}
+#leaderboard{position:absolute;top:310px;left:740px}
 fieldset legend{font-weight:bold}
 input,label{display:block}
 input{margin:.4em 0}
