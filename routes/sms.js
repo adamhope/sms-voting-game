@@ -140,10 +140,16 @@ function setBroadcasting(ms) {
         return;
       }
 
-      _.each(participants, function(p, index) {
-        var message = p.username + ', you are in ' + (index+1) + suffix(index+1) + ' place with ' + p.score + ' votes.';
-        exports.sendSms(message, p.phoneNumber, settings.burstApi);
-      });
+      if (participants.length >= 1) {
+        var topScore = _.first(participants).score,
+          message = p.username + ', you are in the lead.';
+        exports.sendSms(message, _.first(participants).phoneNumber, settings.burstApi);
+
+        _.each(_.rest(participants), function(p) {
+          message = p.username + ', you are in ' + (topScore - p.score + 1) + ' connections away from the lead.'
+          exports.sendSms(message, p.phoneNumber, settings.burstApi);
+        });
+      }
     });
   }, ms);
 }
