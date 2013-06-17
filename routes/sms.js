@@ -146,7 +146,8 @@ function setBroadcasting(ms) {
         exports.sendSms(message, _.first(participants).phoneNumber, settings.burstApi);
 
         _.each(_.rest(participants), function(p) {
-          message = p.username + ', you are in ' + (topScore - p.score + 1) + ' connections away from the lead.'
+          var nConnections = (topScore - p.score + 1) > 1 ? (topScore - p.score + 1) + ' connections' : (topScore - p.score + 1) + ' connection';
+          message = p.username + ', you are ' + nConnections + ' away from the lead.'
           exports.sendSms(message, p.phoneNumber, settings.burstApi);
         });
       }
