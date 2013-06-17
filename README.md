@@ -1,5 +1,7 @@
 # The SMS Voting-Game
 
+# http://morning-shore-2216.herokuapp.com/
+
 #TODOs
 
 ## Final list
