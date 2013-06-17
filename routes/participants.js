@@ -1,4 +1,5 @@
 var Participant = require('../models/participant');
+var _ = require('underscore');
 
 exports.list = function(req, res) {
   Participant.find(function(err, participants) {
@@ -58,14 +59,15 @@ exports.links = function (req, res) {
 
       for (var voter in voters) {
         if (voters.hasOwnProperty(voter)) {
+          if (_.find(nodes, function(node) { return node.id == voter; })) {
+            totalDonation += donationPerVote;
+            linkCount++;
 
-          totalDonation += donationPerVote;
-          linkCount++;
-
-          links.push({
-            source: voter,
-            target: nodeId
-          });
+            links.push({
+              source: voter,
+              target: nodeId
+            });
+          }
         }
       }
 
