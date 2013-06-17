@@ -142,10 +142,15 @@ function setBroadcasting(ms) {
 
       if (participants.length >= 1) {
         var topScore = _.first(participants).score,
-          message = _.first(participants).username + ', you are in the lead.';
-        exports.sendSms(message, _.first(participants).phoneNumber, settings.burstApi);
+          message,
+          leads = _.filter(participants, function(p) {return p.score == topScore});
 
-        _.each(_.rest(participants), function(p) {
+        _.each(leads, function(p) {
+          message = p.username + ', you are in the lead!'
+          exports.sendSms(message, p.phoneNumber, settings.burstApi);
+        });
+
+        _.each(_.rest(participants, leads.length), function(p) {
           var nConnections = (topScore - p.score + 1) > 1 ? (topScore - p.score + 1) + ' connections' : (topScore - p.score + 1) + ' connection';
           message = p.username + ', you are ' + nConnections + ' away from the lead.'
           exports.sendSms(message, p.phoneNumber, settings.burstApi);

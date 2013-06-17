@@ -37,7 +37,7 @@ describe('Participant', function() {
       _.uniq(participants.map(function(p) {return p.pin;})).length.should.eql(participants.length);
     });
 
-    it('creates unique pin of 5 digits', function() {
+    it('creates unique pin of 4 digits', function() {
       _.every(participants, function(p){return p.pin >= 1000 && p.pin <= 9999;}).should.be.true;
     }); 
   });
