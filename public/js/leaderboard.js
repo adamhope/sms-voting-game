@@ -26,7 +26,7 @@ function updateLeaderboard(data) {
   var x      = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
 
   // NOTE: remove the old leaderboard, this is lame, but fine for now
-  $('#leaderboard').empty();
+  $('#leaderboard').empty().append('<h1 class="leaderboard-title">Top 10 Minglers</h1>');
 
   // svg container element
   var chart = d3.select('#leaderboard').append('svg')
@@ -36,6 +36,7 @@ function updateLeaderboard(data) {
   // grid line labels
   var gridContainer = chart.append('g')
     .attr('transform', 'translate(' + barLabelWidth + ',' + gridLabelHeight + ')');
+
   gridContainer.selectAll('text').data(x.ticks(10)).enter().append('text')
     .attr('x', x)
     .attr('dy', -3)
@@ -53,10 +54,10 @@ function updateLeaderboard(data) {
   // bar labels
   var labelsContainer = chart.append('g')
     .attr('transform', 'translate(' + (barLabelWidth - barLabelPadding) + ',' + (gridLabelHeight + gridChartOffset) + ')');
+
   labelsContainer.selectAll('text').data(sortedData).enter().append('text')
     .attr('y', yText)
-    .attr('stroke', 'none')
-    .attr('fill', 'white')
+    .attr('class', 'label-container')
     .attr('dy', '.35em') // vertical-align: middle
     .attr('text-anchor', 'end')
     .text(barLabel);
@@ -64,22 +65,21 @@ function updateLeaderboard(data) {
   // bars
   var barsContainer = chart.append('g')
     .attr('transform', 'translate(' + barLabelWidth + ',' + (gridLabelHeight + gridChartOffset) + ')');
+
   barsContainer.selectAll('rect').data(sortedData).enter().append('rect')
     .attr('y', y)
     .attr('height', yScale.rangeBand())
     .attr('width', function(d) { return x(barValue(d)); })
-    .attr('stroke', 'white')
-    .attr('fill', 'steelblue');
+    .attr('class', 'bar-container');
 
   // bar value labels
   barsContainer.selectAll('text').data(sortedData).enter().append('text')
     .attr('x', function(d) { return x(barValue(d)); })
     .attr('y', yText)
-    .attr('dx', 3) // padding-left
-    .attr('dy', '.35em') // vertical-align: middle
+    .attr('dx', 3)                // padding-left
+    .attr('dy', '.35em')          // vertical-align: middle
     .attr('text-anchor', 'start') // text-align: right
-    .attr('fill', 'white')
-    .attr('stroke', 'none')
+    .attr('class', 'bar-label')
     .text(function(d) { return d3.round(barValue(d), 2); });
 
   // start line
