@@ -74,7 +74,7 @@ describe('SMS dispatch', function() {
           var url = '/sms/dispatch/?mobile=12345&response=' + p.pin + '&message_id=0';
           var afterRequest = function(err, res) {
             stubSmsSendSms.called.should.be.true;
-            stubSmsSendSms.withArgs('You are now connected to fred', '12345', settings.burstApi).calledOnce.should.be.true;
+            stubSmsSendSms.withArgs('Thanks for connecting with fred', '12345', settings.burstApi).calledOnce.should.be.true;
             done();
           };
           request(app).get(url).expect(201, afterRequest);

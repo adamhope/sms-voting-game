@@ -56,7 +56,7 @@ function vote(res, options) {
         message = 'Sorry something went wrong. Please try again.';
       }
     } else {
-      message = 'You are now connected to ' + participant.username;
+      message = 'Thanks for connecting with ' + participant.username;
     }
     exports.sendSms(message, options.phoneNumber, settings.burstApi);
     res.send(201);
