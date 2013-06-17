@@ -19,7 +19,7 @@ describe('SMS dispatch', function() {
   });
 
   describe('#register', function() {
-    
+
     describe('when valid username and not registered', function(){
       it('sends sms pin and responds with 201', function(done) {
         var url = '/sms/dispatch/?mobile=1234567890&response=Fred&message_id=0';
@@ -74,7 +74,7 @@ describe('SMS dispatch', function() {
           var url = '/sms/dispatch/?mobile=12345&response=' + p.pin + '&message_id=0';
           var afterRequest = function(err, res) {
             stubSmsSendSms.called.should.be.true;
-            stubSmsSendSms.withArgs('Thank you for voting for fred', '12345', settings.burstApi).calledOnce.should.be.true;
+            stubSmsSendSms.withArgs('You are now connected to fred', '12345', settings.burstApi).calledOnce.should.be.true;
             done();
           };
           request(app).get(url).expect(201, afterRequest);
@@ -87,7 +87,7 @@ describe('SMS dispatch', function() {
         var url = '/sms/dispatch/?mobile=12345&response=9900&message_id=0';
         var afterRequest = function(err, res) {
           stubSmsSendSms.called.should.be.true;
-          stubSmsSendSms.withArgs('Sorry, user with pin 9900 not found.', '12345', settings.burstApi).calledOnce.should.be.true;
+          stubSmsSendSms.withArgs('Sorry, I can\'t find a user with PIN 9900.', '12345', settings.burstApi).calledOnce.should.be.true;
           done();
         };
 

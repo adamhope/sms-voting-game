@@ -20,7 +20,7 @@ describe("Participant", function(){
     afterEach(function(done){
       Participant.remove({}, done);
     });
-    
+
     it('adds the phoneNumber of the registered participant', function(done){
       Participant.vote(anotherParticipant.phoneNumber, participant.pin, function(err, p){
         if (err) return done(err);
@@ -35,7 +35,7 @@ describe("Participant", function(){
         p.votedForBy.should.have.property('0412121212');
         done();
       });
-    }); 
+    });
 
     it('returns invalid pin error when no registered participant has the pin code', function(done) {
       Participant.vote(anotherParticipant.phoneNumber, '10101', function(err, p){

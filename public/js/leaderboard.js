@@ -3,7 +3,7 @@ function updateLeaderboard(data) {
   // NOTE: from http://d3-generator.com/
 
   var valueLabelWidth = 40;  // space reserved for value labels (right)
-  var barHeight       = 20;  // height of one bar
+  var barHeight       = 45;  // height of one bar
   var barLabelWidth   = 100; // space reserved for bar labels
   var barLabelPadding = 5;   // padding between bar and bar labels (left)
   var gridLabelHeight = 18;  // space reserved for gridline labels
@@ -56,7 +56,7 @@ function updateLeaderboard(data) {
   labelsContainer.selectAll('text').data(sortedData).enter().append('text')
     .attr('y', yText)
     .attr('stroke', 'none')
-    .attr('fill', 'black')
+    .attr('fill', 'white')
     .attr('dy', '.35em') // vertical-align: middle
     .attr('text-anchor', 'end')
     .text(barLabel);
@@ -78,7 +78,7 @@ function updateLeaderboard(data) {
     .attr('dx', 3) // padding-left
     .attr('dy', '.35em') // vertical-align: middle
     .attr('text-anchor', 'start') // text-align: right
-    .attr('fill', 'black')
+    .attr('fill', 'white')
     .attr('stroke', 'none')
     .text(function(d) { return d3.round(barValue(d), 2); });
 
