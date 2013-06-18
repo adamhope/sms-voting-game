@@ -5,7 +5,7 @@ function myGraph(el) {
   // Add and remove elements on the graph object
   this.addNode = function (node) {
     nodes.push({
-      'id' : node.id,
+      'id'   : node.id,
       'name' : node.name,
       'size' : node.size,
       'color': generateColor()
@@ -94,22 +94,21 @@ function myGraph(el) {
       links = force.links(),
       nodes = force.nodes();
 
-
   var update = function () {
 
-    //LINKS
+    // LINKS
     var link = linkGroup.selectAll('.link')
       .data(links, function(d) {
         return d.source.id + '-' + d.target.id;
       });
 
     link.enter().append('line')
-      .attr('id',function(d){return d.source.id + '-' + d.target.id;})
+      .attr('id', function(d){return d.source.id + '-' + d.target.id;})
       .attr('class', 'link');
 
     link.exit().remove();
 
-    //NODES
+    // NODES
     var node = nodeGroup.selectAll('.node')
       .data(nodes, function(d) {return d.id;});
 
@@ -132,8 +131,6 @@ function myGraph(el) {
       .attr('fill', '#9ecae1')
       .text( function(d){ return d.name;});
 
-
-
     nodes.forEach(function(node) {
       nodeGroup.select('#node-' + node.id)
         .transition().duration(500)
@@ -144,7 +141,7 @@ function myGraph(el) {
 
     force.on('tick', function() {
       node.attr('transform', function(d) { return 'translate(' + d.x + ', ' + d.y + ')'; });
-       link.attr('x1', function(d) { return d.source.x; })
+      link.attr('x1', function(d) { return d.source.x; })
         .attr('y1', function(d) { return d.source.y; })
         .attr('x2', function(d) { return d.target.x; })
         .attr('y2', function(d) { return d.target.y; });
@@ -157,6 +154,7 @@ function myGraph(el) {
       .linkDistance(function(d) { return d.target._children ? 100 : 100; }) // 100
       .size([w, h])
       .start();
+
   };
 
   update();
@@ -196,8 +194,8 @@ function updateGraph(data) {
     });
 
     totalScores = sizesChanged(data);
-    nodeCount = data.nodeCount;
-    linkCount = data.linkCount;
+    nodeCount   = data.nodeCount;
+    linkCount   = data.linkCount;
     graph.upd();
   }
 }

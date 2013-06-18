@@ -30,14 +30,13 @@ exports.links = function (req, res) {
         nodeIds = [],
         linkCount = 0,
         nodeCount = 0,
-        donationPerVote = 1,
-        totalDonation = 0;
+        donationPerVote = 4,
+        totalDonation = 0,
         donationLimit    = 1000;
 
   for (var i = 0; i < participants.length; i ++) {
     nodeIds.push(participants[i].phoneNumber);
   }
-  console.log(nodeIds);
 
   for (var i = 0; i < participants.length; i ++) {
       var p      = participants[i],
