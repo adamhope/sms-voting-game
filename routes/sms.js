@@ -146,12 +146,13 @@ function setBroadcasting(ms) {
           message,
           leads = _.filter(participants, function(p) {return p.score == topScore});
 
-        _.each(leads, function(p) {
-          message = p.username + ', you are in the lead!'
-          exports.sendSms(message, p.phoneNumber, settings.burstApi);
-        });
+        if (leads.length == 1) {
+          message = _.first(leads).username + ', you are in the lead!';
+          exports.sendSms(message, _.first(leads).phoneNumber, settings.burstApi);
+          participants = _.rest(participants);
+        }
 
-        _.each(_.rest(participants, leads.length), function(p) {
+        _.each(participants, function(p) {
           var nConnections = (topScore - p.score + 1) > 1 ? (topScore - p.score + 1) + ' connections' : (topScore - p.score + 1) + ' connection';
           message = p.username + ', you are ' + nConnections + ' away from the lead.'
           exports.sendSms(message, p.phoneNumber, settings.burstApi);
