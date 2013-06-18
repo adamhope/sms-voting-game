@@ -98,5 +98,19 @@ describe('SMS dispatch', function() {
         });
       });
     });
+
+    describe('when not registered', function() {
+      it('responds with 400', function(done) {
+        Participant.register('0411222111', 'fred', function(err, p) {
+          var url = '/sms/dispatch/?mobile=0414213852&response=' + p.pin + '&message_id=0';
+          var afterRequest = function(err, res) {
+            stubSmsSendSms.called.should.be.true;
+            stubSmsSendSms.withArgs('Sorry, you must register before connecting. SMS your full name to register', '0414213852', settings.burstApi).calledOnce.should.be.true;
+            done();
+          };
+          request(app).get(url).expect(400, afterRequest);
+        });
+      });
+    });
   });
 });

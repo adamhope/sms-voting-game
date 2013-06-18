@@ -51,8 +51,9 @@ function vote(res, options) {
     if (err) {
       if (err instanceof ApplicationError.InvalidPin) {
         message = 'Sorry, I can\'t find a user with PIN '+ options.text + '.';
+      } else if (err instanceof ApplicationError.RegistrationNeeded) {
+        message = "Sorry, you must register before connecting. SMS your full name to register";
       } else {
-        console.log(err);
         message = 'Sorry something went wrong. Please try again.';
       }
     } else {
