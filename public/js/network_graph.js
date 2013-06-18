@@ -111,9 +111,7 @@ function myGraph(el) {
 
     //NODES
     var node = nodeGroup.selectAll('.node')
-      .data(nodes, function(d) {
-        return d.id;
-      });
+      .data(nodes, function(d) {return d.id;});
 
     var nodeEnter = node.enter().append('g')
       .attr('class', 'node')
@@ -121,15 +119,18 @@ function myGraph(el) {
 
     nodeEnter.append('svg:circle')
       .attr('r', function(d) { return Math.pow(d.size, 2.0) + 10;})
-      .attr('id',function(d) { return 'node-' + d.id})
+      .attr('id',function(d) { return 'node-' + d.id;})
       .style('fill', function(d) { return d.color; })
       .attr('stroke-width', 10);
 
     nodeEnter.append('svg:text')
       .attr('x', function(d) { return Math.pow(d.size, 2.0) + 20; })
+      .attr('y', function(d) { return  -1; })
       .attr('dy', '.35em')
       .attr('fill', '#9ecae1')
       .text( function(d){ return d.name;});
+
+
 
     nodes.forEach(function(node) {
       nodeGroup.select('#node-' + node.id)
