@@ -116,8 +116,12 @@ function myGraph(el) {
       .attr('class', 'node')
       .call(force.drag);
 
+    var calcRadius = function(node) {
+      return Math.pow(node.size, 1.0) + 10
+    };
+
     nodeEnter.append('svg:circle')
-      .attr('r', function(d) { return Math.pow(d.size, 2.0) + 10;})
+      .attr('r', calcRadius )
       .attr('id',function(d) { return 'node-' + d.id;})
       .style('fill', function(d) { return d.color; })
       .attr('stroke', function(d) { return '#ddd'; })
@@ -134,7 +138,7 @@ function myGraph(el) {
     nodes.forEach(function(node) {
       nodeGroup.select('#node-' + node.id)
         .transition().duration(500)
-        .attr('r', Math.pow(node.size, 2.0) + 10);
+        .attr('r', calcRadius);
     });
 
     node.exit().remove();
@@ -150,8 +154,8 @@ function myGraph(el) {
 
     force
       .gravity(0.06)
-      .charge(function(d) { return d._children ? 0 : -100 ;}) // -200
-      .linkDistance(function(d) { return d.target._children ? 100 : 100; }) // 100
+      .charge(-100) // -200
+      .linkDistance(100) // 100
       .size([w, h])
       .start();
 

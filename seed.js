@@ -81,6 +81,4 @@ var seedMore = function() {
     }
   });
 };
-
-// module.exports = seed;
 module.exports = seedMore;
