@@ -25,8 +25,16 @@ var InvalidPinError = function (msg) {
 util.inherits(InvalidPinError, AbstractError);
 InvalidPinError.prototype.message = 'Participant Error - Invalid PIN';
 
+var RegistrationNeededError = function(msg) {
+  RegistrationNeededError.super_.call(this, msg, this.constructor); 
+};
+util.inherits(RegistrationNeededError, AbstractError);
+RegistrationNeededError.prototype.message = 'Connect Error - User needs to be registered';
+
+
 module.exports = {
   UsernameTaken: UsernameTakenError,
   AlreadyRegistered: AlreadyRegisteredError,
-  InvalidPin: InvalidPinError
+  InvalidPin: InvalidPinError,
+  RegistrationNeeded: RegistrationNeededError
 }

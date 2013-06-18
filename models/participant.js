@@ -38,13 +38,16 @@ participantSchema.statics.register = function (phoneNumber, username, callback) 
 };
 
 participantSchema.statics.vote = function(phoneNumberFrom, pinTo, callback) {
-  Participant.findOne({pin: pinTo}, function(err, participant) {
-    var set = {};
-    if (err) return callback(err);
-    if (participant === null) return callback(new ApplicationError.InvalidPin());
+  Participant.findOne({phoneNumber: phoneNumberFrom}, function(e, p) {
+    if (p === null) return callback(new ApplicationError.RegistrationNeeded());
+    Participant.findOne({pin: pinTo}, function(err, participant) {
+      var set = {};
+      if (err) return callback(err);
+      if (participant === null) return callback(new ApplicationError.InvalidPin());
 
-    set['votedForBy.' + phoneNumberFrom] = null;
-    Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);
+      set['votedForBy.' + phoneNumberFrom] = null;
+      Participant.findByIdAndUpdate(participant.id, { $set: set}, callback);
+    });
   });
 };
 

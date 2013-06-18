@@ -29,10 +29,9 @@ describe("Participant", function(){
       });
     });
 
-    it('allows to vote when the voter is not registered', function(done) {
+    it('disallows vote when the voter is not registered', function(done) {
       Participant.vote('0412121212', participant.pin, function(err, p){
-        // err.message.should.match(/No participant has phone number/);
-        p.votedForBy.should.have.property('0412121212');
+        err.should.be.an.instanceof(ApplicationError.RegistrationNeeded);
         done();
       });
     });

@@ -71,27 +71,31 @@ describe('SMS dispatch', function() {
     describe('when no error', function() {
       it('responds with 201', function(done) {
         Participant.register('0411222111', 'fred', function(err, p) {
-          var url = '/sms/dispatch/?mobile=12345&response=' + p.pin + '&message_id=0';
-          var afterRequest = function(err, res) {
-            stubSmsSendSms.called.should.be.true;
-            stubSmsSendSms.withArgs('Thanks for connecting with fred', '12345', settings.burstApi).calledOnce.should.be.true;
-            done();
-          };
-          request(app).get(url).expect(201, afterRequest);
+          Participant.register('0414213852', 'dom', function(err, voter) {
+            var url = '/sms/dispatch/?mobile=0414213852&response=' + p.pin + '&message_id=0';
+            var afterRequest = function(err, res) {
+              stubSmsSendSms.called.should.be.true;
+              stubSmsSendSms.withArgs('Thanks for connecting with fred', '0414213852', settings.burstApi).calledOnce.should.be.true;
+              done();
+            };
+            request(app).get(url).expect(201, afterRequest);
+          });
         });
       });
     });
 
     describe('when invalid pin', function() {
       it('sends sms with the error and responds with 201', function(done) {
-        var url = '/sms/dispatch/?mobile=12345&response=9900&message_id=0';
-        var afterRequest = function(err, res) {
-          stubSmsSendSms.called.should.be.true;
-          stubSmsSendSms.withArgs('Sorry, I can\'t find a user with PIN 9900.', '12345', settings.burstApi).calledOnce.should.be.true;
-          done();
-        };
+        Participant.register('0414213852', 'dom', function(err, voter) {
+          var url = '/sms/dispatch/?mobile=0414213852&response=12345&message_id=0';
+          var afterRequest = function(err, res) {
+            stubSmsSendSms.called.should.be.true;
+            stubSmsSendSms.withArgs('Sorry, I can\'t find a user with PIN 12345.', '0414213852', settings.burstApi).calledOnce.should.be.true;
+            done();
+          };
 
-        request(app).get(url).expect(201, afterRequest);
+          request(app).get(url).expect(201, afterRequest);
+        });
       });
     });
   });
