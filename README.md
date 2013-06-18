@@ -5,20 +5,10 @@
 #TODOs
 
 ## Final list
-- Style the leaderboard properly
 - Style the network graph (fix the bug Dom introduced)
-- Testing (broadcasting etc)
 
 ## MVP
-- Leader board on the dashboard page should only show the top 10!
-- Style leaderboard (at least when it's displayed on the dashboard page)
-- Make the leaderboard and network-graph switch places every few seconds with a nice transition
-- Document text messages the game sends and when/why (so we can run them by Olivia)
-- User testing: Reset the game on Heroku and play it properly
-- Ensure leaderboard screen shows the correct winnder
-    - 1st place most in bound connections: hoarder
-- Check Heroku can support our needs. Do we need a non free account?
-- Timed broadcast to all players telling them their current rank on the leaderboard (or maybe just what band they're in e.g. top 10)
+- 1st place most in bound connections: hoarder
 
 ## Wishlist
 - A "stop" button to freeze the game before announcing winners
