@@ -154,8 +154,8 @@ function myGraph(el) {
 
     force
       .gravity(0.06)
-      .charge(-100) // -200
-      .linkDistance(100) // 100
+      .charge(-300) // -200
+      .linkDistance(130) // 100
       .size([w, h])
       .start();
 
