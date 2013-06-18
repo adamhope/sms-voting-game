@@ -15,11 +15,12 @@
 - Acheivements / announcements
 
 ## Rules
-- You get 1 vote and a pin number when you register by texting your name
-- You give 1 vote when you text someone elses pin number
-- You don't have to register to vote for someone
-- You can't vote for yourself
-- You can't vote for anyone more than once
+- You register and receive a PIN # by texting your full name
+- You connect to other Minglers by texting their PIN #
+- You have to register to connect to another Mingler
+- You can't connect to yourself
+- You can't connect to someone else more than once
+- The donation to charity is the number of minglers + the total number of connections * 4
 
 # Decisions made
 
