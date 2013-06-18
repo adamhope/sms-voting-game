@@ -121,6 +121,8 @@ function myGraph(el) {
       .attr('r', function(d) { return Math.pow(d.size, 2.0) + 10;})
       .attr('id',function(d) { return 'node-' + d.id;})
       .style('fill', function(d) { return d.color; })
+      .attr('stroke', function(d) { return '#ddd'; })
+      .attr('stroke-opacity', 0.5)
       .attr('stroke-width', 10);
 
     nodeEnter.append('svg:text')
