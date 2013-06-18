@@ -12,9 +12,10 @@ exports.list = function(req, res) {
 
 // TODO: needs tests
 exports.json = function(req, res) {
+  var NUMBER_OF_USERS = 10;
   Participant.find(function(err, participants) {
 
-    var sorted = _.map(_.first(_.sortBy(participants, function(p) {return p.score * -1;}), 15), function(p){
+    var sorted = _.map(_.first(_.sortBy(participants, function(p) {return p.score * -1;}), NUMBER_OF_USERS), function(p){
       return {username: p.username, score: p.score};
     });
 
