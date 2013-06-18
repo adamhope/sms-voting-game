@@ -59,5 +59,5 @@ button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #
 #network-graph text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
 #network-graph circle{stroke:#9ecae1;stroke-width:2;transition:all 300ms ease}
 #network-graph circle:hover,#network-graph circle:active,#network-graph circle:focus{stroke-width:5px}
-#network-graph .link{fill:#9ecae1;stroke:#9ecae1;stroke-width:5px}
+#network-graph .link{fill:#090;stroke:#090;stroke-width:5px}
 #network-graph .node{fill:none;stroke:none}
