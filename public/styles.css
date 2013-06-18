@@ -56,6 +56,7 @@ button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #
 #leaderboard .bar-container{fill:#008000;stroke:#fff}
 #leaderboard .bar-label{stroke:none;fill:#fff}
 #leaderboard .label-container{stroke:none;fill:#fff}
+#network-graph text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
 #network-graph circle{stroke:#9ecae1;stroke-width:2;transition:all 300ms ease}
 #network-graph circle:hover,#network-graph circle:active,#network-graph circle:focus{stroke-width:5px}
 #network-graph .link{fill:#9ecae1;stroke:#9ecae1;stroke-width:5px}

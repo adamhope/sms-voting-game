@@ -84,12 +84,11 @@ function myGraph(el) {
     .attr('pointer-events', 'all')
     .attr('viewBox', '0 0 ' + w + ' ' + h)
     .attr('perserveAspectRatio', 'xMinYMid')
-    .attr("pointer-events", "all")
-    .call(d3.behavior.zoom().on("zoom", update))
+    .attr('pointer-events', 'all')
+    .call(d3.behavior.zoom().on('zoom', update));
 
-  
-  var linkGroup = vis.append("g").attr('class', 'links');
-  var nodeGroup = vis.append("g").attr('class', 'nodes');
+  var linkGroup = vis.append('g').attr('class', 'links');
+  var nodeGroup = vis.append('g').attr('class', 'nodes');
 
   var force = d3.layout.force(),
       links = force.links(),
@@ -122,23 +121,21 @@ function myGraph(el) {
 
     nodeEnter.append('svg:circle')
       .attr('r', function(d) { return Math.pow(d.size, 2.0) + 10;})
-      .attr('id',function(d) { return "node-" +d.id})
-      .style("fill", function(d) { return d.color; })
-      .attr("stroke-width", 10)
+      .attr('id',function(d) { return 'node-' + d.id})
+      .style('fill', function(d) { return d.color; })
+      .attr('stroke-width', 10);
 
     nodeEnter.append('svg:text')
-      .attr("font-family", "'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;")                
-      .attr("font-size", "16px")
-      .attr("x", function(d) { return Math.pow(d.size, 2.0) + 20; })
-      .attr("dy", ".35em")
-      .attr("fill", "#9ecae1")
+      .attr('x', function(d) { return Math.pow(d.size, 2.0) + 20; })
+      .attr('dy', '.35em')
+      .attr('fill', '#9ecae1')
       .text( function(d){ return d.name;});
 
     nodes.forEach(function(node) {
       nodeGroup.select('#node-' + node.id)
         .transition().duration(500)
-        .attr("r", Math.pow(node.size, 2.0) + 10);
-    }); 
+        .attr('r', Math.pow(node.size, 2.0) + 10);
+    });
 
     node.exit().remove();
 
@@ -148,7 +145,7 @@ function myGraph(el) {
         .attr('y1', function(d) { return d.source.y; })
         .attr('x2', function(d) { return d.target.x; })
         .attr('y2', function(d) { return d.target.y; });
-      
+
     });
 
     force
@@ -164,8 +161,8 @@ function myGraph(el) {
 }
 
 // XXX these are quick hacks to make up for the fact that we are constantly polling the server instead of using socket.io
-var nodeCount = 0,
-    linkCount = 0,
+var nodeCount   = 0,
+    linkCount   = 0,
     totalScores = 0;
 
 function initGraph(data) {
