@@ -38,7 +38,7 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
-body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#fff;color:#000}
+body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#000;color:#000}
 #leaderboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #dashboard-title{position:absolute;top:320px;left:700px;color:#fff;text-align:left}
@@ -53,11 +53,11 @@ input[type='submit']:hover,button:hover{background:none repeat scroll 0 0 #d9d9d
 button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #e3e3e3 inset;color:#000}
 #leaderboard text{font-size:24px}
 #leaderboard .leaderboard-title{color:#fff}
-#leaderboard .bar-container{fill:#008000;stroke:#fff}
+#leaderboard .bar-container{fill:#00aa90;stroke:#fff}
 #leaderboard .bar-label{stroke:none;fill:#fff}
 #leaderboard .label-container{stroke:none;fill:#fff}
 #network-graph text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
 #network-graph circle{stroke-width:2;transition:all 300ms ease}
 #network-graph circle:hover,#network-graph circle:active,#network-graph circle:focus{stroke-width:5px}
-#network-graph .link{fill:#090;stroke:#090;stroke-width:5px}
+#network-graph .link{fill:#090;stroke:#090;stroke-width:3px}
 #network-graph .node{fill:none;stroke:none}
