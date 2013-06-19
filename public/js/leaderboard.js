@@ -4,7 +4,7 @@ function updateLeaderboard(data) {
 
   var valueLabelWidth = 60;  // space reserved for value labels (right)
   var barHeight       = 45;  // height of one bar
-  var barLabelWidth   = 200; // space reserved for bar labels
+  var barLabelWidth   = 290; // space reserved for bar labels
   var barLabelPadding = 15;  // padding between bar and bar labels (left)
   var gridLabelHeight = 18;  // space reserved for gridline labels
   var gridChartOffset = 3;   // space between start of grid and first bar
