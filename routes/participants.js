@@ -24,6 +24,8 @@ exports.json = function(req, res) {
   });
 };
 
+
+
 exports.links = function (req, res) {
   Participant.find(function(err, participants) {
 
@@ -34,7 +36,7 @@ exports.links = function (req, res) {
         nodeCount = 0,
         donationPerVote = 4,
         totalDonation = 0,
-        donationLimit    = 2000;
+        donationLimit    = 100000;
 
   for (var i = 0; i < participants.length; i ++) {
     nodeIds.push(participants[i].phoneNumber);
