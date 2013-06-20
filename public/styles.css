@@ -38,10 +38,10 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
-body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#000;color:#000}
+body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#fff;color:#000}
+.leader-board,.dashboard{background-color:#000}
 .nonblack{background-color:#fff}
-#leaderboard-wrapper{background-image:url("/img/bg_1080p.png")}
-width: 1920px{height:1080px}
+#leaderboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
 #dashboard-title{position:absolute;top:320px;left:700px;color:#fff;text-align:left}
 #donation{position:absolute;top:320px;left:1500px;color:#fff;text-align:right}

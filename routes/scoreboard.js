@@ -4,9 +4,9 @@
  */
 
 exports.leaderboard = function(req, res){
-  res.render('scoreboard/leaderboard', {title: 'Leaderboard'});
+  res.render('scoreboard/leaderboard', {title: 'Leader board', bodyClass: 'leader-board'});
 };
 
 exports.dashboard = function(req, res){
-  res.render('scoreboard/dashboard', {title: 'Dashboard'});
+  res.render('scoreboard/dashboard', {title: 'Dashboard', bodyClass: 'dashboard'});
 };

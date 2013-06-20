@@ -106,7 +106,7 @@ exports.index = function(req, res) {
   } else {
     message = 'No timer has been set.'
   }
-  res.render('sms/index', {broadcastingMessage: message});
+  res.render('sms/index', {broadcastingMessage: message, bodyClass: 'sms', title: 'broadcast sms'});
 }
 
 exports.startBroadcast = function(req, res) {

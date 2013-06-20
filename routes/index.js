@@ -4,5 +4,5 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'SMS Voting Game' });
+  res.render('index', { title: 'SMS Voting Game', bodyClass: 'home' });
 };
