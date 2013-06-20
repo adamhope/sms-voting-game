@@ -1,18 +1,6 @@
 # The SMS Voting-Game
 
-# http://morning-shore-2216.herokuapp.com/
-
-#TODOs
-
-## Final list
-- Style the network graph (fix the bug Dom introduced)
-
-## MVP
-- 1st place most in bound connections: hoarder
-
-## Wishlist
-- A "stop" button to freeze the game before announcing winners
-- Acheivements / announcements
+Heroku URL http://morning-shore-2216.herokuapp.com/
 
 ## Rules
 - You register and receive a PIN # by texting your full name
@@ -21,8 +9,6 @@
 - You can't connect to yourself
 - You can't connect to someone else more than once
 - The donation to charity is the number of minglers + the total number of connections * 4
-
-# Decisions made
 
 ## Voting and registering
 
