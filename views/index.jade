@@ -4,16 +4,23 @@ block content
   h1= title
   p Welcome to #{title}
 
+  h2 Admin
+
   ul
     li
       a(href='/participants')
         | Play
     li
-      a(href='/leaderboard')
-        | Leaderboard
-    li
-      a(href='/dashboard')
-        | Dashboard
-    li
       a(href='/sms')
         | SMS
+
+
+  h2 Visualisations
+
+  ul
+    li
+      a(href='/display/leader-board')
+        | Leader board
+    li
+      a(href='/display/network-graph')
+        | Network Graph

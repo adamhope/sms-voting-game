@@ -50,13 +50,14 @@ app.get('/participants/links', participants.links);
 app.post('/participants/create', auth, participants.create);
 app.post('/participants/vote', auth, participants.vote);
 app.post('/participants/delete', auth, participants.delete);
+
 app.get('/sms/dispatch', sms.dispatch);
 app.get('/sms', auth, sms.index);
 app.post('/sms/startbroadcast', auth, sms.startBroadcast);
 app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
-app.get('/leaderboard', scoreboard.leaderboard);
-app.get('/dashboard', scoreboard.dashboard);
+app.get('/display/leader-board', scoreboard.leaderboard);
+app.get('/display/network-graph', scoreboard.dashboard);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
