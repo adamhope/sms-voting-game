@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node app.js",
     "test" : "make test",
-    "testauto" : "make test-w"
+    "testauto" : "make test-w",
+    "parse_json" : "node parse_json.js"
   },
   "dependencies": {
     "express": "3.1.1",
