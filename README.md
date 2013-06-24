@@ -2,13 +2,18 @@
 
 Heroku URL http://morning-shore-2216.herokuapp.com/
 
+## Instructions
+- Register and receive a PIN # by texting your full name
+- Connect to other Minglers by texting their PIN #
+- The winner is the person who the most people have connected to
+
 ## Rules
-- You register and receive a PIN # by texting your full name
-- You connect to other Minglers by texting their PIN #
 - You have to register to connect to another Mingler
 - You can't connect to yourself
 - You can't connect to someone else more than once
-- The donation to charity is the number of minglers + the total number of connections * 4
+
+## Charitable donation
+- The donation to charity is the number of minglers + the total number of connections * 4 or the max donation amount, whichever is lower
 
 ## Voting and registering
 
@@ -16,11 +21,6 @@ Heroku URL http://morning-shore-2216.herokuapp.com/
 - Players should have a username so that we can display something on screen which is not their phone number or pin number
     - phone numbers = privacy issues
     - pin numbers removes the need to talk to other players
-
-## Winning
-- Rules for winning have not been finalised
-    - however the winners will not be the top 1-3 players who have voted for the most people as we want to encourage recipricale voting
-
 
 ## Routes
 
