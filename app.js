@@ -47,6 +47,7 @@ app.get('/', routes.index);
 app.get('/participants', auth, participants.list);
 app.get('/participants/json', participants.json);
 app.get('/participants/links', participants.links);
+app.get('/participants/edgeBundling', participants.edgeBundling);
 app.post('/participants/create', auth, participants.create);
 app.post('/participants/vote', auth, participants.vote);
 app.post('/participants/delete', auth, participants.delete);

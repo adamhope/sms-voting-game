@@ -11,6 +11,7 @@ exports.list = function(req, res) {
   });
 };
 
+// TODO: should take query params, sort asec|desc, count n
 // TODO: needs tests
 exports.json = function(req, res) {
   var NUMBER_OF_USERS = 10;
@@ -24,7 +25,33 @@ exports.json = function(req, res) {
   });
 };
 
+// TODO: tests
+exports.edgeBundling = function (req, res) {
 
+  var data = [];
+
+  Participant.find(function(err, participants) {
+
+    _.each(participants, function (p) {
+
+      var voters = [];
+
+      for (var voter in p.votedForBy) {
+        if (p.votedForBy.hasOwnProperty(voter)) {
+          voters.push(voter);
+        }
+      }
+
+      // XXX: we probably don't ever want to return phone numbers in the JSON
+      data.push({"name": p.username, "number": p.phoneNumber, "numbers": voters });
+
+    });
+
+    res.json(data);
+
+  });
+
+};
 
 exports.links = function (req, res) {
   Participant.find(function(err, participants) {

@@ -38,6 +38,10 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+body{margin:0;padding:0;background-color:#000;color:#fff;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
+h1,h2,h3,h4,h5{font-weight:600;margin:0}
+b,strong{font-weight:700}
 #leader-board text{font-size:24px}
 #leader-board .leaderboard-title{color:#fff}
 #leader-board .bar-container{fill:#00aa90;stroke:#fff}
@@ -53,7 +57,6 @@ table{border-collapse:collapse;border-spacing:0}
 #scoreboard li strong{display:inline-block;background:#444;color:#fff;padding:6px;width:28px;height:28px;line-height:28px;text-align:center;margin:0 12px 0 -6px;border-radius:32px;border:3px #222 solid;transition:border 500ms ease}
 #scoreboard .all{color:#48d1cc}
 #scoreboard .all li strong{background:#48d1cc}
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-body{margin:0;padding:0;background-color:#000;color:#fff;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
-h1,h2,h3,h4,h5{font-weight:600;margin:0}
-b,strong{font-weight:700}
+#hierarchial-edge-bundling text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
+#hierarchial-edge-bundling .node{font:10px sans-serif}
+#hierarchial-edge-bundling .link{stroke:#008000;stroke-opacity:.6;fill:none}

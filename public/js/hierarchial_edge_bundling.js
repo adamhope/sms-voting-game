@@ -1,11 +1,12 @@
+var ctx = $('#hiearchial-edge-bundling');
+
 var diameter    = 960,
     radius      = diameter / 2,
     innerRadius = radius - 120;
 
 var cluster = d3.layout.cluster()
     .size([360, innerRadius])
-    .sort(null)
-    .value(function(d) { return d.size; });
+    .sort(null);
 
 var bundle = d3.layout.bundle();
 
@@ -15,15 +16,15 @@ var line = d3.svg.line.radial()
     .radius(function(d) { return d.y; })
     .angle(function(d) { return d.x / 180 * Math.PI; });
 
-var svg = d3.select('#edge-bundling').append('svg')
+var svg = d3.select('.visualization-body', ctx).append('svg')
     .attr('width', diameter)
     .attr('height', diameter)
     .append('g')
     .attr('transform', 'translate(' + radius + ',' + radius + ')');
 
-d3.json('/js/readme-flare-imports.json', function(error, classes) {
+d3.json('/participants/edgeBundling', function(error, classes) {
   var nodes = cluster.nodes(packages.root(classes)),
-      links = packages.imports(nodes);
+      links = packages.votedForBy(nodes);
 
   svg.selectAll('.link')
       .data(bundle(links))
@@ -73,22 +74,22 @@ var packages = {
   },
 
   // Return a list of imports for the given array of nodes.
-  imports: function(nodes) {
-    var map = {},
-        imports = [];
+  votedForBy: function(nodes) {
+    var map     = {},
+        numbers = [];
 
     // Compute a map from name to node.
     nodes.forEach(function(d) {
-      map[d.name] = d;
+      map[d.number] = d;
     });
 
     // For each import, construct a link from the source to target node.
     nodes.forEach(function(d) {
-      if (d.imports) d.imports.forEach(function(i) {
-        imports.push({source: map[d.name], target: map[i]});
+      if (d.numbers) d.numbers.forEach(function(i) {
+        numbers.push({source: map[d.number], target: map[i]});
       });
     });
 
-    return imports;
+    return numbers;
   }
 };
