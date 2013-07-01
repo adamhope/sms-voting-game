@@ -2,21 +2,17 @@ extends ../layout
 
 block content
 
-  #dashboard-wrapper
+  include ../includes/instructions
 
-    #dashboard-title
-      h1
+  include ../includes/donations
 
-    #donation
-      h1 Donated so far: $
-        span.amount  0
+  #network-graph.display
 
-    #network-graph
+    h1.display-title
 
-    #leaderboard
+    .display-content
 
 block scripts
     script(src="/js/libs/d3.v3.min.js?")
     script(src="/js/network_graph.js")
-    script(src="/js/leaderboard.js")
     script(src="/js/dashboard_init.js")

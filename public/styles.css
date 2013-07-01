@@ -38,26 +38,23 @@ textarea{overflow:auto;vertical-align:top;}
 table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
-body{margin:0;font-size:16px;line-height:24px;font-family:"Helvetica Neue",Helvetica,sans-serif;background-color:#fff;color:#000}
-.leader-board,.dashboard{background-color:#000}
-.nonblack{background-color:#fff}
-#leaderboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
-#dashboard-wrapper{background-image:url("/img/bg_1080p.png");width:1920px;height:1080px}
-#dashboard-title{position:absolute;top:320px;left:700px;color:#fff;text-align:left}
-#donation{position:absolute;top:320px;left:1500px;color:#fff;text-align:right}
-#network-graph{position:absolute;top:310px;left:640px}
-#leaderboard{position:absolute;top:380px;left:740px}
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+body{margin:0;padding:0;background-color:#fff;color:#000;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
+h1,h2,h3,h4,h5{font-weight:600;margin:0}
+b,strong{font-weight:700}
 fieldset legend{font-weight:bold}
 input,label{display:block}
 input{margin:.4em 0}
 input[type='submit'],button{background:none repeat scroll 0 0 #e3e3e3;border:1px solid #bbb;border-radius:3px 3px 3px 3px;box-shadow:0 0 1px 1px #f6f6f6 inset;color:#333;font:bold 12px;margin:0 5px;padding:8px 0 9px;text-align:center;text-shadow:0 1px 0 #fff;width:150px}
 input[type='submit']:hover,button:hover{background:none repeat scroll 0 0 #d9d9d9;box-shadow:0 0 1px 1px #eaeaea inset;color:#222;cursor:pointer}
 button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #e3e3e3 inset;color:#000}
-#leaderboard text{font-size:24px}
-#leaderboard .leaderboard-title{color:#fff}
-#leaderboard .bar-container{fill:#00aa90;stroke:#fff}
-#leaderboard .bar-label{stroke:none;fill:#fff}
-#leaderboard .label-container{stroke:none;fill:#fff}
+.leaderboard{background-color:#000;color:#fff}
+#leader-board text{font-size:24px}
+#leader-board .leaderboard-title{color:#fff}
+#leader-board .bar-container{fill:#00aa90;stroke:#fff}
+#leader-board .bar-label{stroke:none;fill:#fff}
+#leader-board .label-container{stroke:none;fill:#fff}
+.dashboard{background-color:#000;color:#fff}
 #network-graph text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
 #network-graph circle{stroke-width:2;transition:all 300ms ease}
 #network-graph circle:hover,#network-graph circle:active,#network-graph circle:focus{stroke-width:5px}

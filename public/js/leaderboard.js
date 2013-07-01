@@ -1,5 +1,9 @@
 function updateLeaderboard(data) {
 
+  var ctx = '#leader-board';
+
+  $('.display-title', ctx).text('Leaderboard');
+
   // NOTE: from http://d3-generator.com/
 
   var valueLabelWidth = 60;  // space reserved for value labels (right)
@@ -26,10 +30,10 @@ function updateLeaderboard(data) {
   var x      = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
 
   // NOTE: remove the old leaderboard, this is lame, but fine for now
-  $('#leaderboard').empty();
+  $('.display-content', ctx).empty();
 
   // svg container element
-  var chart = d3.select('#leaderboard').append('svg')
+  var chart = d3.select('.display-content', ctx).append('svg')
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
     .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 

@@ -1,64 +1,38 @@
-bgColor = #FFF
-fgColor = #000
+/**
+ * Base
+ */
+
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700")
 
 body
   margin: 0
-  font-size: 16px
-  line-height: 24px
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  padding: 0
   background-color: bgColor
   color: fgColor
+  font-family: sansSerifFont
+  font-weight: 400
+  font-size: 100%
 
-.leader-board
-.dashboard
-  background-color: #000
+h1
+h2
+h3
+h4
+h5
+  font-weight: 600
+  margin: 0
 
-// Layout
+b
+strong
+  font-weight: 700
 
-.nonblack
-  background-color: white
-
-#leaderboard-wrapper
-  background-image: url('/img/bg_1080p.png')
-  width: 1920px
-  height: 1080px
-
-#dashboard-wrapper
-  background-image: url('/img/bg_1080p.png')
-  width: 1920px
-  height: 1080px
-
-#dashboard-title
-  position: absolute
-  top: 320px
-  left: 700px
-  color: #FFFFFF
-  text-align: left
-
-#donation
-  position: absolute
-  top: 320px
-  left: 1500px
-  color: #FFFFFF
-  text-align: right
-
-#network-graph
-  position: absolute
-  top: 310px
-  left: 640px
-
-#leaderboard
-  position: absolute
-  top: 380px
-  left: 740px
-
-// Forms
+/**
+ * Forms
+ */
 fieldset
     legend
         font-weight: bold
 input
 label
-    // margin-left: 1em
     display: block
 
 input

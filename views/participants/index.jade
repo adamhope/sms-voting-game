@@ -5,12 +5,11 @@ block header
   p Welcome to #{title}
 
 block content
-  .nonblack
-    include ../includes/form
+  include ../includes/form
 
-    section.debug
+  section.debug
 
-      article
-        each participant in participants
-          pre= participant
-          p Scorecount is #{participant.score}
+    article
+      each participant in participants
+        pre= participant
+        p Scorecount is #{participant.score}

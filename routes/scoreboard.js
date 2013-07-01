@@ -4,7 +4,7 @@
  */
 
 exports.leaderboard = function(req, res){
-  res.render('scoreboard/leaderboard', {title: 'Leader board', bodyClass: 'leader-board'});
+  res.render('scoreboard/leaderboard', {title: 'Leaderboard', bodyClass: 'leaderboard'});
 };
 
 exports.dashboard = function(req, res){

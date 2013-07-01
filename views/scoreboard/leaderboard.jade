@@ -2,11 +2,15 @@ extends ../layout
 
 block content
 
-  #leaderboard-wrapper
+  include ../includes/instructions
 
-    #leaderboard
+  #leader-board.display
+
+    h1.display-title
+
+    .display-content
 
 block scripts
-    script(src="/js/libs/d3.v3.min.js?")
-    script(src="/js/leaderboard.js")
-    script(src="/js/leaderboard_init.js")
+  script(src="/js/libs/d3.v3.min.js?")
+  script(src="/js/leaderboard.js")
+  script(src="/js/leaderboard_init.js")

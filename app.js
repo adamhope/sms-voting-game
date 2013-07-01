@@ -56,7 +56,7 @@ app.get('/sms', auth, sms.index);
 app.post('/sms/startbroadcast', auth, sms.startBroadcast);
 app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
-app.get('/display/leader-board', scoreboard.leaderboard);
+app.get('/display/leaderboard', scoreboard.leaderboard);
 app.get('/display/network-graph', scoreboard.dashboard);
 
 http.createServer(app).listen(app.get('port'), function(){
