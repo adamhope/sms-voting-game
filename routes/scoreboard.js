@@ -10,3 +10,7 @@ exports.leaderboard = function(req, res){
 exports.dashboard = function(req, res){
   res.render('scoreboard/dashboard', {title: 'Dashboard', bodyClass: 'dashboard'});
 };
+
+exports.hierarchialEdgeBundling = function(req, res){
+  res.render('scoreboard/hierarchial_edge_bundling', {title: 'Hierachial Edge Bundling', bodyClass: 'heirarchial-edge-bundling'});
+};

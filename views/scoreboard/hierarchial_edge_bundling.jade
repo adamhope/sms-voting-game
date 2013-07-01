@@ -1,0 +1,25 @@
+extends ../layout
+
+block content
+
+  style
+
+    body {
+      background-color: red;
+    }
+
+    .node {
+      font: 10px sans-serif;
+    }
+
+    .link {
+      stroke: steelblue;
+      stroke-opacity: .4;
+      fill: none;
+    }
+
+  #edge-bundling
+
+block scripts
+  script(src="/js/libs/d3.v3.min.js?")
+  script(src="/js/hierarchial_edge_bundling.js")

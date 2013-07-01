@@ -58,6 +58,7 @@ app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
 app.get('/display/leaderboard', scoreboard.leaderboard);
 app.get('/display/network-graph', scoreboard.dashboard);
+app.get('/display/hierarchial-edge-bundling', scoreboard.hierarchialEdgeBundling);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
