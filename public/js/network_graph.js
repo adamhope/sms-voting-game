@@ -171,8 +171,8 @@ var nodeCount   = 0,
     totalScores = 0;
 
 function initGraph(data) {
-  $('#network-graph .display-title').text('Mingle Map');
-  graph = new myGraph('#network-graph .display-content');
+  $('#network-graph .visualization-header').text('Mingle Map');
+  graph = new myGraph('#network-graph .visualization-body');
   updateGraph(data);
 }
 

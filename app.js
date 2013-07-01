@@ -6,7 +6,7 @@ var express        = require('express'),
   routes           = require('./routes'),
   participants     = require('./routes/participants'),
   Participant      = require('./models/participant'),
-  scoreboard       = require('./routes/scoreboard'),
+  visualization    = require('./routes/visualization'),
   sms              = require('./routes/sms'),
   seed = require('./seed'),
   settings        = require('./settings');
@@ -56,9 +56,9 @@ app.get('/sms', auth, sms.index);
 app.post('/sms/startbroadcast', auth, sms.startBroadcast);
 app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
-app.get('/display/leaderboard', scoreboard.leaderboard);
-app.get('/display/network-graph', scoreboard.dashboard);
-app.get('/display/hierarchial-edge-bundling', scoreboard.hierarchialEdgeBundling);
+app.get('/visualization/leaderboard', visualization.leaderboard);
+app.get('/visualization/network-graph', visualization.dashboard);
+app.get('/visualization/hierarchial-edge-bundling', visualization.hierarchialEdgeBundling);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

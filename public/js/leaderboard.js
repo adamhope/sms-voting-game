@@ -2,7 +2,7 @@ function updateLeaderboard(data) {
 
   var ctx = '#leader-board';
 
-  $('.display-title', ctx).text('Leaderboard');
+  $('.visualization-header', ctx).text('Leaderboard');
 
   // NOTE: from http://d3-generator.com/
 
@@ -30,10 +30,10 @@ function updateLeaderboard(data) {
   var x      = d3.scale.linear().domain([0, d3.max(sortedData, barValue)]).range([0, maxBarWidth]);
 
   // NOTE: remove the old leaderboard, this is lame, but fine for now
-  $('.display-content', ctx).empty();
+  $('.visualization-body', ctx).empty();
 
   // svg container element
-  var chart = d3.select('.display-content', ctx).append('svg')
+  var chart = d3.select('.visualization-body', ctx).append('svg')
     .attr('width', maxBarWidth + barLabelWidth + valueLabelWidth)
     .attr('height', gridLabelHeight + gridChartOffset + sortedData.length * barHeight);
 
