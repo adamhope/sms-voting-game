@@ -39,16 +39,13 @@ table{border-collapse:collapse;border-spacing:0}
 .node{stroke:#fff;stroke-width:1.5px;font:10px sans-serif}
 .link{stroke:#999;stroke-opacity:.6;fill:none}
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
-body{margin:0;padding:0;background-color:#000;color:#fff;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
+body{margin:1em;background-color:bgColor;color:fgColor;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
 h1,h2,h3,h4,h5{font-weight:600;margin:0}
 b,strong{font-weight:700}
-#leader-board text{font-size:24px}
-#leader-board .leaderboard-title{color:#fff}
-#leader-board .bar-container{fill:#00aa90;stroke:#fff}
-#leader-board .bar-label{stroke:none;fill:#fff}
-#leader-board .label-container{stroke:none;fill:#fff}
-#network-graph text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
-#network-graph circle{stroke-width:2;transition:all 300ms ease}
-#network-graph circle:hover,#network-graph circle:active,#network-graph circle:focus{stroke-width:5px}
-#network-graph .link{fill:#090;stroke:#090;stroke-width:3px}
-#network-graph .node{fill:none;stroke:none}
+fieldset legend{font-weight:bold}
+input,label{display:block}
+input{margin:.4em 0}
+input[type='submit'],button{background:none repeat scroll 0 0 #e3e3e3;border:1px solid #bbb;border-radius:3px 3px 3px 3px;box-shadow:0 0 1px 1px #f6f6f6 inset;color:#333;font:bold 12px;margin:0 5px;padding:8px 0 9px;text-align:center;text-shadow:0 1px 0 #fff;width:150px}
+input[type='submit']:hover,button:hover{background:none repeat scroll 0 0 #d9d9d9;box-shadow:0 0 1px 1px #eaeaea inset;color:#222;cursor:pointer}
+button:active{background:none repeat scroll 0 0 #d0d0d0;box-shadow:0 0 1px 1px #e3e3e3 inset;color:#000}
+.admin-header{padding:24px 0}
