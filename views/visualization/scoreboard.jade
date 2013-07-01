@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+
+  include ../includes/instructions
+
+  #scoreboard.visualization
+
+    h1.visualization-header
+
+    .visualization-body
+
+block scripts
+  script(src="/js/libs/d3.v3.min.js?")
+  script(src="/js/scoreboard.js")
+  script(src="/js/scoreboard_init.js")

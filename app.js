@@ -56,6 +56,7 @@ app.get('/sms', auth, sms.index);
 app.post('/sms/startbroadcast', auth, sms.startBroadcast);
 app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
+app.get('/visualization/scoreboard', visualization.scoreboard);
 app.get('/visualization/leaderboard', visualization.leaderboard);
 app.get('/visualization/force-directed', visualization.forceDirected);
 app.get('/visualization/hierarchial-edge-bundling', visualization.hierarchialEdgeBundling);
