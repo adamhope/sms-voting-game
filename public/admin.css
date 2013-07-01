@@ -42,7 +42,7 @@ table{border-collapse:collapse;border-spacing:0}
 body{margin:1em;background-color:bgColor;color:fgColor;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
 h1,h2,h3,h4,h5{font-weight:600;margin:0}
 b,strong{font-weight:700}
-fieldset legend{font-weight:bold}
+fieldset legend{font-weight:bold;padding:8px}
 input,label{display:block}
 input{margin:.4em 0}
 input[type='submit'],button{background:none repeat scroll 0 0 #e3e3e3;border:1px solid #bbb;border-radius:3px 3px 3px 3px;box-shadow:0 0 1px 1px #f6f6f6 inset;color:#333;font:bold 12px;padding:8px 0 9px;text-align:center;text-shadow:0 1px 0 #fff;width:150px}
