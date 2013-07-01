@@ -7,8 +7,8 @@ exports.leaderboard = function(req, res){
   res.render('visualization/leaderboard', {title: 'Leaderboard', bodyClass: 'leaderboard'});
 };
 
-exports.dashboard = function(req, res){
-  res.render('visualization/dashboard', {title: 'Dashboard', bodyClass: 'dashboard'});
+exports.forceDirected = function(req, res){
+  res.render('visualization/force_directed', {title: 'Dashboard', bodyClass: 'dashboard'});
 };
 
 exports.hierarchialEdgeBundling = function(req, res){

@@ -43,11 +43,11 @@ table{border-collapse:collapse;border-spacing:0}
 #leader-board .bar-container{fill:#00aa90;stroke:#fff}
 #leader-board .bar-label{stroke:none;fill:#fff}
 #leader-board .label-container{stroke:none;fill:#fff}
-#network-graph text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
-#network-graph circle{stroke-width:2;transition:all 300ms ease}
-#network-graph circle:hover,#network-graph circle:active,#network-graph circle:focus{stroke-width:5px}
-#network-graph .link{fill:#090;stroke:#090;stroke-width:3px}
-#network-graph .node{fill:none;stroke:none}
+#force-directed text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
+#force-directed circle{stroke-width:2;transition:all 300ms ease}
+#force-directed circle:hover,#force-directed circle:active,#force-directed circle:focus{stroke-width:5px}
+#force-directed .link{fill:#090;stroke:#090;stroke-width:3px}
+#force-directed .node{fill:none;stroke:none}
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
 body{margin:0;padding:0;background-color:#000;color:#fff;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:100%}
 h1,h2,h3,h4,h5{font-weight:600;margin:0}

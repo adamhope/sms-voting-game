@@ -57,7 +57,7 @@ app.post('/sms/startbroadcast', auth, sms.startBroadcast);
 app.post('/sms/stopbroadcast', auth, sms.stopBroadcast);
 
 app.get('/visualization/leaderboard', visualization.leaderboard);
-app.get('/visualization/network-graph', visualization.dashboard);
+app.get('/visualization/force-directed', visualization.forceDirected);
 app.get('/visualization/hierarchial-edge-bundling', visualization.hierarchialEdgeBundling);
 
 http.createServer(app).listen(app.get('port'), function(){
