@@ -1,36 +1,53 @@
 #scoreboard
 
-  ol
-    list-style: none
-    margin: 0
-    padding: 0
+  // Layouts are weighted to this number
+  row-size = 96px
 
+  .visualization-header
+    background winningColor
+    margin-bottom 1px
+
+  ol
+    list-style none
+    margin 0
+    padding 0
+    color white
 
   li
-    padding: 6px 32px
-    line-height: 44px
-    font-size: 120%
-    transition: all 500ms ease-in-out
+    margin 0
+    position relative
+    height row-size
+    margin-bottom 1px
+    font-weight 500
+    font-size (row-size*0.25)
+    transition all 500ms ease-in-out
 
-  li strong
-    display: inline-block
-    background: #444
-    color: white
-    padding: 6px
-    width: 28px
-    height: 28px
-    line-height: 28px
-    text-align: center
-    margin: 0 12px 0 -6px
-    border-radius: 32px
-    border: 3px #222 solid
-    transition: border 500ms ease
+  .score-bar
+    left 0
+    top 0
+    height row-size
+    padding-left row-size
+    position absolute
+    background winningColor // TODO @2metres: stylus function for blocked colour fade
+    transition width 500ms ease-in-out
+    box-sizing border-box
+    z-index -4
 
+  .score
+    box-sizing  border-box
+    line-height row-size
+    height      row-size
+    min-width   row-size
+    padding 0 (row-size*0.2)
+    background darken(winningColor, 5%)
+    color white
+    display inline-block
+    font-weight 100    
+    font-size (row-size*0.5)
+    text-align center
+    transition border 500ms ease
+    margin-right (row-size*0.2)
 
   .all
-    color: mediumturquoise
-
-
-  .all li strong
-    background: mediumturquoise
+    color: white
 

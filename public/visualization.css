@@ -52,11 +52,12 @@ b,strong{font-weight:700}
 #force-directed circle:hover,#force-directed circle:active,#force-directed circle:focus{stroke-width:5px}
 #force-directed .link{fill:#090;stroke:#090;stroke-width:3px}
 #force-directed .node{fill:none;stroke:none}
-#scoreboard ol{list-style:none;margin:0;padding:0}
-#scoreboard li{padding:6px 32px;line-height:44px;font-size:120%;transition:all 500ms ease-in-out}
-#scoreboard li strong{display:inline-block;background:#444;color:#fff;padding:6px;width:28px;height:28px;line-height:28px;text-align:center;margin:0 12px 0 -6px;border-radius:32px;border:3px #222 solid;transition:border 500ms ease}
-#scoreboard .all{color:#48d1cc}
-#scoreboard .all li strong{background:#48d1cc}
+#scoreboard .visualization-header{background:#1abc9c;margin-bottom:1px}
+#scoreboard ol{list-style:none;margin:0;padding:0;color:#fff}
+#scoreboard li{margin:0;position:relative;height:96px;margin-bottom:1px;font-weight:500;font-size:24px;transition:all 500ms ease-in-out}
+#scoreboard .score-bar{left:0;top:0;height:96px;padding-left:96px;position:absolute;background:#1abc9c;transition:width 500ms ease-in-out;box-sizing:border-box;z-index:-4}
+#scoreboard .score{box-sizing:border-box;line-height:96px;height:96px;min-width:96px;padding:0 19.200000000000003px;background:#19b394;color:#fff;display:inline-block;font-weight:100;font-size:48px;text-align:center;transition:border 500ms ease;margin-right:19.200000000000003px}
+#scoreboard .all{color:#fff}
 #hierarchial-edge-bundling text{font-size:16px;font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif}
 #hierarchial-edge-bundling .node{font:10px sans-serif}
 #hierarchial-edge-bundling .link{stroke:#008000;stroke-opacity:.6;fill:none}
