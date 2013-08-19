@@ -34,7 +34,7 @@ function register(res, options) {
             nextSerie();
           }
         } else {
-          message = participant.username + ', thank you for registering. Your PIN is ' + participant.pin;
+          message = participant.username + ', thanks for coming to LevelUp! Your PIN is ' + participant.pin;
           nextSerie();
         }
 

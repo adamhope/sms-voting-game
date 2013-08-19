@@ -26,7 +26,7 @@ describe('SMS dispatch', function() {
         var afterRequest = function(err, res) {
           stubSmsSendSms.called.should.be.true;
           Participant.findOne({phoneNumber: '1234567890'}, function(err, p) {
-            stubSmsSendSms.withArgs('Fred, thank you for registering. Your PIN is ' + p.pin, '1234567890', settings.burstApi).calledOnce.should.be.true;
+            stubSmsSendSms.withArgs('Fred, thanks for coming to LevelUp! Your PIN is ' + p.pin, '1234567890', settings.burstApi).calledOnce.should.be.true;
             done();
           });
         };
